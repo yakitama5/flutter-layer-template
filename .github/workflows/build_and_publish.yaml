@@ -1,0 +1,159 @@
+name: Build and Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: Version bump
+        required: true
+        default: build
+        type: choice
+        options: [major, minor, patch, build]
+      platform:
+        description: Platform to build and publish
+        required: true
+        default: all
+        type: choice
+        options: [all, android, ios]
+
+concurrency:
+  group: build-and-publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  version:
+    name: Bump version (${{ inputs.bump_type }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.bump.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: jdx/mise-action@v3
+        with:
+          cache: true
+      - name: Install cider
+        run: dart pub global activate cider
+      - name: Bump version
+        id: bump
+        working-directory: apps/app
+        run: |
+          if [ "${{ inputs.bump_type }}" = "build" ]; then
+            cider bump build
+          else
+            cider bump "${{ inputs.bump_type }}" --bump-build
+          fi
+          echo "version=$(cider version)" >> "$GITHUB_OUTPUT"
+      - name: Commit and tag version
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apps/app/pubspec.yaml
+          git commit -m "chore: bump version to $VERSION"
+          git tag "v$VERSION"
+          git push origin "HEAD:${{ github.ref_name }}"
+          git push origin "v$VERSION"
+
+  android:
+    name: Build and publish Android
+    needs: version
+    if: inputs.platform == 'all' || inputs.platform == 'android'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ANDROID_KEYSTORE_FILENAME: ${{ vars.ANDROID_KEYSTORE_FILENAME }}
+      ANDROID_KEY_ALIAS: ${{ vars.ANDROID_KEY_ALIAS }}
+      ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: ./.github/actions/setup-config-files
+        env:
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
+          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+      - uses: ./.github/actions/setup-application-runtime
+      - name: Install Codemagic CLI tools
+        run: pip install codemagic-cli-tools
+      - name: Configure Android signing
+        run: |
+          echo "$ANDROID_KEYSTORE" | base64 --decode > "apps/app/android/app/$ANDROID_KEYSTORE_FILENAME"
+          cat > apps/app/android/key.properties <<EOF
+          storePassword=$ANDROID_KEYSTORE_PASSWORD
+          keyPassword=$ANDROID_KEY_PASSWORD
+          keyAlias=$ANDROID_KEY_ALIAS
+          storeFile=$ANDROID_KEYSTORE_FILENAME
+          EOF
+      - name: Build Android App Bundle
+        working-directory: apps/app
+        run: flutter build appbundle --release --dart-define-from-file=flavor/prd.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ needs.version.outputs.version }}.aab
+          path: apps/app/build/app/outputs/bundle/release/app-release.aab
+          retention-days: 7
+      - name: Publish to Google Play internal track
+        run: google-play bundles publish --bundle apps/app/build/app/outputs/bundle/release/app-release.aab --track internal
+
+  ios:
+    name: Build and publish iOS
+    needs: version
+    if: inputs.platform == 'all' || inputs.platform == 'ios'
+    runs-on: macos-latest
+    timeout-minutes: 60
+    env:
+      APP_STORE_CONNECT_ISSUER_ID: ${{ vars.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ vars.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+      APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+      CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
+      EXPORT_OPTIONS: ${{ secrets.EXPORT_OPTIONS }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: ./.github/actions/setup-config-files
+        env:
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
+          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+      - uses: ./.github/actions/setup-application-runtime
+      - name: Install Codemagic CLI tools
+        run: pip install codemagic-cli-tools
+      - name: Configure iOS signing
+        run: |
+          keychain initialize
+          app-store-connect fetch-signing-files "$(xcode-project detect-bundle-id)" --type IOS_APP_STORE --create
+          keychain add-certificates
+          xcode-project use-profiles
+          echo "$EXPORT_OPTIONS" | base64 --decode > apps/app/ExportOptions.plist
+      - name: Build IPA
+        working-directory: apps/app
+        run: flutter build ipa --release --export-options-plist=ExportOptions.plist --dart-define-from-file=flavor/prd.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ needs.version.outputs.version }}.ipa
+          path: apps/app/build/ios/ipa/*.ipa
+          retention-days: 7
+      - name: Publish to App Store Connect
+        run: app-store-connect publish --path "$(find apps/app/build/ios/ipa -name '*.ipa' | head -n 1)"
