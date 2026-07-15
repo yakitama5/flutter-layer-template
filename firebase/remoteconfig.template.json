@@ -1,0 +1,27 @@
+{
+  "conditions": [],
+  "parameters": {
+    "app_maintenance_mode": {
+      "defaultValue": {
+        "value": "false"
+      },
+      "description": "アプリをメンテナンス表示へ切り替える",
+      "valueType": "BOOLEAN"
+    },
+    "latest_app_version": {
+      "defaultValue": {
+        "value": "0.0.0"
+      },
+      "description": "ストアで公開済みの最新アプリバージョン",
+      "valueType": "STRING"
+    },
+    "force_update_app_version": {
+      "defaultValue": {
+        "value": "0.0.0"
+      },
+      "description": "強制アップデート対象となる最小アプリバージョン",
+      "valueType": "STRING"
+    }
+  },
+  "parameterGroups": {}
+}

@@ -1,0 +1,42 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function hasValidUserSchema(userId, data) {
+      return data.keys().hasAll(['id', 'created_at', 'updated_at'])
+        && data.keys().hasOnly(['id', 'created_at', 'updated_at'])
+        && data.id == userId
+        && data.created_at is timestamp
+        && data.updated_at is timestamp;
+    }
+
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId)
+        && hasValidUserSchema(userId, request.resource.data)
+        && request.resource.data.created_at == request.time
+        && request.resource.data.updated_at == request.time;
+      allow update: if isOwner(userId)
+        && hasValidUserSchema(userId, request.resource.data)
+        && request.resource.data.created_at == resource.data.created_at
+        && request.resource.data.updated_at == request.time;
+      allow delete: if isOwner(userId);
+    }
+
+    match /_dusers/{userId} {
+      allow create: if isOwner(userId)
+        && hasValidUserSchema(userId, request.resource.data)
+        && request.resource.data.updated_at == request.time;
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
