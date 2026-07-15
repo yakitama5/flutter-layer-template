@@ -23,5 +23,5 @@
 /.firebase
 /firebase-debug.log
 
-# FVM Version Cache
-/.fvm
+# Generated build output
+/build/

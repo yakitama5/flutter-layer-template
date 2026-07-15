@@ -11,7 +11,7 @@
   - [Visual Studio Code]
     - `extension.json` に定義されている拡張機能をインストールしてください。
   - [Xcode]
-- [fvm] コマンドを有効にしてください。
+- [mise] コマンドを有効にしてください。
 - [melos] コマンドを有効にしてください。
   - `pubspec.lock` ファイルを解析して melos コマンドのバージョンを取得するため、[yq] コマンドをインストールしてください。
   - 以下のコマンドを実行して melos コマンドをグローバルに有効にしてください。
@@ -19,7 +19,7 @@
 
     ```shell
     MELOS_VERSION=$(cat pubspec.lock | yq ".packages.melos.version" -r)
-    fvm dart pub global activate melos $MELOS_VERSION
+    mise exec -- dart pub global activate melos $MELOS_VERSION
     ```
 
 - [mason_cli] コマンドを有効にしてください。
@@ -32,10 +32,10 @@
 ### Flutter SDKのセットアップ
 
 ```shell
-fvm use --force
+mise install
 ```
 
-### FVM を使用するように IDE を設定
+### mise でインストールした Flutter SDK を IDE で使用
 
 ウィンドウをリロードして SDK を再読み込みしてください。
 
@@ -95,7 +95,7 @@ Please check:
 
 [Xcode]: https://developer.apple.com/xcode/
 
-[fvm]: https://fvm.app/
+[mise]: https://mise.jdx.dev/
 
 [melos]: https://melos.invertase.dev/
 

@@ -3,7 +3,7 @@
 
 ## 手順
 
-1. `fvm use <upgrade version>` を実行
+1. `mise use flutter@<upgrade version>` を実行
 2. ルートの`pubspec.yaml` の `sdk`バージョンを更新
 3. ルートの`pubspec.yaml` のmelos.bootstrapにある`sdk`, `flutter`部分のバージョンを更新
 

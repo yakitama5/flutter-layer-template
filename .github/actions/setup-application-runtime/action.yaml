@@ -5,17 +5,9 @@ runs:
   using: "composite"
   steps:
   
-    # https://github.com/kuhnroyal/flutter-fvm-config-action
-    - name: ⚙️Fetch flutter config
-      uses: kuhnroyal/flutter-fvm-config-action/setup@v3
-      id: fvm-config-action
-
-    # https://github.com/subosito/flutter-action
-    - name: ⚙️Setup flutter
-      uses: subosito/flutter-action@1c5eb12d812966ca84680edc38353a0851c8fd56 # v2.14.0
+    - name: ⚙️Setup mise
+      uses: jdx/mise-action@v3
       with:
-        flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
-        channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
         cache: true
 
     # NOTE: 後述の melosコマンドが実行できないためPATHを通します。
