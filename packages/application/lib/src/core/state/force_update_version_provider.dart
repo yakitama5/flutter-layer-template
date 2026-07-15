@@ -1,9 +1,9 @@
-import 'package:domain/core.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:version/version.dart';
 
-part 'force_update_version_provider.g.dart';
+import '../interface/app_version_repository.dart';
 
-@riverpod
-Stream<Version> forceUpdateVersion(Ref ref) =>
-    ref.watch(appVersionRepositoryProvider).listenForceUpdateAppVersion();
+final forceUpdateVersionProvider = StreamProvider.autoDispose<Version>(
+  (ref) =>
+      ref.watch(appVersionRepositoryProvider).listenForceUpdateAppVersion(),
+);

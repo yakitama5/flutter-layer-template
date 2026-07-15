@@ -10,9 +10,6 @@ class WidthFillBox extends SingleChildStatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return SizedBox(
-      width: double.infinity,
-      child: child,
-    );
+    return SizedBox(width: double.infinity, child: child);
   }
 }

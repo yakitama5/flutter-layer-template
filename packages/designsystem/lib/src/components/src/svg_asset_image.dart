@@ -45,9 +45,7 @@ class SvgAssetImage extends StatelessWidget {
 }
 
 class _SvgColorMapper implements ColorMapper {
-  const _SvgColorMapper({
-    this.replaceColors,
-  });
+  const _SvgColorMapper({this.replaceColors});
 
   final List<SvgReplaceColors>? replaceColors;
 
@@ -59,8 +57,9 @@ class _SvgColorMapper implements ColorMapper {
     Color color,
   ) {
     // 変換色が設定されていればそちらを優先して利用
-    final replaceColor =
-        replaceColors?.firstWhereOrNull((c) => c.rawColor == color);
+    final replaceColor = replaceColors?.firstWhereOrNull(
+      (c) => c.rawColor == color,
+    );
     return replaceColor?.color ?? color;
   }
 }

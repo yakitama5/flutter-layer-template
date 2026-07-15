@@ -89,14 +89,9 @@ class _FirstTile extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: cs.primary,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(16),
-        ),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      child: const SizedBox(
-        height: 160,
-        width: double.infinity,
-      ),
+      child: const SizedBox(height: 160, width: double.infinity),
     );
   }
 }

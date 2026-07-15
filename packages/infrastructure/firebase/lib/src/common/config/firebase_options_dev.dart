@@ -60,8 +60,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '899934807737',
     projectId: 'yakuran-playground',
     storageBucket: 'yakuran-playground.appspot.com',
-    androidClientId: '899934807737-v5col7di0a4hngfeg7u8b2og1mcn9dis.apps.googleusercontent.com',
-    iosClientId: '899934807737-uar9lntulo07v6t4a16tknb9jgqif9aj.apps.googleusercontent.com',
+    androidClientId:
+        '899934807737-v5col7di0a4hngfeg7u8b2og1mcn9dis.apps.googleusercontent.com',
+    iosClientId:
+        '899934807737-uar9lntulo07v6t4a16tknb9jgqif9aj.apps.googleusercontent.com',
     iosBundleId: 'com.yakuran.template.dev',
   );
 
@@ -74,5 +76,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'yakuran-playground.appspot.com',
     measurementId: 'G-DPBPJ7GZ73',
   );
-
 }

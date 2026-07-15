@@ -86,17 +86,11 @@ class _BottomSheet<T> extends StatelessWidget {
         children: [
           const Gap(8),
           ...[
-            ListTile(
-              title: title,
-            ),
+            ListTile(title: title),
             const Divider(),
             ...actions.map((a) {
-              final icon = a.icon ??
-                  (hasAnyIcon
-                      ? const SizedBox(
-                          width: 24,
-                        )
-                      : null);
+              final icon =
+                  a.icon ?? (hasAnyIcon ? const SizedBox(width: 24) : null);
               final selected = a.value == initial;
 
               return ListTile(

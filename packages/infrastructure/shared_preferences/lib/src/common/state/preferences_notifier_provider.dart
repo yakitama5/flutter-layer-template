@@ -1,18 +1,24 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 
 import '../enum/preferences.dart';
 import 'shared_preferences_provider.dart';
-
-part 'preferences_notifier_provider.g.dart';
 
 ///
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
 /// `Preference<String>`のenum値を設定して利用する.
 ///
-@riverpod
-class StringPreference extends _$StringPreference {
+final stringPreferenceProvider = NotifierProvider.autoDispose
+    .family<StringPreference, String, Preferences<String>>(
+      StringPreference.new,
+    );
+
+class StringPreference extends Notifier<String> {
+  StringPreference(this.pref);
+
+  final Preferences<String> pref;
+
   @override
-  String build(Preferences<String> pref) =>
+  String build() =>
       ref.read(sharedPreferencesProvider).getString(pref.key) ??
       pref.defaultValue;
 
@@ -27,10 +33,16 @@ class StringPreference extends _$StringPreference {
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
 /// `Preference<bool>`のenum値を設定して利用する.
 ///
-@riverpod
-class BoolPreference extends _$BoolPreference {
+final boolPreferenceProvider = NotifierProvider.autoDispose
+    .family<BoolPreference, bool, Preferences<bool>>(BoolPreference.new);
+
+class BoolPreference extends Notifier<bool> {
+  BoolPreference(this.pref);
+
+  final Preferences<bool> pref;
+
   @override
-  bool build(Preferences<bool> pref) =>
+  bool build() =>
       ref.read(sharedPreferencesProvider).getBool(pref.key) ??
       pref.defaultValue;
 
@@ -46,10 +58,16 @@ class BoolPreference extends _$BoolPreference {
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
 /// `Preference<int>`のenum値を設定して利用する.
 ///
-@riverpod
-class IntPreference extends _$IntPreference {
+final intPreferenceProvider = NotifierProvider.autoDispose
+    .family<IntPreference, int, Preferences<int>>(IntPreference.new);
+
+class IntPreference extends Notifier<int> {
+  IntPreference(this.pref);
+
+  final Preferences<int> pref;
+
   @override
-  int build(Preferences<int> pref) =>
+  int build() =>
       ref.read(sharedPreferencesProvider).getInt(pref.key) ?? pref.defaultValue;
 
   /// ローカルストレージ値の更新

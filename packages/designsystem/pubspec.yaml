@@ -8,6 +8,8 @@ environment:
   flutter: ^3.44.6
 
 dependencies:
+  packages_application:
+    path: ../application
   adaptive_dialog: ^2.4.0
   animations: null
   collection: null
@@ -26,7 +28,7 @@ dependencies:
   material_color_utilities: null
   nested: null
   responsive_framework: ^1.5.1
-  riverpod_annotation: ^4.0.2
+  riverpod: ^3.2.1
   shimmer: null
   slang: ^4.18.0
   slang_flutter: ^4.18.0
@@ -43,7 +45,6 @@ dev_dependencies:
     sdk: flutter
   freezed: any
 
-  riverpod_generator: ^4.0.3
 
   theme_tailor: null
 

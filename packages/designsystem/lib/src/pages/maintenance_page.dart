@@ -7,16 +7,12 @@ class MaintenancePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Maintenance mode'),
-      ),
+      appBar: AppBar(title: const Text('Maintenance mode')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Maintenance in progress.\n\n\n',
-            ),
+            const Text('Maintenance in progress.\n\n\n'),
             ElevatedButton(
               onPressed: () {
                 // ref

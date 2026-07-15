@@ -1,16 +1,18 @@
 import 'dart:async';
 
 import 'package:designsystem/src/extension/app_theme_mode_extension.dart';
-import 'package:domain/designsystem.dart';
+import 'package:packages_application/designsystem.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'theme_mode_notifier_provider.g.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// テーマを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
-@riverpod
-class ThemeModeNotifier extends _$ThemeModeNotifier {
+final themeModeProvider =
+    NotifierProvider.autoDispose<ThemeModeNotifier, ThemeMode>(
+      ThemeModeNotifier.new,
+    );
+
+class ThemeModeNotifier extends Notifier<ThemeMode> {
   ThemeRepository get _repository => ref.watch(themeRepositoryProvider);
 
   @override

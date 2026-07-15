@@ -1,7 +1,7 @@
-import 'package:domain/core.dart';
-import 'package:domain/designsystem.dart';
-import 'package:domain/goods.dart';
-import 'package:domain/user.dart';
+import 'package:packages_application/core.dart';
+import 'package:packages_application/designsystem.dart';
+import 'package:packages_application/goods.dart';
+import 'package:packages_application/user.dart';
 import 'package:infrastructure_firebase/core.dart';
 import 'package:infrastructure_firebase/user.dart';
 import 'package:infrastructure_mock/goods.dart';

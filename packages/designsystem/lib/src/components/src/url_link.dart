@@ -20,8 +20,9 @@ class UrlLink extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    final defaultStyle =
-        textTheme.labelMedium?.copyWith(color: colorScheme.onPrimaryContainer);
+    final defaultStyle = textTheme.labelMedium?.copyWith(
+      color: colorScheme.onPrimaryContainer,
+    );
 
     // HACK(yakitama5): `ThemeExtension`
     return Link(
@@ -29,10 +30,7 @@ class UrlLink extends StatelessWidget {
       target: LinkTarget.blank,
       builder: (context, followLink) => GestureDetector(
         onTap: onTap ?? () => launchUrlString(url),
-        child: Text(
-          label,
-          style: defaultStyle?.merge(textStyle),
-        ),
+        child: Text(label, style: defaultStyle?.merge(textStyle)),
       ),
     );
   }

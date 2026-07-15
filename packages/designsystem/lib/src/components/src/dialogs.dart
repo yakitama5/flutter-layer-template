@@ -10,18 +10,17 @@ Future<void> showOkBarrierDismissibleDialog(
   String? message,
   String? okLabel,
   required VoidCallback onOk,
-}) =>
-    showAdaptiveDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => _OkDialog(
-        icon: icon,
-        title: title,
-        message: message,
-        okLabel: okLabel,
-        onOk: onOk,
-      ),
-    );
+}) => showAdaptiveDialog<void>(
+  context: context,
+  barrierDismissible: false,
+  builder: (context) => _OkDialog(
+    icon: icon,
+    title: title,
+    message: message,
+    okLabel: okLabel,
+    onOk: onOk,
+  ),
+);
 
 /// 「OK」をアクションに持つダイアログ
 class _OkDialog extends StatelessWidget {
@@ -59,10 +58,7 @@ class _OkDialog extends StatelessWidget {
 /// アダプティブダイアログで利用するアクション
 /// プラットフォームに応じたアダプティブレイアウトを提供
 class _AdaptiveAction extends SingleChildStatelessWidget {
-  const _AdaptiveAction({
-    required super.child,
-    required this.onPressed,
-  });
+  const _AdaptiveAction({required super.child, required this.onPressed});
 
   final VoidCallback? onPressed;
 
@@ -72,14 +68,13 @@ class _AdaptiveAction extends SingleChildStatelessWidget {
         TargetPlatform.android ||
         TargetPlatform.fuchsia ||
         TargetPlatform.linux ||
-        TargetPlatform.windows =>
-          TextButton(
-            onPressed: onPressed,
-            child: child ?? const SizedBox.shrink(),
-          ),
+        TargetPlatform.windows => TextButton(
+          onPressed: onPressed,
+          child: child ?? const SizedBox.shrink(),
+        ),
         TargetPlatform.iOS || TargetPlatform.macOS => CupertinoDialogAction(
-            onPressed: onPressed,
-            child: child ?? const SizedBox.shrink(),
-          ),
+          onPressed: onPressed,
+          child: child ?? const SizedBox.shrink(),
+        ),
       };
 }

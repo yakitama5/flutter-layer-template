@@ -1,7 +1,7 @@
 import 'package:dependency_override/dependency_override.dart';
 import 'package:designsystem/i18n.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:domain/core.dart';
+import 'package:packages_application/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/router/routes/base_shell_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

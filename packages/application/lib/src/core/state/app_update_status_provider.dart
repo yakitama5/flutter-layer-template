@@ -1,18 +1,18 @@
-import 'package:domain/src/core/state/app_build_config_provider.dart';
-import 'package:domain/src/core/state/app_latest_version_provider.dart';
-import 'package:domain/src/core/state/force_update_version_provider.dart';
-import 'package:domain/src/core/value_object/app_update_status.dart';
-import 'package:domain/src/util/logger.dart';
+import 'package:domain/core.dart';
+import 'package:domain/util.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'app_update_status_provider.g.dart';
+import 'app_build_config_provider.dart';
+import 'app_latest_version_provider.dart';
+import 'force_update_version_provider.dart';
 
-@riverpod
-Future<AppUpdateStatus> appUpdateStatus(Ref ref) async {
+final appUpdateStatusProvider = FutureProvider.autoDispose<AppUpdateStatus>((
+  ref,
+) async {
   // バージョン情報を取得
-  final forceUpdateAppVersion =
-      await ref.watch(forceUpdateVersionProvider.future);
+  final forceUpdateAppVersion = await ref.watch(
+    forceUpdateVersionProvider.future,
+  );
   final latestAppVersion = await ref.watch(appLatestVersionProvider.future);
 
   // 現在のアプリ情報を取得
@@ -34,4 +34,4 @@ Future<AppUpdateStatus> appUpdateStatus(Ref ref) async {
 
   logger.d('Using Latest');
   return AppUpdateStatus.usingLatest;
-}
+});

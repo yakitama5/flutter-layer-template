@@ -13,8 +13,6 @@ dependencies:
   logger: null
   packages_foundation:
     path: ../foundation
-  riverpod: ^3.2.1
-  riverpod_annotation: ^4.0.2
   version: null
 
 dev_dependencies:
@@ -23,6 +21,5 @@ dev_dependencies:
   freezed: any
   json_serializable: ^6.13.0
 
-  riverpod_generator: ^4.0.3
 
 resolution: workspace

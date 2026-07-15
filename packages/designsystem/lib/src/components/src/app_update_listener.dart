@@ -2,7 +2,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:designsystem/i18n/strings.g.dart';
 import 'package:designsystem/src/components/src/dialogs.dart';
 import 'package:designsystem/src/keys/root_navigator_key.dart';
-import 'package:domain/core.dart';
+import 'package:packages_application/core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';

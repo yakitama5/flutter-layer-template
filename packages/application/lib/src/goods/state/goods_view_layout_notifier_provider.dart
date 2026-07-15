@@ -1,13 +1,17 @@
 import 'dart:async';
 
+import 'package:domain/designsystem.dart';
 import 'package:domain/goods.dart';
-import 'package:domain/src/designsystem/value_object/view_layout.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 
-part 'goods_view_layout_notifier_provider.g.dart';
+import '../interface/goods_config_repository.dart';
 
-@riverpod
-class GoodsViewLayoutNotifier extends _$GoodsViewLayoutNotifier {
+final goodsViewLayoutProvider =
+    NotifierProvider.autoDispose<GoodsViewLayoutNotifier, ViewLayout>(
+      GoodsViewLayoutNotifier.new,
+    );
+
+class GoodsViewLayoutNotifier extends Notifier<ViewLayout> {
   GoodsConfigRepository get _repository =>
       ref.watch(goodsConfigRepositoryProvider);
 

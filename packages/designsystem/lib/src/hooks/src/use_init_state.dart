@@ -4,6 +4,6 @@ import 'use_effect_once.dart';
 
 /// StatefulWidgetの`initState`のように利用
 void useInitState(VoidCallback initState) => useEffectOnce(() {
-      initState();
-      return null;
-    });
+  initState();
+  return null;
+});

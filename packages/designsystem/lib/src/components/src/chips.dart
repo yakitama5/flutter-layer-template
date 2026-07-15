@@ -20,16 +20,7 @@ class LeadingIconInputChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InputChip(
-      label: Row(
-        children: [
-          label,
-          const Gap(8),
-          Icon(
-            iconData,
-            size: 18,
-          ),
-        ],
-      ),
+      label: Row(children: [label, const Gap(8), Icon(iconData, size: 18)]),
       onPressed: onPressed,
       showCheckmark: showCheckmark,
       selected: selected,

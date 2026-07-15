@@ -11,9 +11,7 @@ import '../components/src/settings_radio_list_tile.dart';
 import '../components/src/settings_radio_scaffold.dart';
 
 class SettingsUiStylePage extends HookConsumerWidget {
-  const SettingsUiStylePage({
-    super.key,
-  });
+  const SettingsUiStylePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

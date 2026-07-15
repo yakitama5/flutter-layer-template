@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-typedef SwitchLayoutItemBuilder = Widget? Function(
-  BuildContext context,
-  int index,
-);
+typedef SwitchLayoutItemBuilder =
+    Widget? Function(BuildContext context, int index);
 
 /// 表示形式をスイッチング可能なViewBuilder
 // TODO(yakitama5): アニメーション対応する
@@ -32,20 +30,21 @@ class SliverSwitchLayoutViewBuilder extends StatelessWidget {
       duration: switchDuration,
       child: switch (viewLayout) {
         ViewLayout.list => SliverList.separated(
-            itemBuilder: itemBuilder,
-            itemCount: itemCount,
-            separatorBuilder: (context, index) => const Gap(8),
-          ),
+          itemBuilder: itemBuilder,
+          itemCount: itemCount,
+          separatorBuilder: (context, index) => const Gap(8),
+        ),
         ViewLayout.grid => SliverGrid.builder(
-            gridDelegate: gridDelegate ??
-                const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 240,
-                  mainAxisSpacing: 4,
-                  crossAxisSpacing: 4,
-                  childAspectRatio: 0.75,
-                ),
-            itemBuilder: itemBuilder,
-          )
+          gridDelegate:
+              gridDelegate ??
+              const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 240,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+                childAspectRatio: 0.75,
+              ),
+          itemBuilder: itemBuilder,
+        ),
       },
     );
   }

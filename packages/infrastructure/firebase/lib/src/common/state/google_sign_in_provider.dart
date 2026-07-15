@@ -1,9 +1,8 @@
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'google_sign_in_provider.g.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Google Sign In
 /// テスト時にDIすることを考慮して、Providerとして定義
-@Riverpod(keepAlive: true)
-GoogleSignIn googleSignIn(Ref ref) => GoogleSignIn.instance;
+final googleSignInProvider = Provider<GoogleSignIn>(
+  (ref) => GoogleSignIn.instance,
+);

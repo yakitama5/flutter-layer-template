@@ -1,17 +1,19 @@
 import 'dart:async';
 
 import 'package:designsystem/src/theme/model/dynamic_color_support_status.dart';
-import 'package:domain/designsystem.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:packages_application/designsystem.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'dynamic_color_support_provider.dart';
 
-part 'theme_color_notifier_provider.g.dart';
-
 /// テーマカラーを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
-@riverpod
-class ThemeColorNotifier extends _$ThemeColorNotifier {
+final themeColorProvider =
+    NotifierProvider.autoDispose<ThemeColorNotifier, ThemeColor>(
+      ThemeColorNotifier.new,
+    );
+
+class ThemeColorNotifier extends Notifier<ThemeColor> {
   ThemeRepository get _repository => ref.watch(themeRepositoryProvider);
 
   @override
@@ -19,7 +21,7 @@ class ThemeColorNotifier extends _$ThemeColorNotifier {
     final themeColor = _repository.fetchThemeColor();
 
     // 初期値は `DynamicColor`のサポート有無で変更
-    final supportStatus = ref.watch(dynamicColorSupportProviderProvider);
+    final supportStatus = ref.watch(dynamicColorSupportProvider);
     final defaultValue = switch (supportStatus) {
       DynamicColorSupportStatus.supported => ThemeColor.dynamicColor,
       DynamicColorSupportStatus.notSupported => ThemeColor.appColor,

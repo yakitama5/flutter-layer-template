@@ -17,10 +17,8 @@ class MainApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // テーマ設定
     final themeMode = ref.watch(themeModeProvider);
-    final lightTheme = ref.watch(
-      appThemeProvider(brightness: Brightness.light),
-    );
-    final darkTheme = ref.watch(appThemeProvider(brightness: Brightness.dark));
+    final lightTheme = ref.watch(appThemeProvider(Brightness.light));
+    final darkTheme = ref.watch(appThemeProvider(Brightness.dark));
 
     return MaterialApp.router(
       builder: (_, child) => Nested(

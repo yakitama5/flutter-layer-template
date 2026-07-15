@@ -16,9 +16,7 @@ final class FirebaseInitializer {
       Flavor.prd => DefaultFirebaseOptions.currentPlatform,
     };
 
-    await Firebase.initializeApp(
-      options: firebaseOptions,
-    );
+    await Firebase.initializeApp(options: firebaseOptions);
 
     // Firebase Crashlytics
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;

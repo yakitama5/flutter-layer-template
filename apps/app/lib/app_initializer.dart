@@ -1,13 +1,11 @@
 import 'dart:async';
 
-import 'package:domain/core.dart';
+import 'package:packages_application/core.dart';
 import 'package:domain/util.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:version/version.dart';
 
-typedef InitializedValues = ({
-  AppBuildConfig buildConfig,
-});
+typedef InitializedValues = ({AppBuildConfig buildConfig});
 
 final class AppInitializer {
   AppInitializer._();

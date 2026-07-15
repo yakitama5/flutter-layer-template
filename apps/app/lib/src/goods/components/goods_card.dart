@@ -7,11 +7,7 @@ import 'package:gap/gap.dart';
 import 'goods_empty_image.dart';
 
 class GoodsCard extends StatelessWidget {
-  const GoodsCard({
-    super.key,
-    required this.item,
-    this.onTap,
-  });
+  const GoodsCard({super.key, required this.item, this.onTap});
 
   final Goods item;
   final VoidCallback? onTap;
@@ -44,10 +40,7 @@ class GoodsCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    item.name,
-                    style: tt.titleLarge,
-                  ),
+                  Text(item.name, style: tt.titleLarge),
                   const Gap(4),
                   Text(
                     i18n.goods.goodsPage.price(price: item.price ?? 0),
@@ -70,10 +63,7 @@ class GoodsCard extends StatelessWidget {
 }
 
 class _Image extends StatelessWidget {
-  const _Image({
-    required this.imageUrl,
-    required this.semanticLabel,
-  });
+  const _Image({required this.imageUrl, required this.semanticLabel});
 
   static const _imageHeight = 120.0;
 
@@ -98,10 +88,8 @@ class _Image extends StatelessWidget {
       semanticLabel: semanticLabel,
       loadingBuilder: (context, child, loadingProgress) =>
           loadingProgress == null
-              ? child
-              : const ShimmerWidget.rectangular(
-                  height: _imageHeight,
-                ),
+          ? child
+          : const ShimmerWidget.rectangular(height: _imageHeight),
     );
   }
 }

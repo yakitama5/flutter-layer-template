@@ -1,15 +1,12 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
-import '../entity/user.dart';
 import 'auth_status_provider.dart';
 import 'user_provider.dart';
 
-part 'auth_user_provider.g.dart';
-
 /// 認証済のユーザー
 /// データの参照頻度を減らすため、`keepAlive`を指定
-@Riverpod(keepAlive: true)
-Future<User?> authUser(Ref ref) async {
+final authUserProvider = FutureProvider<User?>((ref) async {
   final userId = await ref.watch(
     authStatusProvider.selectAsync((value) => value?.uid),
   );
@@ -17,7 +14,7 @@ Future<User?> authUser(Ref ref) async {
     return null;
   }
 
-  final user = await ref.watch(userProvider(userId: userId).future);
+  final user = await ref.watch(userProvider(userId).future);
 
   return user;
-}
+});

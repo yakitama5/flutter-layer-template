@@ -1,7 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:designsystem/common_assets.dart';
 import 'package:designsystem/widgets.dart';
-import 'package:domain/user.dart';
+import 'package:packages_application/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';

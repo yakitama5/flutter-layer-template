@@ -17,7 +17,7 @@ class RemoteConfigAppMaintenanceRepository extends AppMaintenanceRepository {
   @override
   Stream<bool> listenMaintenanceMode() async* {
     final value = await ref.watch(
-      boolStreamConfigProvider(config: RemoteConfigs.maintenance).future,
+      boolStreamConfigProvider(RemoteConfigs.maintenance).future,
     );
     yield value;
   }

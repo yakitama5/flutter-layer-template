@@ -4,10 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NavigatorPage extends ConsumerWidget {
-  const NavigatorPage({
-    required this.navigationShell,
-    super.key,
-  });
+  const NavigatorPage({required this.navigationShell, super.key});
 
   final StatefulNavigationShell navigationShell;
 

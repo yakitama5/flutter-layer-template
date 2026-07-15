@@ -1,4 +1,4 @@
-import 'package:domain/core.dart';
+import 'package:packages_application/core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
@@ -13,7 +13,7 @@ class LoaderOverlay extends SingleChildStatelessWidget {
         child ?? const SizedBox.shrink(),
         Consumer(
           builder: (context, ref, child) {
-            final loading = ref.watch(loadingProvider);
+            final loading = ref.watch(appLoadingProvider);
             if (!loading) {
               return const SizedBox.shrink();
             }

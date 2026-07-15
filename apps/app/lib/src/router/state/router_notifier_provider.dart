@@ -1,15 +1,16 @@
-import 'package:domain/core.dart';
-import 'package:domain/user.dart';
+import 'package:packages_application/core.dart';
+import 'package:packages_application/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/router/routes/base_shell_route.dart';
 import 'package:flutter_app/src/router/routes/branches/home_shell_branch.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 
-part 'router_notifier_provider.g.dart';
+final routerProvider = AsyncNotifierProvider.autoDispose<RouterNotifier, void>(
+  RouterNotifier.new,
+);
 
-@riverpod
-class RouterNotifier extends _$RouterNotifier implements Listenable {
+class RouterNotifier extends AsyncNotifier<void> implements Listenable {
   VoidCallback? _routerListener;
 
   @override

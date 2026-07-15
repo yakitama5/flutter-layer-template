@@ -1,17 +1,14 @@
 import 'dart:async';
 
-import 'package:domain/src/core/usecase/run_usecase_mixin.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
-import '../entity/user.dart';
+import '../../core/usecase/run_usecase_mixin.dart';
 import '../interface/user_repository.dart';
 import '../state/auth_status_provider.dart';
 import '../state/auth_user_provider.dart';
 
-part 'user_usecase.g.dart';
-
-@Riverpod(keepAlive: true)
-UserUsecase userUsecase(Ref ref) => UserUsecase(ref);
+final userUsecaseProvider = Provider<UserUsecase>(UserUsecase.new);
 
 class UserUsecase with RunUsecaseMixin {
   const UserUsecase(this.ref);
@@ -23,28 +20,19 @@ class UserUsecase with RunUsecaseMixin {
   Future<String?> get _authUserId => _authUser.then((data) => data?.id);
 
   /// ユーザーの登録
-  Future<void> signUp() => execute(
-    ref,
-    action: () => _userRepository.signUp(),
-  );
+  Future<void> signUp() => execute(ref, action: () => _userRepository.signUp());
 
   /// Apple認証
-  Future<void> signInWithApple() => execute(
-    ref,
-    action: () => _userRepository.signInWithApple(),
-  );
+  Future<void> signInWithApple() =>
+      execute(ref, action: () => _userRepository.signInWithApple());
 
   /// Google認証
-  Future<void> signInWithGoogle() => execute(
-    ref,
-    action: () => _userRepository.signInWithGoogle(),
-  );
+  Future<void> signInWithGoogle() =>
+      execute(ref, action: () => _userRepository.signInWithGoogle());
 
   /// サインアウト
-  Future<void> signOut() => execute(
-    ref,
-    action: () => _userRepository.signOut(),
-  );
+  Future<void> signOut() =>
+      execute(ref, action: () => _userRepository.signOut());
 
   /// 退会
   /// ログイン中の自身の情報を削除

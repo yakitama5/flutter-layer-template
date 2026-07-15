@@ -1,14 +1,6 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:version/version.dart';
+import 'package:domain/core.dart';
+import 'package:riverpod/riverpod.dart';
 
-part 'app_version_repository.g.dart';
-
-@Riverpod(keepAlive: true)
-AppVersionRepository appVersionRepository(Ref ref) =>
-    throw UnimplementedError();
-
-abstract class AppVersionRepository {
-  const AppVersionRepository();
-  Stream<Version> listenLatestAppVersion();
-  Stream<Version> listenForceUpdateAppVersion();
-}
+final appVersionRepositoryProvider = Provider<AppVersionRepository>(
+  (ref) => throw UnimplementedError(),
+);

@@ -7,5 +7,5 @@ enum ThemeColor {
   red,
   orange,
   yellow,
-  green;
+  green,
 }

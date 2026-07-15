@@ -36,9 +36,7 @@ class SliverErrorView extends ErrorView {
 
   @override
   Widget build(BuildContext context) {
-    return SliverFillRemaining(
-      child: super.build(context),
-    );
+    return SliverFillRemaining(child: super.build(context));
   }
 }
 

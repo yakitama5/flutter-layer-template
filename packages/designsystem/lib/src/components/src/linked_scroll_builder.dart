@@ -9,7 +9,8 @@ class LinkedScrollBuilder extends StatefulWidget {
     BuildContext context,
     LinkedScrollControllerGroup controllerGroup,
     ({ScrollController one, ScrollController two}) controllers,
-  ) builder;
+  )
+  builder;
 
   @override
   State<StatefulWidget> createState() => _LinkedScrollControllBuilderState();
@@ -39,11 +40,8 @@ class _LinkedScrollControllBuilderState extends State<LinkedScrollBuilder> {
   @override
   Widget build(BuildContext context) {
     return Builder(
-      builder: (context) => widget.builder(
-        context,
-        _controllerGroup,
-        (one: _one, two: _two),
-      ),
+      builder: (context) =>
+          widget.builder(context, _controllerGroup, (one: _one, two: _two)),
     );
   }
 }

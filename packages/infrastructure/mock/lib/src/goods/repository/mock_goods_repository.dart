@@ -43,20 +43,17 @@ class MockGoodsRepository extends GoodsRepository {
 
   final Ref ref;
 
-  static final List<Goods> items = List.generate(
-    _totalLength,
-    (i) {
-      return Goods(
-        id: 'Id $i',
-        name: 'Name $i',
-        price: i * 100,
-        imageUrl: _images[i % _images.length],
-        description: _descriptions[i % _descriptions.length],
-        createdAt: clock.fromNow(days: -i),
-        updatedAt: clock.fromNow(days: -i),
-      );
-    },
-  );
+  static final List<Goods> items = List.generate(_totalLength, (i) {
+    return Goods(
+      id: 'Id $i',
+      name: 'Name $i',
+      price: i * 100,
+      imageUrl: _images[i % _images.length],
+      description: _descriptions[i % _descriptions.length],
+      createdAt: clock.fromNow(days: -i),
+      updatedAt: clock.fromNow(days: -i),
+    );
+  });
 
   @override
   Stream<Goods?> listenGoods({required String id}) {

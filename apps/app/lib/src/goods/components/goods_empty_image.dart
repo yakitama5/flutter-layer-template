@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GoodsEmptyImage extends StatelessWidget {
-  const GoodsEmptyImage({
-    super.key,
-    required this.width,
-    required this.height,
-  });
+  const GoodsEmptyImage({super.key, required this.width, required this.height});
 
   final double width;
   final double height;

@@ -1,5 +1,2 @@
 /// Viewのレイアウト
-enum ViewLayout {
-  grid,
-  list;
-}
+enum ViewLayout { grid, list }

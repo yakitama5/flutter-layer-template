@@ -1,6 +1,6 @@
 import 'package:designsystem/widgets.dart';
 import 'package:domain/designsystem.dart';
-import 'package:domain/goods.dart';
+import 'package:packages_application/goods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -84,7 +84,7 @@ class _SliverBody extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // 先頭ページを固定で取得
     // エラーハンドリングはコンテンツ取得部分で行うため`valueOrNull`で無視する
-    final result = ref.watch(goodsListProvider(page: 1, query: query)).value;
+    final result = ref.watch(goodsListProvider((page: 1, query: query))).value;
 
     return SliverSwitchLayoutViewBuilder(
       viewLayout: viewLayout,
@@ -92,7 +92,9 @@ class _SliverBody extends HookConsumerWidget {
       itemBuilder: (context, index) {
         final page = index ~/ goodsPageSize + 1;
         final indexInPage = index % goodsPageSize;
-        final response = ref.watch(goodsListProvider(page: page, query: query));
+        final response = ref.watch(
+          goodsListProvider((page: page, query: query)),
+        );
 
         return response.when(
           data: (data) => OpenContainerCardWrapper(
@@ -121,7 +123,7 @@ class _SliverBody extends HookConsumerWidget {
             isLoading: response.isLoading,
             error: error.toString(),
             onRetry: () {
-              ref.invalidate(goodsListProvider(page: page, query: query));
+              ref.invalidate(goodsListProvider((page: page, query: query)));
             },
           ),
         );

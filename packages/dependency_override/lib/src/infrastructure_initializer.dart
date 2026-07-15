@@ -1,4 +1,4 @@
-import 'package:domain/core.dart';
+import 'package:packages_application/core.dart';
 import 'package:infrastructure_firebase/common.dart';
 
 final class InfrastructureInitializer {

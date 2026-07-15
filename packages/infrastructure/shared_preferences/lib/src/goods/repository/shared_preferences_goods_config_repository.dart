@@ -12,8 +12,9 @@ class SharedPreferencesGoodsConfigRepository implements GoodsConfigRepository {
 
   @override
   ViewLayout? fetchViewLayout() {
-    final value =
-        ref.watch(stringPreferenceProvider(Preferences.goodsViewLayout));
+    final value = ref.watch(
+      stringPreferenceProvider(Preferences.goodsViewLayout),
+    );
     return ViewLayout.values.firstWhereOrNull((e) => e.name == value);
   }
 

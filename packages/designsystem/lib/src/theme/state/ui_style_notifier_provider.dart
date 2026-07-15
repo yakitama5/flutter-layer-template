@@ -1,14 +1,15 @@
 import 'dart:async';
 
-import 'package:domain/designsystem.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'ui_style_notifier_provider.g.dart';
+import 'package:packages_application/designsystem.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// UIスタイルを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
-@riverpod
-class UiStyle extends _$UiStyle {
+final uiStyleProvider = NotifierProvider.autoDispose<UiStyle, UIStyle>(
+  UiStyle.new,
+);
+
+class UiStyle extends Notifier<UIStyle> {
   ThemeRepository get _repository => ref.watch(themeRepositoryProvider);
 
   @override

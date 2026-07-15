@@ -1,5 +1,1 @@
-enum GoodsSortKey {
-  createdAt,
-  name,
-  price,
-}
+enum GoodsSortKey { createdAt, name, price }

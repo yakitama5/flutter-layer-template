@@ -1,5 +1,1 @@
-enum UIStyle {
-  system,
-  android,
-  ios;
-}
+enum UIStyle { system, android, ios }

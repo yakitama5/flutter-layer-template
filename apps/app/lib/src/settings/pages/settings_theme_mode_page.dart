@@ -9,9 +9,7 @@ import '../components/src/settings_radio_list_tile.dart';
 import '../components/src/settings_radio_scaffold.dart';
 
 class SettingsThemeModePage extends HookConsumerWidget {
-  const SettingsThemeModePage({
-    super.key,
-  });
+  const SettingsThemeModePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,17 +20,16 @@ class SettingsThemeModePage extends HookConsumerWidget {
       title: i18n.settings.settingsPage.layout.themeMode,
       tiles: ThemeMode.values.map((themeMode) {
         return SettingsRadioListTile<ThemeMode>(
-          title:
-              Text(designsystemI18n.designsystem.themeMode(context: themeMode)),
+          title: Text(
+            designsystemI18n.designsystem.themeMode(context: themeMode),
+          ),
           value: themeMode,
           groupValue: selected.value,
-          leading: Icon(
-            switch (themeMode) {
-              ThemeMode.system => Icons.settings,
-              ThemeMode.light => Icons.light_mode,
-              ThemeMode.dark => Icons.dark_mode,
-            },
-          ),
+          leading: Icon(switch (themeMode) {
+            ThemeMode.system => Icons.settings,
+            ThemeMode.light => Icons.light_mode,
+            ThemeMode.dark => Icons.dark_mode,
+          }),
           onChanged: (_) {
             selected.value = themeMode;
             ref.read(themeModeProvider.notifier).update(themeMode);

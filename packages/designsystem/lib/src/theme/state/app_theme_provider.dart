@@ -2,16 +2,16 @@ import 'package:designsystem/extension.dart';
 import 'package:designsystem/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'app_color_scheme_provider.dart';
 
-part 'app_theme_provider.g.dart';
-
 /// アプリ内のテーマを管理
-@riverpod
-ThemeData appTheme(Ref ref, {required Brightness brightness}) {
-  final colorScheme = ref.watch(appColorSchemeProvider(brightness: brightness));
+final appThemeProvider = Provider.autoDispose.family<ThemeData, Brightness>((
+  ref,
+  brightness,
+) {
+  final colorScheme = ref.watch(appColorSchemeProvider(brightness));
   final uiStyle = ref.watch(uiStyleProvider);
 
   return ThemeData(
@@ -27,4 +27,4 @@ ThemeData appTheme(Ref ref, {required Brightness brightness}) {
     ),
     extensions: [AppColors.brightness(brightness: brightness)],
   );
-}
+});

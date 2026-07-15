@@ -22,7 +22,7 @@ class FirebaseUserRepository implements UserRepository {
   @override
   Stream<User?> listen({required String userId}) {
     return ref
-        .read(userDocumentRefProvider(userId: userId))
+        .read(userDocumentRefProvider(userId))
         .snapshots()
         .where((s) {
           // 読み込み中のドキュメントが存在する場合はスキップ
@@ -47,8 +47,8 @@ class FirebaseUserRepository implements UserRepository {
     final firestore = ref.watch(firestoreProvider);
     await firestore.runTransaction((transaction) async {
       // 削除前の状態を保持
-      final docRef = ref.watch(userDocumentRefProvider(userId: userId));
-      final delDocRef = ref.watch(duserDocumentRefProvider(userId: userId));
+      final docRef = ref.watch(userDocumentRefProvider(userId));
+      final delDocRef = ref.watch(duserDocumentRefProvider(userId));
       final doc = await transaction.get(docRef);
 
       transaction
@@ -202,7 +202,7 @@ class FirebaseUserRepository implements UserRepository {
 
   Future<void> _createUserDocIfNotExists(String uid) async {
     // ドキュメントの取得
-    final userDocRef = ref.watch(userDocumentRefProvider(userId: uid));
+    final userDocRef = ref.watch(userDocumentRefProvider(uid));
     final userDoc = await userDocRef.get();
 
     // 存在すれば認証情報を返却して終了
@@ -212,9 +212,7 @@ class FirebaseUserRepository implements UserRepository {
 
     // Firestore用のモデルに変換
     final userId = userDocRef.id;
-    final user = FirestoreUserModel(
-      id: userId,
-    );
+    final user = FirestoreUserModel(id: userId);
 
     // 同時に登録
     await ref.watch(firestoreProvider).runTransaction((transaction) async {

@@ -17,7 +17,7 @@ class SettingsThemeColorPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDynamicColorSupported = ref.watch(
-      dynamicColorSupportProviderProvider.select(
+      dynamicColorSupportProvider.select(
         (status) => switch (status) {
           DynamicColorSupportStatus.supported => true,
           DynamicColorSupportStatus.notSupported => false,

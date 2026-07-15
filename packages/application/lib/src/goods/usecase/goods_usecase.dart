@@ -1,12 +1,11 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:domain/goods.dart';
+import 'package:riverpod/riverpod.dart';
 
 import '../state/goods_list_provider.dart';
-import '../value_object/goods_fetch_query.dart';
 
-part 'goods_usecase.g.dart';
-
-@riverpod
-GoodsUsecase goodsUsecase(Ref ref) => GoodsUsecase(ref);
+final goodsUsecaseProvider = Provider.autoDispose<GoodsUsecase>(
+  GoodsUsecase.new,
+);
 
 class GoodsUsecase {
   const GoodsUsecase(this.ref);
@@ -19,6 +18,6 @@ class GoodsUsecase {
     ref.invalidate(goodsListProvider);
 
     // 最初のページが表示されるまでは待機
-    return ref.read(goodsListProvider(page: 1, query: query).future);
+    return ref.read(goodsListProvider((page: 1, query: query)).future);
   }
 }

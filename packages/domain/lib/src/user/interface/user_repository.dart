@@ -1,13 +1,5 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import '../entity/auth_status.dart';
 import '../entity/user.dart';
-
-part 'user_repository.g.dart';
-
-/// DI用 (依存性逆転のためドメイン層に定義)
-@Riverpod(keepAlive: true)
-UserRepository userRepository(Ref ref) => throw UnimplementedError();
 
 /// ユーザーモデル および ユーザーの認証に関するリポジトリ
 abstract class UserRepository {

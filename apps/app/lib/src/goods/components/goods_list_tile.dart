@@ -26,8 +26,8 @@ class GoodsListTile extends StatelessWidget {
                 height: 64,
                 loadingBuilder: (context, child, loadingProgress) =>
                     loadingProgress == null
-                        ? child
-                        : const GoodsShimmerListTileLeading(),
+                    ? child
+                    : const GoodsShimmerListTileLeading(),
               ),
       ),
       subtitle: Text(i18n.goods.goodsPage.price(price: item.price ?? 0)),
@@ -40,9 +40,6 @@ class GoodsShimmerListTileLeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ShimmerWidget.rectangular(
-      height: 64,
-      width: 64,
-    );
+    return const ShimmerWidget.rectangular(height: 64, width: 64);
   }
 }

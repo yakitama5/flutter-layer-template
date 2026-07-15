@@ -1,12 +1,13 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 
-import '../../util/logger.dart';
-
-part 'app_loading_provider.g.dart';
+import 'package:domain/util.dart';
 
 /// アプリ全体で共通するローディング表示を管理
-@riverpod
-class LoadingNotifier extends _$LoadingNotifier {
+final appLoadingProvider = NotifierProvider.autoDispose<LoadingNotifier, bool>(
+  LoadingNotifier.new,
+);
+
+class LoadingNotifier extends Notifier<bool> {
   int _count = 0;
 
   @override

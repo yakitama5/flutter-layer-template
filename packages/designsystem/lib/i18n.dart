@@ -10,7 +10,5 @@ class DesignsystemTranslationProvider extends SingleChildStatelessWidget {
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) =>
-      TranslationProvider(
-        child: child ?? const SizedBox.shrink(),
-      );
+      TranslationProvider(child: child ?? const SizedBox.shrink());
 }

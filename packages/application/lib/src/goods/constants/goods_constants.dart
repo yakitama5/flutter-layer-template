@@ -1,1 +1,0 @@
-const goodsPageSize = 20;

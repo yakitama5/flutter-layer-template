@@ -15,9 +15,9 @@ extension FirebaseAuthUserX on User {
 
   /// ドメイン層への変換を記載
   AuthStatus get authStatus => AuthStatus(
-        uid: uid,
-        isAnonymous: isAnonymous,
-        linkedGoogle: linkedGoogle,
-        linkedApple: linkedApple,
-      );
+    uid: uid,
+    isAnonymous: isAnonymous,
+    linkedGoogle: linkedGoogle,
+    linkedApple: linkedApple,
+  );
 }

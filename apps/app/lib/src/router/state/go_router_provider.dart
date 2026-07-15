@@ -1,19 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_app/src/router/routes/base_shell_route.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'initial_location_provider.dart';
 import 'router_notifier_provider.dart';
 
-part 'go_router_provider.g.dart';
-
-@riverpod
-GoRouter goRouter(Ref ref) {
+final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
   final notifier = ref.watch(routerProvider.notifier);
   final initialLocation = ref.watch(initialLocationProvider);
 
-  return GoRouter(
+  final router = GoRouter(
     routes: $appRoutes,
     debugLogDiagnostics: kDebugMode,
     initialLocation: initialLocation,
@@ -23,4 +20,6 @@ GoRouter goRouter(Ref ref) {
     redirect: (_, routeState) => notifier.redirect(routeState),
     refreshListenable: notifier,
   );
-}
+  ref.onDispose(router.dispose);
+  return router;
+});

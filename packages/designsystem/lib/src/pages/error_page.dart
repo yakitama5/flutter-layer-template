@@ -12,12 +12,7 @@ class ErrorPage extends HookWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: ErrorView(
-            exception ?? Exception('Error'),
-            null,
-          ),
-        ),
+        body: Center(child: ErrorView(exception ?? Exception('Error'), null)),
       ),
     );
   }

@@ -35,7 +35,6 @@ melos:
         json_annotation: ^4.11.0
         logger: any
         riverpod: ^3.2.1
-        riverpod_annotation: ^4.0.2
         slang: ^4.18.0
         slang_flutter: ^4.18.0
       dev_dependencies:
@@ -45,7 +44,6 @@ melos:
         freezed: any
         go_router_builder: ^4.1.3
         json_serializable: ^6.13.0
-        riverpod_generator: ^4.0.3
         slang_build_runner: ^4.18.0
         test: any
     clean:
@@ -59,18 +57,18 @@ melos:
     # ビルド関連
     build:app:
       description: 各プラットフォーム毎にモバイルアプリをビルドする
-      stpes:
+      steps:
         - build:app:android
         - build:app:ios
     build:app:ios:
-      description: Android向けにモバイルアプリをビルドする
+      description: iOS向けにモバイルアプリをビルドする
       run: melos exec --scope="flutter_app" -- flutter build ipa
         --export-options-plist=ExportOptions.plist
-        --dart-define-from-file=flavor/prod.json
+        --dart-define-from-file=flavor/prd.json
     build:app:android:
-      description: iOS向けにモバイルアプリをビルドする
+      description: Android向けにモバイルアプリをビルドする
       run: melos exec --scope="flutter_app" -- flutter build appbundle
-        --dart-define-from-file=flavor/prod.json
+        --dart-define-from-file=flavor/prd.json
 
     # コード生成関連
     gen:
@@ -173,6 +171,12 @@ melos:
       packageFilters:
         dirExists:
           - test
+
+    test:e2e:
+      description: AndroidエミュレータでPatrol E2Eテストを実行する
+      run: patrol test --target integration_test/app_flow_test.dart --dart-define-from-file=flavor/dev.json
+      packageFilters:
+        scope: flutter_app
 
   ide:
     intellij:

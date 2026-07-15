@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum _SnackBarType {
-  info,
-  error,
-}
+enum _SnackBarType { info, error }
 
 sealed class SnackBarManager {
   SnackBarManager._();
@@ -35,30 +32,21 @@ sealed class SnackBarManager {
 
     state
       ..hideCurrentSnackBar()
-      ..showSnackBar(
-        switch (type) {
-          _SnackBarType.info => SnackBar(
-              content: Text(message),
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              showCloseIcon: true,
-            ),
-          _SnackBarType.error => SnackBar(
-              content: Text(
-                message,
-                style: TextStyle(color: cs.onError),
-              ),
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              backgroundColor: cs.error,
-              closeIconColor: cs.onError,
-              showCloseIcon: true,
-            ),
-        },
-      );
+      ..showSnackBar(switch (type) {
+        _SnackBarType.info => SnackBar(
+          content: Text(message),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          showCloseIcon: true,
+        ),
+        _SnackBarType.error => SnackBar(
+          content: Text(message, style: TextStyle(color: cs.onError)),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          backgroundColor: cs.error,
+          closeIconColor: cs.onError,
+          showCloseIcon: true,
+        ),
+      });
   }
 }

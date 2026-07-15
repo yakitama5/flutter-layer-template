@@ -10,5 +10,7 @@ Timestamp? timestampFromDateValue(dynamic value) =>
     value is DateTime ? Timestamp.fromDate(value) : null;
 
 /// Timestamp ↔ DateTimeのConverter Json Key
-const timestampKey =
-    JsonKey(fromJson: dateFromTimestampValue, toJson: timestampFromDateValue);
+const timestampKey = JsonKey(
+  fromJson: dateFromTimestampValue,
+  toJson: timestampFromDateValue,
+);

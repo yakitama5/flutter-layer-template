@@ -3,30 +3,32 @@
 import 'package:designsystem/src/extension/theme_color_extension.dart';
 import 'package:designsystem/src/theme/state/theme_color_notifier_provider.dart';
 import 'package:designsystem/src/theme/utils/core_palette_extension.dart';
-import 'package:domain/designsystem.dart';
+import 'package:packages_application/designsystem.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 
 import '../color_schemes.dart';
 import 'core_palette_provider.dart';
 
-part 'app_color_scheme_provider.g.dart';
-
 /// アプリ内のカラースキーマを管理
-@riverpod
-ColorScheme appColorScheme(Ref ref, {required Brightness brightness}) {
-  final themeColor = ref.watch(themeColorProvider);
-  final dynamicCorePalette = ref.watch(corePaletteProvider).value;
+final appColorSchemeProvider = Provider.autoDispose
+    .family<ColorScheme, Brightness>((ref, brightness) {
+      final themeColor = ref.watch(themeColorProvider);
+      final dynamicCorePalette = ref.watch(corePaletteProvider).value;
 
-  // テーマカラーに応じたカラースキーマを取得
-  final colorScheme = _colorScheme(brightness, themeColor, dynamicCorePalette);
+      // テーマカラーに応じたカラースキーマを取得
+      final colorScheme = _colorScheme(
+        brightness,
+        themeColor,
+        dynamicCorePalette,
+      );
 
-  // Dynamic Colorに対応している場合、エラー色を調和する
-  final isDynamicColorSupported = dynamicCorePalette != null;
-  return isDynamicColorSupported ? colorScheme.harmonized() : colorScheme;
-}
+      // Dynamic Colorに対応している場合、エラー色を調和する
+      final isDynamicColorSupported = dynamicCorePalette != null;
+      return isDynamicColorSupported ? colorScheme.harmonized() : colorScheme;
+    });
 
 /// テーマカラーに応じたカラースキーマ
 ColorScheme _colorScheme(
