@@ -1,0 +1,17 @@
+"layer: domain":
+  - changed-files:
+      - any-glob-to-any-file: "packages/domain/**"
+
+"layer: application":
+  - changed-files:
+      - any-glob-to-any-file: "packages/application/**"
+
+"layer: infrastructure":
+  - changed-files:
+      - any-glob-to-any-file: "packages/infrastructure/**"
+
+"layer: designsystem+app":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/designsystem/**"
+          - "apps/app/**"
