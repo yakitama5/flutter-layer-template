@@ -5,6 +5,7 @@ linter:
 
 analyzer:
   exclude:
+    - "build/**"
     - "**/build/**"
     - "**/*.g.dart"
     - "**/*.freezed.dart"
