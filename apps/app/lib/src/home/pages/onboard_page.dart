@@ -7,7 +7,6 @@ import 'package:flutter_app/src/settings/components/components.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class OnboardPage extends StatelessWidget {
   const OnboardPage({super.key});
@@ -99,7 +98,7 @@ class _SignInWithGoogleButton extends ConsumerWidget with PresentationMixin {
           action: () => ref.read(userUsecaseProvider).signInWithGoogle(),
         ),
         label: Text(i18n.user.onboardPage.signInWithGoogle),
-        icon: Icon(MdiIcons.google),
+        icon: const Icon(Icons.login),
       ),
     );
   }
@@ -118,10 +117,7 @@ class _SignInWithAppleButton extends ConsumerWidget with PresentationMixin {
           action: () => ref.read(userUsecaseProvider).signInWithApple(),
         ),
         label: Text(i18n.user.onboardPage.signInWithApple),
-        icon: Icon(
-          MdiIcons.apple,
-          color: cs.onSurface,
-        ),
+        icon: Icon(Icons.apple, color: cs.onSurface),
       ),
     );
   }
@@ -140,12 +136,8 @@ class _Links extends HookWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Flexible(
-                child: ContactUsLink(),
-              ),
-              Flexible(
-                child: PrivacyPollicyLink(),
-              ),
+              Flexible(child: ContactUsLink()),
+              Flexible(child: PrivacyPollicyLink()),
             ],
           ),
         ),

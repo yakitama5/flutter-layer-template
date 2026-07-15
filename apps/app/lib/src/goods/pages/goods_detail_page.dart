@@ -65,7 +65,7 @@ class GoodsDetailPage extends StatelessWidget {
                           }
                           return ListTile(title: Text('Index $index'));
                         },
-                        separatorBuilder: (_, __) => const Divider(),
+                        separatorBuilder: (_, _) => const Divider(),
                       ),
                     ),
                   ],

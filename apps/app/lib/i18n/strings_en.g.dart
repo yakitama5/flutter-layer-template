@@ -40,43 +40,43 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
-	late final TranslationsAppEn app = TranslationsAppEn.internal(_root);
-	late final TranslationsErrorEn error = TranslationsErrorEn.internal(_root);
-	late final TranslationsGoodsEn goods = TranslationsGoodsEn.internal(_root);
-	late final TranslationsSettingsEn settings = TranslationsSettingsEn.internal(_root);
-	late final TranslationsUserEn user = TranslationsUserEn.internal(_root);
+	late final Translations$app$en app = Translations$app$en.internal(_root);
+	late final Translations$error$en error = Translations$error$en.internal(_root);
+	late final Translations$goods$en goods = Translations$goods$en.internal(_root);
+	late final Translations$settings$en settings = Translations$settings$en.internal(_root);
+	late final Translations$user$en user = Translations$user$en.internal(_root);
 }
 
 // Path: app
-class TranslationsAppEn {
-	TranslationsAppEn.internal(this._root);
+class Translations$app$en {
+	Translations$app$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAppBottomNavBarEn bottomNavBar = TranslationsAppBottomNavBarEn.internal(_root);
-	late final TranslationsAppHomePageEn homePage = TranslationsAppHomePageEn.internal(_root);
+	late final Translations$app$bottomNavBar$en bottomNavBar = Translations$app$bottomNavBar$en.internal(_root);
+	late final Translations$app$homePage$en homePage = Translations$app$homePage$en.internal(_root);
 }
 
 // Path: error
-class TranslationsErrorEn {
-	TranslationsErrorEn.internal(this._root);
+class Translations$error$en {
+	Translations$error$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsErrorErrorPageEn errorPage = TranslationsErrorErrorPageEn.internal(_root);
-	late final TranslationsErrorMessageEn message = TranslationsErrorMessageEn.internal(_root);
+	late final Translations$error$errorPage$en errorPage = Translations$error$errorPage$en.internal(_root);
+	late final Translations$error$message$en message = Translations$error$message$en.internal(_root);
 }
 
 // Path: goods
-class TranslationsGoodsEn {
-	TranslationsGoodsEn.internal(this._root);
+class Translations$goods$en {
+	Translations$goods$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsGoodsGoodsPageEn goodsPage = TranslationsGoodsGoodsPageEn.internal(_root);
+	late final Translations$goods$goodsPage$en goodsPage = Translations$goods$goodsPage$en.internal(_root);
 
 	/// en: '(createdAt) {Created at} (name) {Name} (price) {Price}'
 	String goodsSortKey({required GoodsSortKey context}) {
@@ -92,30 +92,30 @@ class TranslationsGoodsEn {
 }
 
 // Path: settings
-class TranslationsSettingsEn {
-	TranslationsSettingsEn.internal(this._root);
+class Translations$settings$en {
+	Translations$settings$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsSettingsSettingsPageEn settingsPage = TranslationsSettingsSettingsPageEn.internal(_root);
-	late final TranslationsSettingsAccountPageEn accountPage = TranslationsSettingsAccountPageEn.internal(_root);
+	late final Translations$settings$settingsPage$en settingsPage = Translations$settings$settingsPage$en.internal(_root);
+	late final Translations$settings$accountPage$en accountPage = Translations$settings$accountPage$en.internal(_root);
 }
 
 // Path: user
-class TranslationsUserEn {
-	TranslationsUserEn.internal(this._root);
+class Translations$user$en {
+	Translations$user$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsUserUserPageEn userPage = TranslationsUserUserPageEn.internal(_root);
-	late final TranslationsUserOnboardPageEn onboardPage = TranslationsUserOnboardPageEn.internal(_root);
+	late final Translations$user$userPage$en userPage = Translations$user$userPage$en.internal(_root);
+	late final Translations$user$onboardPage$en onboardPage = Translations$user$onboardPage$en.internal(_root);
 }
 
 // Path: app.bottomNavBar
-class TranslationsAppBottomNavBarEn {
-	TranslationsAppBottomNavBarEn.internal(this._root);
+class Translations$app$bottomNavBar$en {
+	Translations$app$bottomNavBar$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -132,8 +132,8 @@ class TranslationsAppBottomNavBarEn {
 }
 
 // Path: app.homePage
-class TranslationsAppHomePageEn {
-	TranslationsAppHomePageEn.internal(this._root);
+class Translations$app$homePage$en {
+	Translations$app$homePage$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -144,8 +144,8 @@ class TranslationsAppHomePageEn {
 }
 
 // Path: error.errorPage
-class TranslationsErrorErrorPageEn {
-	TranslationsErrorErrorPageEn.internal(this._root);
+class Translations$error$errorPage$en {
+	Translations$error$errorPage$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -156,18 +156,18 @@ class TranslationsErrorErrorPageEn {
 }
 
 // Path: error.message
-class TranslationsErrorMessageEn {
-	TranslationsErrorMessageEn.internal(this._root);
+class Translations$error$message$en {
+	Translations$error$message$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsErrorMessageImpossibleOperationEn impossibleOperation = TranslationsErrorMessageImpossibleOperationEn.internal(_root);
+	late final Translations$error$message$impossibleOperation$en impossibleOperation = Translations$error$message$impossibleOperation$en.internal(_root);
 }
 
 // Path: goods.goodsPage
-class TranslationsGoodsGoodsPageEn {
-	TranslationsGoodsGoodsPageEn.internal(this._root);
+class Translations$goods$goodsPage$en {
+	Translations$goods$goodsPage$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -184,8 +184,8 @@ class TranslationsGoodsGoodsPageEn {
 }
 
 // Path: settings.settingsPage
-class TranslationsSettingsSettingsPageEn {
-	TranslationsSettingsSettingsPageEn.internal(this._root);
+class Translations$settings$settingsPage$en {
+	Translations$settings$settingsPage$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -194,14 +194,14 @@ class TranslationsSettingsSettingsPageEn {
 	/// en: 'Settings'
 	String get title => 'Settings';
 
-	late final TranslationsSettingsSettingsPageAccountEn account = TranslationsSettingsSettingsPageAccountEn.internal(_root);
-	late final TranslationsSettingsSettingsPageLayoutEn layout = TranslationsSettingsSettingsPageLayoutEn.internal(_root);
-	late final TranslationsSettingsSettingsPageHelpEn help = TranslationsSettingsSettingsPageHelpEn.internal(_root);
+	late final Translations$settings$settingsPage$account$en account = Translations$settings$settingsPage$account$en.internal(_root);
+	late final Translations$settings$settingsPage$layout$en layout = Translations$settings$settingsPage$layout$en.internal(_root);
+	late final Translations$settings$settingsPage$help$en help = Translations$settings$settingsPage$help$en.internal(_root);
 }
 
 // Path: settings.accountPage
-class TranslationsSettingsAccountPageEn {
-	TranslationsSettingsAccountPageEn.internal(this._root);
+class Translations$settings$accountPage$en {
+	Translations$settings$accountPage$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -210,14 +210,14 @@ class TranslationsSettingsAccountPageEn {
 	/// en: 'Account'
 	String get title => 'Account';
 
-	late final TranslationsSettingsAccountPageLinkEn link = TranslationsSettingsAccountPageLinkEn.internal(_root);
-	late final TranslationsSettingsAccountPageOtherEn other = TranslationsSettingsAccountPageOtherEn.internal(_root);
-	late final TranslationsSettingsAccountPageLeaveConfirmDialogEn leaveConfirmDialog = TranslationsSettingsAccountPageLeaveConfirmDialogEn.internal(_root);
+	late final Translations$settings$accountPage$link$en link = Translations$settings$accountPage$link$en.internal(_root);
+	late final Translations$settings$accountPage$other$en other = Translations$settings$accountPage$other$en.internal(_root);
+	late final Translations$settings$accountPage$leaveConfirmDialog$en leaveConfirmDialog = Translations$settings$accountPage$leaveConfirmDialog$en.internal(_root);
 }
 
 // Path: user.userPage
-class TranslationsUserUserPageEn {
-	TranslationsUserUserPageEn.internal(this._root);
+class Translations$user$userPage$en {
+	Translations$user$userPage$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -228,8 +228,8 @@ class TranslationsUserUserPageEn {
 }
 
 // Path: user.onboardPage
-class TranslationsUserOnboardPageEn {
-	TranslationsUserOnboardPageEn.internal(this._root);
+class Translations$user$onboardPage$en {
+	Translations$user$onboardPage$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -249,8 +249,8 @@ class TranslationsUserOnboardPageEn {
 }
 
 // Path: error.message.impossibleOperation
-class TranslationsErrorMessageImpossibleOperationEn {
-	TranslationsErrorMessageImpossibleOperationEn.internal(this._root);
+class Translations$error$message$impossibleOperation$en {
+	Translations$error$message$impossibleOperation$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -264,8 +264,8 @@ class TranslationsErrorMessageImpossibleOperationEn {
 }
 
 // Path: settings.settingsPage.account
-class TranslationsSettingsSettingsPageAccountEn {
-	TranslationsSettingsSettingsPageAccountEn.internal(this._root);
+class Translations$settings$settingsPage$account$en {
+	Translations$settings$settingsPage$account$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -279,8 +279,8 @@ class TranslationsSettingsSettingsPageAccountEn {
 }
 
 // Path: settings.settingsPage.layout
-class TranslationsSettingsSettingsPageLayoutEn {
-	TranslationsSettingsSettingsPageLayoutEn.internal(this._root);
+class Translations$settings$settingsPage$layout$en {
+	Translations$settings$settingsPage$layout$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -300,8 +300,8 @@ class TranslationsSettingsSettingsPageLayoutEn {
 }
 
 // Path: settings.settingsPage.help
-class TranslationsSettingsSettingsPageHelpEn {
-	TranslationsSettingsSettingsPageHelpEn.internal(this._root);
+class Translations$settings$settingsPage$help$en {
+	Translations$settings$settingsPage$help$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -327,8 +327,8 @@ class TranslationsSettingsSettingsPageHelpEn {
 }
 
 // Path: settings.accountPage.link
-class TranslationsSettingsAccountPageLinkEn {
-	TranslationsSettingsAccountPageLinkEn.internal(this._root);
+class Translations$settings$accountPage$link$en {
+	Translations$settings$accountPage$link$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -345,8 +345,8 @@ class TranslationsSettingsAccountPageLinkEn {
 }
 
 // Path: settings.accountPage.other
-class TranslationsSettingsAccountPageOtherEn {
-	TranslationsSettingsAccountPageOtherEn.internal(this._root);
+class Translations$settings$accountPage$other$en {
+	Translations$settings$accountPage$other$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -363,8 +363,8 @@ class TranslationsSettingsAccountPageOtherEn {
 }
 
 // Path: settings.accountPage.leaveConfirmDialog
-class TranslationsSettingsAccountPageLeaveConfirmDialogEn {
-	TranslationsSettingsAccountPageLeaveConfirmDialogEn.internal(this._root);
+class Translations$settings$accountPage$leaveConfirmDialog$en {
+	Translations$settings$accountPage$leaveConfirmDialog$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 

@@ -116,7 +116,7 @@ class _SliverBody extends HookConsumerWidget {
           ),
           loading: () => _ShimmerTile(viewLayout: viewLayout),
           // TODO(yakitama5): エラー表示を分けて記載
-          error: (error, __) => ErrorListTile(
+          error: (error, _) => ErrorListTile(
             indexInPage: indexInPage,
             isLoading: response.isLoading,
             error: error.toString(),

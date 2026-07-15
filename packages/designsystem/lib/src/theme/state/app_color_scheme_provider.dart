@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:designsystem/src/extension/theme_color_extension.dart';
 import 'package:designsystem/src/theme/state/theme_color_notifier_provider.dart';
 import 'package:designsystem/src/theme/utils/core_palette_extension.dart';

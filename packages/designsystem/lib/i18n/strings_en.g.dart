@@ -40,12 +40,12 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
-	late final TranslationsDesignsystemEn designsystem = TranslationsDesignsystemEn.internal(_root);
+	late final Translations$designsystem$en designsystem = Translations$designsystem$en.internal(_root);
 }
 
 // Path: designsystem
-class TranslationsDesignsystemEn {
-	TranslationsDesignsystemEn.internal(this._root);
+class Translations$designsystem$en {
+	Translations$designsystem$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -99,7 +99,7 @@ class TranslationsDesignsystemEn {
 		}
 	}
 
-	late final TranslationsDesignsystemViewLayoutEn viewLayout = TranslationsDesignsystemViewLayoutEn.internal(_root);
+	late final Translations$designsystem$viewLayout$en viewLayout = Translations$designsystem$viewLayout$en.internal(_root);
 
 	/// en: '(asc) {ASC} (desc) {DESC}'
 	String sortOrder({required SortOrder context}) {
@@ -111,12 +111,12 @@ class TranslationsDesignsystemEn {
 		}
 	}
 
-	late final TranslationsDesignsystemAppUpdateEn appUpdate = TranslationsDesignsystemAppUpdateEn.internal(_root);
+	late final Translations$designsystem$appUpdate$en appUpdate = Translations$designsystem$appUpdate$en.internal(_root);
 }
 
 // Path: designsystem.viewLayout
-class TranslationsDesignsystemViewLayoutEn {
-	TranslationsDesignsystemViewLayoutEn.internal(this._root);
+class Translations$designsystem$viewLayout$en {
+	Translations$designsystem$viewLayout$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -137,22 +137,22 @@ class TranslationsDesignsystemViewLayoutEn {
 }
 
 // Path: designsystem.appUpdate
-class TranslationsDesignsystemAppUpdateEn {
-	TranslationsDesignsystemAppUpdateEn.internal(this._root);
+class Translations$designsystem$appUpdate$en {
+	Translations$designsystem$appUpdate$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsDesignsystemAppUpdateUpdatePossibleEn updatePossible = TranslationsDesignsystemAppUpdateUpdatePossibleEn.internal(_root);
-	late final TranslationsDesignsystemAppUpdateForceUpdateEn forceUpdate = TranslationsDesignsystemAppUpdateForceUpdateEn.internal(_root);
+	late final Translations$designsystem$appUpdate$updatePossible$en updatePossible = Translations$designsystem$appUpdate$updatePossible$en.internal(_root);
+	late final Translations$designsystem$appUpdate$forceUpdate$en forceUpdate = Translations$designsystem$appUpdate$forceUpdate$en.internal(_root);
 
 	/// en: 'Open Store'
 	String get navigateStore => 'Open Store';
 }
 
 // Path: designsystem.appUpdate.updatePossible
-class TranslationsDesignsystemAppUpdateUpdatePossibleEn {
-	TranslationsDesignsystemAppUpdateUpdatePossibleEn.internal(this._root);
+class Translations$designsystem$appUpdate$updatePossible$en {
+	Translations$designsystem$appUpdate$updatePossible$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -163,8 +163,8 @@ class TranslationsDesignsystemAppUpdateUpdatePossibleEn {
 }
 
 // Path: designsystem.appUpdate.forceUpdate
-class TranslationsDesignsystemAppUpdateForceUpdateEn {
-	TranslationsDesignsystemAppUpdateForceUpdateEn.internal(this._root);
+class Translations$designsystem$appUpdate$forceUpdate$en {
+	Translations$designsystem$appUpdate$forceUpdate$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 

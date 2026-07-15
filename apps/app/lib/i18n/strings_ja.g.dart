@@ -41,43 +41,43 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	TranslationsJa $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsJa(meta: meta ?? this.$meta);
 
 	// Translations
-	@override late final _TranslationsAppJa app = _TranslationsAppJa._(_root);
-	@override late final _TranslationsErrorJa error = _TranslationsErrorJa._(_root);
-	@override late final _TranslationsGoodsJa goods = _TranslationsGoodsJa._(_root);
-	@override late final _TranslationsSettingsJa settings = _TranslationsSettingsJa._(_root);
-	@override late final _TranslationsUserJa user = _TranslationsUserJa._(_root);
+	@override late final _Translations$app$ja app = _Translations$app$ja._(_root);
+	@override late final _Translations$error$ja error = _Translations$error$ja._(_root);
+	@override late final _Translations$goods$ja goods = _Translations$goods$ja._(_root);
+	@override late final _Translations$settings$ja settings = _Translations$settings$ja._(_root);
+	@override late final _Translations$user$ja user = _Translations$user$ja._(_root);
 }
 
 // Path: app
-class _TranslationsAppJa extends TranslationsAppEn {
-	_TranslationsAppJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$app$ja extends Translations$app$en {
+	_Translations$app$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsAppBottomNavBarJa bottomNavBar = _TranslationsAppBottomNavBarJa._(_root);
-	@override late final _TranslationsAppHomePageJa homePage = _TranslationsAppHomePageJa._(_root);
+	@override late final _Translations$app$bottomNavBar$ja bottomNavBar = _Translations$app$bottomNavBar$ja._(_root);
+	@override late final _Translations$app$homePage$ja homePage = _Translations$app$homePage$ja._(_root);
 }
 
 // Path: error
-class _TranslationsErrorJa extends TranslationsErrorEn {
-	_TranslationsErrorJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$error$ja extends Translations$error$en {
+	_Translations$error$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsErrorErrorPageJa errorPage = _TranslationsErrorErrorPageJa._(_root);
-	@override late final _TranslationsErrorMessageJa message = _TranslationsErrorMessageJa._(_root);
+	@override late final _Translations$error$errorPage$ja errorPage = _Translations$error$errorPage$ja._(_root);
+	@override late final _Translations$error$message$ja message = _Translations$error$message$ja._(_root);
 }
 
 // Path: goods
-class _TranslationsGoodsJa extends TranslationsGoodsEn {
-	_TranslationsGoodsJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$goods$ja extends Translations$goods$en {
+	_Translations$goods$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsGoodsGoodsPageJa goodsPage = _TranslationsGoodsGoodsPageJa._(_root);
+	@override late final _Translations$goods$goodsPage$ja goodsPage = _Translations$goods$goodsPage$ja._(_root);
 	@override String goodsSortKey({required GoodsSortKey context}) {
 		switch (context) {
 			case GoodsSortKey.createdAt:
@@ -91,30 +91,30 @@ class _TranslationsGoodsJa extends TranslationsGoodsEn {
 }
 
 // Path: settings
-class _TranslationsSettingsJa extends TranslationsSettingsEn {
-	_TranslationsSettingsJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$settings$ja extends Translations$settings$en {
+	_Translations$settings$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsSettingsSettingsPageJa settingsPage = _TranslationsSettingsSettingsPageJa._(_root);
-	@override late final _TranslationsSettingsAccountPageJa accountPage = _TranslationsSettingsAccountPageJa._(_root);
+	@override late final _Translations$settings$settingsPage$ja settingsPage = _Translations$settings$settingsPage$ja._(_root);
+	@override late final _Translations$settings$accountPage$ja accountPage = _Translations$settings$accountPage$ja._(_root);
 }
 
 // Path: user
-class _TranslationsUserJa extends TranslationsUserEn {
-	_TranslationsUserJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$user$ja extends Translations$user$en {
+	_Translations$user$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsUserUserPageJa userPage = _TranslationsUserUserPageJa._(_root);
-	@override late final _TranslationsUserOnboardPageJa onboardPage = _TranslationsUserOnboardPageJa._(_root);
+	@override late final _Translations$user$userPage$ja userPage = _Translations$user$userPage$ja._(_root);
+	@override late final _Translations$user$onboardPage$ja onboardPage = _Translations$user$onboardPage$ja._(_root);
 }
 
 // Path: app.bottomNavBar
-class _TranslationsAppBottomNavBarJa extends TranslationsAppBottomNavBarEn {
-	_TranslationsAppBottomNavBarJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$app$bottomNavBar$ja extends Translations$app$bottomNavBar$en {
+	_Translations$app$bottomNavBar$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -125,8 +125,8 @@ class _TranslationsAppBottomNavBarJa extends TranslationsAppBottomNavBarEn {
 }
 
 // Path: app.homePage
-class _TranslationsAppHomePageJa extends TranslationsAppHomePageEn {
-	_TranslationsAppHomePageJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$app$homePage$ja extends Translations$app$homePage$en {
+	_Translations$app$homePage$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -135,8 +135,8 @@ class _TranslationsAppHomePageJa extends TranslationsAppHomePageEn {
 }
 
 // Path: error.errorPage
-class _TranslationsErrorErrorPageJa extends TranslationsErrorErrorPageEn {
-	_TranslationsErrorErrorPageJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$error$errorPage$ja extends Translations$error$errorPage$en {
+	_Translations$error$errorPage$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -145,18 +145,18 @@ class _TranslationsErrorErrorPageJa extends TranslationsErrorErrorPageEn {
 }
 
 // Path: error.message
-class _TranslationsErrorMessageJa extends TranslationsErrorMessageEn {
-	_TranslationsErrorMessageJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$error$message$ja extends Translations$error$message$en {
+	_Translations$error$message$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsErrorMessageImpossibleOperationJa impossibleOperation = _TranslationsErrorMessageImpossibleOperationJa._(_root);
+	@override late final _Translations$error$message$impossibleOperation$ja impossibleOperation = _Translations$error$message$impossibleOperation$ja._(_root);
 }
 
 // Path: goods.goodsPage
-class _TranslationsGoodsGoodsPageJa extends TranslationsGoodsGoodsPageEn {
-	_TranslationsGoodsGoodsPageJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$goods$goodsPage$ja extends Translations$goods$goodsPage$en {
+	_Translations$goods$goodsPage$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -167,34 +167,34 @@ class _TranslationsGoodsGoodsPageJa extends TranslationsGoodsGoodsPageEn {
 }
 
 // Path: settings.settingsPage
-class _TranslationsSettingsSettingsPageJa extends TranslationsSettingsSettingsPageEn {
-	_TranslationsSettingsSettingsPageJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$settings$settingsPage$ja extends Translations$settings$settingsPage$en {
+	_Translations$settings$settingsPage$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => '設定';
-	@override late final _TranslationsSettingsSettingsPageAccountJa account = _TranslationsSettingsSettingsPageAccountJa._(_root);
-	@override late final _TranslationsSettingsSettingsPageLayoutJa layout = _TranslationsSettingsSettingsPageLayoutJa._(_root);
-	@override late final _TranslationsSettingsSettingsPageHelpJa help = _TranslationsSettingsSettingsPageHelpJa._(_root);
+	@override late final _Translations$settings$settingsPage$account$ja account = _Translations$settings$settingsPage$account$ja._(_root);
+	@override late final _Translations$settings$settingsPage$layout$ja layout = _Translations$settings$settingsPage$layout$ja._(_root);
+	@override late final _Translations$settings$settingsPage$help$ja help = _Translations$settings$settingsPage$help$ja._(_root);
 }
 
 // Path: settings.accountPage
-class _TranslationsSettingsAccountPageJa extends TranslationsSettingsAccountPageEn {
-	_TranslationsSettingsAccountPageJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$settings$accountPage$ja extends Translations$settings$accountPage$en {
+	_Translations$settings$accountPage$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'アカウント';
-	@override late final _TranslationsSettingsAccountPageLinkJa link = _TranslationsSettingsAccountPageLinkJa._(_root);
-	@override late final _TranslationsSettingsAccountPageOtherJa other = _TranslationsSettingsAccountPageOtherJa._(_root);
-	@override late final _TranslationsSettingsAccountPageLeaveConfirmDialogJa leaveConfirmDialog = _TranslationsSettingsAccountPageLeaveConfirmDialogJa._(_root);
+	@override late final _Translations$settings$accountPage$link$ja link = _Translations$settings$accountPage$link$ja._(_root);
+	@override late final _Translations$settings$accountPage$other$ja other = _Translations$settings$accountPage$other$ja._(_root);
+	@override late final _Translations$settings$accountPage$leaveConfirmDialog$ja leaveConfirmDialog = _Translations$settings$accountPage$leaveConfirmDialog$ja._(_root);
 }
 
 // Path: user.userPage
-class _TranslationsUserUserPageJa extends TranslationsUserUserPageEn {
-	_TranslationsUserUserPageJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$user$userPage$ja extends Translations$user$userPage$en {
+	_Translations$user$userPage$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -203,8 +203,8 @@ class _TranslationsUserUserPageJa extends TranslationsUserUserPageEn {
 }
 
 // Path: user.onboardPage
-class _TranslationsUserOnboardPageJa extends TranslationsUserOnboardPageEn {
-	_TranslationsUserOnboardPageJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$user$onboardPage$ja extends Translations$user$onboardPage$en {
+	_Translations$user$onboardPage$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -216,8 +216,8 @@ class _TranslationsUserOnboardPageJa extends TranslationsUserOnboardPageEn {
 }
 
 // Path: error.message.impossibleOperation
-class _TranslationsErrorMessageImpossibleOperationJa extends TranslationsErrorMessageImpossibleOperationEn {
-	_TranslationsErrorMessageImpossibleOperationJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$error$message$impossibleOperation$ja extends Translations$error$message$impossibleOperation$en {
+	_Translations$error$message$impossibleOperation$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -227,8 +227,8 @@ class _TranslationsErrorMessageImpossibleOperationJa extends TranslationsErrorMe
 }
 
 // Path: settings.settingsPage.account
-class _TranslationsSettingsSettingsPageAccountJa extends TranslationsSettingsSettingsPageAccountEn {
-	_TranslationsSettingsSettingsPageAccountJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$settings$settingsPage$account$ja extends Translations$settings$settingsPage$account$en {
+	_Translations$settings$settingsPage$account$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -238,8 +238,8 @@ class _TranslationsSettingsSettingsPageAccountJa extends TranslationsSettingsSet
 }
 
 // Path: settings.settingsPage.layout
-class _TranslationsSettingsSettingsPageLayoutJa extends TranslationsSettingsSettingsPageLayoutEn {
-	_TranslationsSettingsSettingsPageLayoutJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$settings$settingsPage$layout$ja extends Translations$settings$settingsPage$layout$en {
+	_Translations$settings$settingsPage$layout$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -251,8 +251,8 @@ class _TranslationsSettingsSettingsPageLayoutJa extends TranslationsSettingsSett
 }
 
 // Path: settings.settingsPage.help
-class _TranslationsSettingsSettingsPageHelpJa extends TranslationsSettingsSettingsPageHelpEn {
-	_TranslationsSettingsSettingsPageHelpJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$settings$settingsPage$help$ja extends Translations$settings$settingsPage$help$en {
+	_Translations$settings$settingsPage$help$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -266,8 +266,8 @@ class _TranslationsSettingsSettingsPageHelpJa extends TranslationsSettingsSettin
 }
 
 // Path: settings.accountPage.link
-class _TranslationsSettingsAccountPageLinkJa extends TranslationsSettingsAccountPageLinkEn {
-	_TranslationsSettingsAccountPageLinkJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$settings$accountPage$link$ja extends Translations$settings$accountPage$link$en {
+	_Translations$settings$accountPage$link$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -278,8 +278,8 @@ class _TranslationsSettingsAccountPageLinkJa extends TranslationsSettingsAccount
 }
 
 // Path: settings.accountPage.other
-class _TranslationsSettingsAccountPageOtherJa extends TranslationsSettingsAccountPageOtherEn {
-	_TranslationsSettingsAccountPageOtherJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$settings$accountPage$other$ja extends Translations$settings$accountPage$other$en {
+	_Translations$settings$accountPage$other$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -290,8 +290,8 @@ class _TranslationsSettingsAccountPageOtherJa extends TranslationsSettingsAccoun
 }
 
 // Path: settings.accountPage.leaveConfirmDialog
-class _TranslationsSettingsAccountPageLeaveConfirmDialogJa extends TranslationsSettingsAccountPageLeaveConfirmDialogEn {
-	_TranslationsSettingsAccountPageLeaveConfirmDialogJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$settings$accountPage$leaveConfirmDialog$ja extends Translations$settings$accountPage$leaveConfirmDialog$en {
+	_Translations$settings$accountPage$leaveConfirmDialog$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 

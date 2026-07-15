@@ -42,12 +42,12 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	TranslationsJa $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsJa(meta: meta ?? this.$meta);
 
 	// Translations
-	@override late final _TranslationsDesignsystemJa designsystem = _TranslationsDesignsystemJa._(_root);
+	@override late final _Translations$designsystem$ja designsystem = _Translations$designsystem$ja._(_root);
 }
 
 // Path: designsystem
-class _TranslationsDesignsystemJa extends TranslationsDesignsystemEn {
-	_TranslationsDesignsystemJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$designsystem$ja extends Translations$designsystem$en {
+	_Translations$designsystem$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -94,7 +94,7 @@ class _TranslationsDesignsystemJa extends TranslationsDesignsystemEn {
 				return 'ダークテーマ';
 		}
 	}
-	@override late final _TranslationsDesignsystemViewLayoutJa viewLayout = _TranslationsDesignsystemViewLayoutJa._(_root);
+	@override late final _Translations$designsystem$viewLayout$ja viewLayout = _Translations$designsystem$viewLayout$ja._(_root);
 	@override String sortOrder({required SortOrder context}) {
 		switch (context) {
 			case SortOrder.asc:
@@ -103,12 +103,12 @@ class _TranslationsDesignsystemJa extends TranslationsDesignsystemEn {
 				return '降順';
 		}
 	}
-	@override late final _TranslationsDesignsystemAppUpdateJa appUpdate = _TranslationsDesignsystemAppUpdateJa._(_root);
+	@override late final _Translations$designsystem$appUpdate$ja appUpdate = _Translations$designsystem$appUpdate$ja._(_root);
 }
 
 // Path: designsystem.viewLayout
-class _TranslationsDesignsystemViewLayoutJa extends TranslationsDesignsystemViewLayoutEn {
-	_TranslationsDesignsystemViewLayoutJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$designsystem$viewLayout$ja extends Translations$designsystem$viewLayout$en {
+	_Translations$designsystem$viewLayout$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -125,20 +125,20 @@ class _TranslationsDesignsystemViewLayoutJa extends TranslationsDesignsystemView
 }
 
 // Path: designsystem.appUpdate
-class _TranslationsDesignsystemAppUpdateJa extends TranslationsDesignsystemAppUpdateEn {
-	_TranslationsDesignsystemAppUpdateJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$designsystem$appUpdate$ja extends Translations$designsystem$appUpdate$en {
+	_Translations$designsystem$appUpdate$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsDesignsystemAppUpdateUpdatePossibleJa updatePossible = _TranslationsDesignsystemAppUpdateUpdatePossibleJa._(_root);
-	@override late final _TranslationsDesignsystemAppUpdateForceUpdateJa forceUpdate = _TranslationsDesignsystemAppUpdateForceUpdateJa._(_root);
+	@override late final _Translations$designsystem$appUpdate$updatePossible$ja updatePossible = _Translations$designsystem$appUpdate$updatePossible$ja._(_root);
+	@override late final _Translations$designsystem$appUpdate$forceUpdate$ja forceUpdate = _Translations$designsystem$appUpdate$forceUpdate$ja._(_root);
 	@override String get navigateStore => 'ストアを開く';
 }
 
 // Path: designsystem.appUpdate.updatePossible
-class _TranslationsDesignsystemAppUpdateUpdatePossibleJa extends TranslationsDesignsystemAppUpdateUpdatePossibleEn {
-	_TranslationsDesignsystemAppUpdateUpdatePossibleJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$designsystem$appUpdate$updatePossible$ja extends Translations$designsystem$appUpdate$updatePossible$en {
+	_Translations$designsystem$appUpdate$updatePossible$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -147,8 +147,8 @@ class _TranslationsDesignsystemAppUpdateUpdatePossibleJa extends TranslationsDes
 }
 
 // Path: designsystem.appUpdate.forceUpdate
-class _TranslationsDesignsystemAppUpdateForceUpdateJa extends TranslationsDesignsystemAppUpdateForceUpdateEn {
-	_TranslationsDesignsystemAppUpdateForceUpdateJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class _Translations$designsystem$appUpdate$forceUpdate$ja extends Translations$designsystem$appUpdate$forceUpdate$en {
+	_Translations$designsystem$appUpdate$forceUpdate$ja._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 

@@ -1,17 +1,11 @@
-include: package:altive_lints/altive_lints.yaml
+include: package:flutter_lints/flutter.yaml
 linter:
   rules:
     - public_member_api_docs: false
 
-plugins:
-  altive_lints:
-    version: ^2.0.0
-    diagnostics:
-      avoid_hardcoded_color: false
-      avoid_hardcoded_japanese: false
-
 analyzer:
   exclude:
+    - "**/build/**"
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - "**/*.gform.dart"

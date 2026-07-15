@@ -18,18 +18,13 @@ class $AssetsImagesGen {
   AssetGenImage get flower => const AssetGenImage('assets/images/flower.png');
 
   /// File path: assets/images/welcome_cats.svg
-  String get welcomeCats =>
-      'packages/flutter_app/assets/images/welcome_cats.svg';
+  String get welcomeCats => 'assets/images/welcome_cats.svg';
 
   /// List of all assets
   List<dynamic> get values => [flower, welcomeCats];
 }
 
-class Assets {
-  const Assets._();
-
-  static const String package = 'flutter_app';
-
+abstract final class Assets {
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
@@ -42,8 +37,6 @@ class AssetGenImage {
   });
 
   final String _assetName;
-
-  static const String package = 'flutter_app';
 
   final Size? size;
   final Set<String> flavors;
@@ -69,8 +62,7 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = true,
     bool isAntiAlias = false,
-    @Deprecated('Do not specify package for a generated library asset')
-    String? package = package,
+    String? package,
     FilterQuality filterQuality = FilterQuality.medium,
     int? cacheWidth,
     int? cacheHeight,
@@ -103,17 +95,13 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    @Deprecated('Do not specify package for a generated library asset')
-    String? package = package,
-  }) {
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
     return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;
 
-  String get keyName => 'packages/flutter_app/$_assetName';
+  String get keyName => _assetName;
 }
 
 class AssetGenImageAnimation {

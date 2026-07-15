@@ -5,7 +5,6 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_app/src/router/routes/branches/setting_shell_branch.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../components/src/themed_settings_list.dart';
 
@@ -88,7 +87,7 @@ class SettingsPage extends HookConsumerWidget {
                 onPressed: _onContactUs,
               ),
               SettingsTile.navigation(
-                leading: Icon(MdiIcons.twitter),
+                leading: const Icon(Icons.alternate_email),
                 title: Text(i18n.settings.settingsPage.help.developperTwitter),
                 onPressed: _onDevelopperTwitter,
               ),

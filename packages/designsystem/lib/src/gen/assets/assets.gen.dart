@@ -27,9 +27,7 @@ class $AssetsImagesGen {
   List<dynamic> get values => [google, logo];
 }
 
-class Assets {
-  const Assets._();
-
+abstract final class Assets {
   static const String package = 'designsystem';
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
