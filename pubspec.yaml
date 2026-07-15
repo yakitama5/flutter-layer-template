@@ -18,6 +18,7 @@ dev_dependencies:
   # altive_lints: ^2.0.0
   flutter_lints: any
   melos: ^8.2.2
+  test: any
 
 melos:
   command:
