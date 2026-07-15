@@ -89,6 +89,32 @@ Please check:
 
 - [Visual Studio Code] の場合、`.vscode/launch.json` を確認してください。
 
+## アプリIDの変更
+
+テンプレート利用開始時に、AndroidとiOSで共通のベースアプリIDを指定します。
+
+```shell
+# 変更対象の確認
+mise exec -- dart run tool/replace_app_id.dart \
+  --app-id com.example.app \
+  --dry-run
+
+# 変更の適用
+mise exec -- dart run tool/replace_app_id.dart \
+  --app-id com.example.app
+```
+
+このツールはflavor、Android namespaceとKotlin package、iOS、Patrol、E2E、
+Firebase設定内のアプリIDを同期します。開発環境には既存の`.dev` suffixが付きます。
+
+GitHub上で実行する場合はActionsの`Replace App ID`を開き、変更先のブランチと
+アプリIDを指定して`Run workflow`を実行します。workflowは検証後、選択したブランチへ
+変更をコミットします。
+
+アプリIDの変更だけではFirebase側に新しいアプリは作成されません。変更後に開発・本番の
+FirebaseプロジェクトへAndroid/iOSアプリを登録し直し、このドキュメントのFirebase節に
+従って`flutterfire configure`とネイティブ設定ファイルの配置を再実行してください。
+
 リリース手順は[RELEASE.md](RELEASE.md)を参照してください。
 <!-- Links -->
 

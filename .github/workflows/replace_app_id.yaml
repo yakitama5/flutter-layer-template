@@ -1,0 +1,61 @@
+name: Replace App ID
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_id:
+        description: AndroidとiOSで使用する逆DNS形式のアプリID
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  replace:
+    name: Replace with ${{ inputs.app_id }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: jdx/mise-action@v3
+        with:
+          cache: true
+      - name: Install dependencies
+        run: dart pub get
+      - name: Replace app ID
+        env:
+          APP_ID: ${{ inputs.app_id }}
+        run: dart run tool/replace_app_id.dart --app-id "$APP_ID"
+      - name: Verify changes
+        run: |
+          dart test test/tool/app_id_replacer_test.dart
+          dart analyze
+          dart run melos run test:ci
+      - name: Commit changes
+        env:
+          APP_ID: ${{ inputs.app_id }}
+        run: |
+          git add \
+            apps/app/android/app/build.gradle \
+            apps/app/android/app/src/main/kotlin \
+            apps/app/android/app/src/dev/google-services.json \
+            apps/app/android/app/src/prd/google-services.json \
+            apps/app/flavor \
+            apps/app/integration_test/app_flow_test.dart \
+            apps/app/ios/dev/GoogleService-Info.plist \
+            apps/app/ios/prd/GoogleService-Info.plist \
+            apps/app/pubspec.yaml \
+            packages/infrastructure/firebase/lib/src/common/config/firebase_options.dart \
+            packages/infrastructure/firebase/lib/src/common/config/firebase_options_dev.dart
+          if git diff --cached --quiet; then
+            echo "App ID is already $APP_ID"
+            exit 0
+          fi
+          git diff --cached --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "🔧chore: アプリIDを${APP_ID}へ変更"
+          git push origin "HEAD:${{ github.ref_name }}"
