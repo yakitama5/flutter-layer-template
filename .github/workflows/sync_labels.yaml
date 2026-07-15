@@ -1,0 +1,27 @@
+name: Sync GitHub Labels
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - labels.yaml
+      - .github/workflows/sync_labels.yaml
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync labels from labels.yaml
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          ruby -ryaml -e 'YAML.load_file("labels.yaml").each { |label| puts [label.fetch("name"), label.fetch("color"), label.fetch("description", "")].join("\t") }' |
+          while IFS=$'\t' read -r name color description; do
+            gh label create "$name" --color "$color" --description "$description" --force
+          done
