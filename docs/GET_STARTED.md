@@ -12,22 +12,7 @@
     - `extension.json` に定義されている拡張機能をインストールしてください。
   - [Xcode]
 - [mise] コマンドを有効にしてください。
-- [melos] コマンドを有効にしてください。
-  - `pubspec.lock` ファイルを解析して melos コマンドのバージョンを取得するため、[yq] コマンドをインストールしてください。
-  - 以下のコマンドを実行して melos コマンドをグローバルに有効にしてください。
-- [cmder] を推奨
-
-    ```shell
-    MELOS_VERSION=$(cat pubspec.lock | yq ".packages.melos.version" -r)
-    mise exec -- dart pub global activate melos $MELOS_VERSION
-    ```
-
-- [mason_cli] コマンドを有効にしてください。
-  - また、ローカルのbricksを有効にするため、以下のコマンドを実行してください。
-
-    ```shell
-    mason get
-    ```
+- `make setup`でMelosと依存関係をセットアップできます。
 
 ### Flutter SDKのセットアップ
 
@@ -42,7 +27,7 @@ mise install
 ### 依存関係のインストール
 
 ```shell
-melos bs
+make setup
 ```
 
 ## 🔥Firebase
@@ -77,10 +62,24 @@ Firebaseを利用する場合は下記の手順を実施してください。
   - 下記のファイルをそれぞれ環境別のディレクトリに配置する
     - `GoogleService-Info.plist`
       - 開発：`apps/app/ios/dev/GoogleService-Info.plist`
-      - 本番：`apps/app/ios/prod/GoogleService-Info.plist`
+      - 本番：`apps/app/ios/prd/GoogleService-Info.plist`
     - `google-services.json`
       - 開発：`apps/app/android/app/src/dev/google-services.json`
-      - 本番：`apps/app/android/app/src/prod/google-services.json`
+      - 本番：`apps/app/android/app/src/prd/google-services.json`
+
+## テスト
+
+```shell
+# 静的解析と全パッケージのテスト
+mise exec -- dart analyze
+mise exec -- dart run melos run test:ci
+
+# Patrol E2E（起動済みのAndroid/iOSエミュレータが必要）
+mise exec -- dart pub global activate patrol_cli
+cd apps/app
+mise exec -- patrol test --target integration_test/app_flow_test.dart \
+  --dart-define-from-file=flavor/dev.json
+```
 
 ## 📱動作確認
 
@@ -89,6 +88,8 @@ Firebaseを利用する場合は下記の手順を実施してください。
 Please check:
 
 - [Visual Studio Code] の場合、`.vscode/launch.json` を確認してください。
+
+リリース手順は[RELEASE.md](RELEASE.md)を参照してください。
 <!-- Links -->
 
 [Visual Studio Code]: https://code.visualstudio.com/
@@ -98,12 +99,6 @@ Please check:
 [mise]: https://mise.jdx.dev/
 
 [melos]: https://melos.invertase.dev/
-
-[mason_cli]: https://pub.dev/packages/mason_cli
-
-[yq]: https://github.com/mikefarah/yq
-
-[cmder]: https://github.com/cmderdev/cmder/wiki/Seamless-VS-Code-Integration
 
 [Firebase CLI]: https://firebase.google.com/docs/cli?hl=ja
 

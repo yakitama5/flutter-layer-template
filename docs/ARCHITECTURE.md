@@ -1,47 +1,30 @@
-# 🏗️アーキテクチャ
+# アーキテクチャ
 
-> [!TIP]
-> 責務範囲はプロジェクトの開始時に議論するべきです。どのように分離するかはプロジェクトによって異なるためです。
-
-## 📁ディレクトリ構造
-
-以下にディレクトリ構造を示します。
-
-```text
-.
-├── apps
-│   ├── app
-│   └── catalog
-│
-└── packages
-    ├── cores
-    │   ├── dependenciy_override
-    │   ├── designsystem
-    │   └── domain
-    │
-    └── infrastructure
-        ├── ...
-        └── ...
-```
-
-## 🗂️パッケージ
-
-> [!IMPORTANT]
->
-> - `cores/domain` はDartのみで構成され、業務ロジックを表します。
-> - `cores/designsystem` は共通のデザインシステムを表します。
-> - `cores/domain` パッケージは、すべてのパッケージから呼び出されます。
-> - `infrastructure` のパッケージは `cores/domain` に依存し `cores/dependency_override`からのみ呼び出されます。
+本テンプレートはオニオンアーキテクチャの依存性逆転に沿った4層構成です。
 
 ```mermaid
-flowchart TB
-    app
-    cores/domain
-    cores/designsystem
-    cores/dependency_override
-    infrastructure
-    app --> cores/domain & cores/designsystem & cores/dependency_override
-    cores/designsystem --> cores/domain
-    cores/dependency_override --> cores/domain & infrastructure
-    infrastructure --> cores/domain
+flowchart LR
+  app --> designsystem
+  app --> application
+  app --> dependency_override
+  designsystem --> application
+  application --> domain
+  dependency_override --> application
+  dependency_override --> infrastructure
+  infrastructure --> domain
+  domain --> foundation
+  application --> foundation
 ```
+
+| パッケージ | 責務 |
+|---|---|
+| `packages/domain` | エンティティ、値オブジェクト、リポジトリ抽象、業務ルール |
+| `packages/application` | ユースケース、アプリ状態、リポジトリを注入するProvider |
+| `packages/infrastructure/*` | Firebase、SharedPreferences、Mockによるリポジトリ実装 |
+| `packages/designsystem` | テーマ、共通Widget、画面非依存のUI表現 |
+| `packages/dependency_override` | applicationのProviderとinfrastructure実装の結線 |
+| `packages/foundation` | ドメイン非依存の汎用ユーティリティ |
+| `apps/app` | 画面、ルーティング、ローカライズ、composition root |
+
+domainはDartのみで構成し、Flutter、Riverpod、外部I/Oへ依存させません。
+Riverpodはコード生成を使わず、application以外で必要なProviderも通常APIで定義します。

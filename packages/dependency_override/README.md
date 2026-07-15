@@ -1,1 +1,5 @@
-# cores_core package
+# dependency_override
+
+アプリのcomposition root補助パッケージです。application層のリポジトリProviderを、
+Firebase、SharedPreferences、Mockの各実装でoverrideします。
+具体実装をappやapplicationへ漏らさないため、このパッケージに結線を集約します。

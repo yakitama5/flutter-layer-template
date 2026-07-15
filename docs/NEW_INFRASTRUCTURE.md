@@ -1,21 +1,11 @@
-# ➕infrastructure_packageパッケージ追加手順
+# Infrastructureパッケージの追加
 
-infrastructure_package(masonのbrick) で新しいパッケージを作成
+`packages/infrastructure/<name>`にDart/Flutterパッケージを作成し、次を守ります。
 
-```shell
-mason make infrastructure_package
-```
+1. domainが公開するリポジトリ抽象を実装する。
+2. workspaceへパッケージを追加する。
+3. dependency_overrideから実装をProviderへ結線する。
+4. 外部I/Oを使わない単体テストを追加する。
+5. コード生成対象が存在する場合だけ`build.yaml`と`build_runner`を追加する。
 
-> [!Note]
-> `mason make`で失敗する場合はbrickのセットアップが終了していないかもしれません。
-`mason list` でfeatures_packageが出ない場合は、`mason get`を実行してください。
-
-パッケージの名前が聞かれるので以下のようにスネークケースで入力する。(以下新たに作成したパッケージ名はsampleとする)
-
-```shell
-What is package name? (example: foo_bar): sample
-```
-
-その後`./packages/infrastructure/`に`sample`ができていることを確認する。
-
----
+このリポジトリにはMason brickを同梱していないため、`mason make`手順はありません。
