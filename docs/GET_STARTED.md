@@ -67,6 +67,10 @@ Firebaseを利用する場合は下記の手順を実施してください。
       - 開発：`apps/app/android/app/src/dev/google-services.json`
       - 本番：`apps/app/android/app/src/prd/google-services.json`
 
+Firestore、Storage、Remote Configのスキーマ・ルール・パラメーターは`firebase/`で管理します。
+ローカルテスト、デプロイ、GitHub Environmentの設定方法は
+`packages/infrastructure/firebase/README.md`を参照してください。
+
 ## テスト
 
 ```shell

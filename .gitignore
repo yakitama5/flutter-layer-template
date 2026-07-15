@@ -24,6 +24,7 @@
 /firebase-debug.log
 /firestore-debug.log
 /ui-debug.log
+/firebase/node_modules/
 
 # Generated build output
 /build/
