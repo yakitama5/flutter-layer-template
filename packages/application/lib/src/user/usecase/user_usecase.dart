@@ -15,8 +15,9 @@ class UserUsecase with RunUsecaseMixin {
 
   final Ref ref;
 
-  UserRepository get _userRepository => ref.watch(userRepositoryProvider);
-  Future<User?> get _authUser => ref.watch(authUserProvider.future);
+  // build外(usecaseのメソッド呼び出し時)での単発参照のため、ref.readを使用する
+  UserRepository get _userRepository => ref.read(userRepositoryProvider);
+  Future<User?> get _authUser => ref.read(authUserProvider.future);
   Future<String?> get _authUserId => _authUser.then((data) => data?.id);
 
   /// ユーザーの登録

@@ -6,15 +6,23 @@ import 'package:flutter_app/src/router/routes/branches/home_shell_branch.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod/riverpod.dart';
 
-final routerProvider = AsyncNotifierProvider.autoDispose<RouterNotifier, void>(
-  RouterNotifier.new,
-);
+/// リダイレクト判定に必要な状態
+typedef RouterRedirectState = ({
+  AuthStatus? authStatus,
+  AppMaintenanceStatus? maintenanceStatus,
+});
 
-class RouterNotifier extends AsyncNotifier<void> implements Listenable {
+final routerProvider =
+    AsyncNotifierProvider.autoDispose<RouterNotifier, RouterRedirectState>(
+      RouterNotifier.new,
+    );
+
+class RouterNotifier extends AsyncNotifier<RouterRedirectState>
+    implements Listenable {
   VoidCallback? _routerListener;
 
   @override
-  Future<void> build() async {
+  Future<RouterRedirectState> build() async {
     listenSelf((previous, next) {
       if (state.isLoading) {
         return;
@@ -22,6 +30,13 @@ class RouterNotifier extends AsyncNotifier<void> implements Listenable {
 
       _routerListener?.call();
     });
+
+    // redirect()はbuild外(GoRouterからの非buildコンテキスト)で呼ばれるため、
+    // リダイレクト判定に必要な値はここでwatchしてstateに保持しておく
+    final authStatus = await ref.watch(authStatusProvider.future);
+    final maintenanceStatus = ref.watch(appMaintenanceStatusProvider).value;
+
+    return (authStatus: authStatus, maintenanceStatus: maintenanceStatus);
   }
 
   Future<String?> redirect(GoRouterState routeState) async {
@@ -35,7 +50,7 @@ class RouterNotifier extends AsyncNotifier<void> implements Listenable {
     );
 
     // 認証判定
-    final authUser = await ref.watch(authStatusProvider.future);
+    final authUser = state.value?.authStatus;
     if (authUser == null && (isSplash || !isNotAuthLocations)) {
       return const OnboardRouteData().location;
     } else if (authUser != null && (isSplash || isNotAuthLocations)) {
@@ -43,7 +58,7 @@ class RouterNotifier extends AsyncNotifier<void> implements Listenable {
     }
 
     // メンテナンスモード
-    final appMaintenanceStatus = ref.watch(appMaintenanceStatusProvider).value;
+    final appMaintenanceStatus = state.value?.maintenanceStatus;
     switch (appMaintenanceStatus) {
       case AppMaintenanceStatus.maintenance:
         return MaintenancePageRouteData.path;
