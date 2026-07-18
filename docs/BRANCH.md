@@ -6,7 +6,7 @@
 
 ### ステータスチェック
 
-[check-pr.yaml](/.github/workflows/check-pr.yaml) に `status-check` ジョブがあります。  
+[check_pr.yaml](/.github/workflows/check_pr.yaml) に `status-check` ジョブがあります。  
 他のチェックジョブの結果を集約しているため、ステータスチェック対象のジョブを `status-check` ジョブのみ設定するだけでよくなる設計です。
 
 `Require status checks to pass` の `Status checks that are required` に `status-check` を追加します。

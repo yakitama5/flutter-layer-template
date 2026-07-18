@@ -1,0 +1,82 @@
+# ワークフローの表示名
+name: Check PR
+
+# ワークフローの起動条件を定義する
+on:
+  # プルリクエストが作成 or 更新された時
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+  # main ブランチに push された時
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# 複数のジョブを定義する
+# 各ジョブはそれぞれまったく別々の環境で実行される
+jobs:
+  flutter_analyze:
+    # ジョブの表示名
+    name: 🔬Analyze
+
+    # ジョブを実行するOS
+    runs-on: ubuntu-latest
+
+    # タイムアウト時間（分）
+    timeout-minutes: 15
+
+    # ジョブの手順
+    steps:
+      # チェックアウト
+      - name: 💾Checkout
+        uses: actions/checkout@v4
+
+      # セットアップ
+      - name: ⚙️Setup Application Runtime
+        uses: ./.github/actions/setup-application-runtime
+
+      # 静的解析を実行
+      - name: 🔬Analyze
+        run: dart analyze
+
+  flutter_test:
+    name: 🧪Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      # チェックアウト
+      - name: 💾Checkout
+        uses: actions/checkout@v4
+
+      # セットアップ
+      - name: ⚙️Setup Application Runtime
+        uses: ./.github/actions/setup-application-runtime
+
+      # 実行
+      - name: 🧪Test
+        run: melos run test:ci
+
+  # 他のチェックジョブの結果を集約するジョブ
+  # ブランチ保護ルールのステータスチェックはこのジョブのみを対象に設定する
+  status-check:
+    name: ✅Status Check
+    needs: [flutter_analyze, flutter_test]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: ✅Check all jobs succeeded
+        run: |
+          if [[ "${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}" == "true" ]]; then
+            echo "One or more required jobs did not succeed."
+            exit 1
+          fi
