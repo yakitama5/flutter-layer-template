@@ -1,5 +1,6 @@
 # Architecture
 
+- `foundation`: logger・uuid・拡張関数などの純粋ユーティリティ。全レイヤーから依存可、外部フレームワークへ依存しない。
 - `domain`: エンティティ、値オブジェクト、リポジトリ抽象、純粋な業務ルール。
 - `application`: ユースケース、状態、リポジトリ抽象を注入するProvider。
 - `infrastructure`: domainのリポジトリ抽象を実装する外部I/O。

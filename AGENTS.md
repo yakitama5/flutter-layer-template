@@ -8,9 +8,10 @@
 
 - 会話とドキュメントは日本語、コード上の識別子は英語を使う。
 - 変更前に対象パッケージの `README.md` と `docs/ARCHITECTURE.md` を確認する。
-- 依存方向は `app -> designsystem/application -> domain` および
+- 依存方向は `app -> designsystem/application -> domain -> foundation` および
   `dependency_override -> application/infrastructure -> domain` を守る。
 - domain は Flutter、Riverpod、Firebase、SharedPreferences に依存させない。
+- foundation は Flutter、Riverpod、Firebase に依存させない純粋ユーティリティ層とする。
 - Riverpod はコード生成を使わず、通常の Provider API で定義する。
 - 完了前に `melos run gen`、`dart analyze`、`melos run test:ci` を実行する。
 - E2Eに影響する変更では `melos run test:e2e` も実行する。
