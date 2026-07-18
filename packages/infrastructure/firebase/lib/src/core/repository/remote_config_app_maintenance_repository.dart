@@ -10,15 +10,13 @@ class RemoteConfigAppMaintenanceRepository extends AppMaintenanceRepository {
 
   @override
   Future<bool> fetchMaintenanceMode() async {
-    final remoteConfig = await ref.watch(remoteConfigProvider.future);
-    return remoteConfig.getBool(RemoteConfigs.maintenance.key);
+    final remoteConfig = await ref.read(remoteConfigProvider.future);
+    return RemoteConfigs.maintenance.getValue(remoteConfig);
   }
 
   @override
   Stream<bool> listenMaintenanceMode() async* {
-    final value = await ref.watch(
-      boolStreamConfigProvider(RemoteConfigs.maintenance).future,
-    );
-    yield value;
+    final remoteConfig = await ref.read(remoteConfigProvider.future);
+    yield* listenConfigValue(remoteConfig, RemoteConfigs.maintenance);
   }
 }
