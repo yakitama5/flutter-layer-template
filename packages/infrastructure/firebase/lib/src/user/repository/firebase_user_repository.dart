@@ -169,7 +169,7 @@ class FirebaseUserRepository implements UserRepository {
 
   /// Mobile用のGoogleサインイン
   Future<auth.UserCredential> _signInWithGoogleByMobile() async {
-    final googleSignIn = ref.read(googleSignInProvider);
+    final googleSignIn = await ref.read(googleSignInInitializedProvider.future);
     final account = await googleSignIn.authenticate();
 
     final credential = auth.GoogleAuthProvider.credential(
