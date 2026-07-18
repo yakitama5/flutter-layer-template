@@ -8,3 +8,14 @@
 - `dependency_override`: applicationのProviderとinfrastructure実装を結線する。
 
 内側のレイヤーから外側のレイヤーをimportしてはならない。
+
+## 例外ハンドリング
+
+- infrastructure層で外部SDK(Firebase, google_sign_in等)の例外を捕捉し、
+  `domain`の`AppException`階層へ変換してからthrowする。
+- ユーザー操作によるキャンセル(サインイン中断等)は`CancelledByUserException`とし、
+  UIへの通知は不要として扱う。
+- presentation層は`PresentationMixin.execute`経由でユースケースを実行し、
+  `AppException`のハンドリングをそこに集約する。
+- 模範実装は`packages/infrastructure/firebase/lib/src/user/repository/firebase_user_repository.dart`
+  および同階層の`common/util/firebase_exception_handler.dart`。

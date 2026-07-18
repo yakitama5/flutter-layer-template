@@ -16,6 +16,20 @@ class NotAuthException extends PermissionException {
   const NotAuthException(super.message);
 }
 
+/// 直近の再認証が必要な操作(アカウント削除等)で発生する例外
+///
+/// UIは再認証フローへ誘導する用途で使用する。
+class RequiresRecentLoginException extends PermissionException {
+  const RequiresRecentLoginException([super.message]);
+}
+
+/// ユーザー操作によるキャンセル(サインイン中断等)を表す例外
+///
+/// UIはユーザーへの通知不要として扱う。
+class CancelledByUserException extends BusinessException {
+  const CancelledByUserException([super.message]);
+}
+
 sealed class NetworkException extends AppException {
   const NetworkException(super.message);
 
@@ -53,4 +67,9 @@ class UnknownNetworkException extends NetworkException {
 
 class UnknownException extends AppException {
   const UnknownException() : super('Unknown error occurred');
+}
+
+/// サインイン結果が不正な場合の例外(credential.userがnull等)
+class SignInFailedException extends AppException {
+  const SignInFailedException([super.message]);
 }

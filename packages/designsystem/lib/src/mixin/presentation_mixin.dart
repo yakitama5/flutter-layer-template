@@ -14,8 +14,10 @@ mixin PresentationMixin {
       if (successMessage != null) {
         SnackBarManager.showInfoSnackBar(successMessage);
       }
+    } on CancelledByUserException {
+      // ユーザー操作によるキャンセルは通知不要
     } on AppException catch (e) {
-      // TODO(yakitama5): 整理
+      // TODO(yakitama5): 例外種別に応じたi18nメッセージへの変換
       SnackBarManager.showErrorSnackBar(e.message ?? '');
     } on Exception catch (e) {
       SnackBarManager.showErrorSnackBar(e.toString());
