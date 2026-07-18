@@ -49,10 +49,10 @@ melos:
         test: any
     clean:
       hooks:
-        post: melos exec --flutter --concurrency=3 -- "flutter clean" melos exec
-          --flutter --file-exists="ios/Podfile.lock" -- "cd ios && rm
-          Podfile.lock" melos exec --flutter --file-exists="macos/Podfile.lock"
-          -- "cd macos && rm Podfile.lock"
+        post: >-
+          melos exec --flutter --concurrency=3 -- "flutter clean" &&
+          melos exec --flutter --file-exists="ios/Podfile.lock" -- "cd ios && rm Podfile.lock" &&
+          melos exec --flutter --file-exists="macos/Podfile.lock" -- "cd macos && rm Podfile.lock"
 
   scripts:
     # ビルド関連
@@ -112,7 +112,7 @@ melos:
       description: main ブランチと差分のあるパッケージのみ build_runner と i18n の生成コマンドを実行します。
       steps:
         - gen:build:diff:main
-        - gen:i18n:diff:main
+        - gen:slang:diff:main
     gen:build:diff:main:
       description: main ブランチと差分のあるパッケージのみ build_runner を使用してコードを生成します。
       exec:
@@ -175,9 +175,7 @@ melos:
 
     test:e2e:
       description: AndroidエミュレータでPatrol E2Eテストを実行する
-      run: patrol test --target integration_test/app_flow_test.dart --dart-define-from-file=flavor/dev.json
-      packageFilters:
-        scope: flutter_app
+      run: melos exec --scope="flutter_app" -- patrol test --target integration_test/app_flow_test.dart --dart-define-from-file=flavor/dev.json
 
   ide:
     intellij:
