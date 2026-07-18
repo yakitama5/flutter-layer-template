@@ -14,15 +14,19 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 # 複数のジョブを定義する
 # 各ジョブはそれぞれまったく別々の環境で実行される
 jobs:
   flutter_analyze:
     # ジョブの表示名
     name: 🔬Analyze
-
-    # 一時的な無効化
-    if: ${{ false }}
 
     # ジョブを実行するOS
     runs-on: ubuntu-latest
@@ -37,20 +41,9 @@ jobs:
         uses: actions/checkout@v4
 
       # セットアップ
-      - name: ⚙️Setup Config Files
-        uses: ./.github/actions/setup-config-files
-        env: # Set the secret as an input
-          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
-          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
-          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
-          ENV_FILE: ${{ secrets.ENV_FILE }}
-          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
       - name: ⚙️Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
       # 静的解析を実行
       - name: 🔬Analyze
-        run: flutter analyze
+        run: dart analyze
