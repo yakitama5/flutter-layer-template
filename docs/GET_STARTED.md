@@ -32,6 +32,15 @@ make setup
 
 ## 🔥Firebase
 
+> [!WARNING]
+> このテンプレートに含まれる Firebase 設定（`firebase_options.dart` /
+> `firebase_options_dev.dart` / `google-services.json` /
+> `GoogleService-Info.plist`）は、すべて `your-project-id` などの
+> **ダミー値** です。実プロジェクトの値へ差し替えないと、
+> `FirebaseInitializer.initialize` が起動時に `StateError` を送出してアプリが
+> 停止します。テンプレート利用時は必ず下記手順の `flutterfire configure` を
+> 実行し、自分の Firebase プロジェクトの設定へ差し替えてください。
+
 Firebaseを利用する場合は下記の手順を実施してください。
 
 ### Firebase CLIツールのインストール
