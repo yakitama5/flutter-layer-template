@@ -1,1 +1,1 @@
-export 'src/util/logger.dart';
+export 'package:packages_foundation/util.dart' show logger;

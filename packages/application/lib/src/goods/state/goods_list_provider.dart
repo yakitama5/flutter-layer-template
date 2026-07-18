@@ -1,9 +1,9 @@
 import 'package:domain/core.dart';
 import 'package:domain/goods.dart';
 import 'package:domain/util.dart';
-import 'package:packages_foundation/extension.dart';
 import 'package:riverpod/riverpod.dart';
 
+import '../../core/extension/ref_extension.dart';
 import '../interface/goods_repository.dart';
 
 typedef GoodsListQuery = ({int page, GoodsFetchQuery query});
