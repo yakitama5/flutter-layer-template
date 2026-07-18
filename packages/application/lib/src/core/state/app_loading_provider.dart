@@ -3,47 +3,30 @@ import 'package:riverpod/riverpod.dart';
 import 'package:domain/util.dart';
 
 /// アプリ全体で共通するローディング表示を管理
-final appLoadingProvider = NotifierProvider.autoDispose<LoadingNotifier, bool>(
+///
+/// `state`は同時に実行中の`wrap`呼び出し数を表すカウンタであり、
+/// ローディング中かどうかは`state > 0`で判定する。
+/// インスタンスフィールドでカウントを保持すると`autoDispose`による
+/// 再生成時にカウントが消失するため、`state`自体にカウントを持たせている。
+final appLoadingProvider = NotifierProvider.autoDispose<LoadingNotifier, int>(
   LoadingNotifier.new,
 );
 
-class LoadingNotifier extends Notifier<bool> {
-  int _count = 0;
-
+class LoadingNotifier extends Notifier<int> {
   @override
-  bool build() {
-    return false;
+  int build() {
+    return 0;
   }
 
   Future<T> wrap<T>(Future<T> future) async {
-    _present();
+    state = state + 1;
     try {
       return await future;
     } on Exception catch (e) {
       logger.e(e.toString());
       rethrow;
     } finally {
-      _dismiss();
-    }
-  }
-
-  void show() {
-    state = true;
-  }
-
-  void hide() {
-    state = false;
-  }
-
-  void _present() {
-    _count = _count + 1;
-    state = true;
-  }
-
-  void _dismiss() {
-    _count = _count - 1;
-    if (_count == 0) {
-      state = false;
+      state = state - 1;
     }
   }
 }

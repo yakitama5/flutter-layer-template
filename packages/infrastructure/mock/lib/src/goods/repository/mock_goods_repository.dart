@@ -57,7 +57,9 @@ class MockGoodsRepository extends GoodsRepository {
 
   @override
   Stream<Goods?> listenGoods({required String id}) {
-    final item = items.firstWhere((e) => e.id == id);
+    // 該当なしの場合は`StateError`を投げる`firstWhere`ではなく、
+    // `null`を返す`firstWhereOrNull`を使用する
+    final item = items.firstWhereOrNull((e) => e.id == id);
     return Stream.value(item);
   }
 

@@ -43,7 +43,9 @@ class SliverErrorView extends ErrorView {
 extension _ExceptionX on Object {
   String get errorMessage {
     if (this is AppException) {
-      return (this as AppException).message!;
+      final exception = this as AppException;
+      // `message`が`null`の場合はフォールバックとして`toString()`を使用する
+      return exception.message ?? exception.toString();
     }
 
     return toString();
