@@ -50,23 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCCdV-R5_dvDhqCHg5jluLJZ6khGHerxeo',
-    appId: '1:899934807737:android:c6dfe05db4690e1715dd68',
-    messagingSenderId: '899934807737',
-    projectId: 'yakuran-playground',
-    storageBucket: 'yakuran-playground.appspot.com',
+    apiKey: 'AIzaSyDummyDummyDummyDummyDummyDummy000',
+    appId: '1:000000000000:android:0000000000000000000000',
+    messagingSenderId: '000000000000',
+    projectId: 'your-project-id',
+    storageBucket: 'your-project-id.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCJGWVebgHHxXIGe_fMjb8I47jTtflLVlo',
-    appId: '1:899934807737:ios:9b6cb3d1dce756a415dd68',
-    messagingSenderId: '899934807737',
-    projectId: 'yakuran-playground',
-    storageBucket: 'yakuran-playground.appspot.com',
-    androidClientId:
-        '899934807737-v5col7di0a4hngfeg7u8b2og1mcn9dis.apps.googleusercontent.com',
-    iosClientId:
-        '899934807737-cmq7nu25qi7k4tqe4hjji0d80quj1jb9.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDummyDummyDummyDummyDummyDummy000',
+    appId: '1:000000000000:ios:0000000000000000000000',
+    messagingSenderId: '000000000000',
+    projectId: 'your-project-id',
+    storageBucket: 'your-project-id.appspot.com',
+    androidClientId: '000000000000-dummy.apps.googleusercontent.com',
+    iosClientId: '000000000000-dummy.apps.googleusercontent.com',
     iosBundleId: 'com.yakuran.template',
   );
 }

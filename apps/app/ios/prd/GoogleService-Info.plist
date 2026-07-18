@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>899934807737-cmq7nu25qi7k4tqe4hjji0d80quj1jb9.apps.googleusercontent.com</string>
+	<string>000000000000-dummy.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.899934807737-cmq7nu25qi7k4tqe4hjji0d80quj1jb9</string>
+	<string>com.googleusercontent.apps.000000000000-dummy</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCJGWVebgHHxXIGe_fMjb8I47jTtflLVlo</string>
+	<string>AIzaSyDummyDummyDummyDummyDummyDummy000</string>
 	<key>GCM_SENDER_ID</key>
-	<string>899934807737</string>
+	<string>000000000000</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.yakuran.template</string>
 	<key>PROJECT_ID</key>
-	<string>yakuran-playground</string>
+	<string>your-project-id</string>
 	<key>STORAGE_BUCKET</key>
-	<string>yakuran-playground.appspot.com</string>
+	<string>your-project-id.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:899934807737:ios:9b6cb3d1dce756a415dd68</string>
+	<string>1:000000000000:ios:0000000000000000000000</string>
 </dict>
 </plist>
