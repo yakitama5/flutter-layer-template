@@ -103,6 +103,79 @@ void main() {
       throwsA(isA<FormatException>()),
     );
   });
+
+  test('アンダースコアを含む識別子を拒否する（iOSバンドルIDと非互換）', () async {
+    expect(
+      () => AppIdReplacer(
+        rootDirectory: root,
+      ).replace(appId: 'io.example.my_app'),
+      throwsA(isA<FormatException>()),
+    );
+  });
+
+  test('置換対象のパターンが1件もヒットしない場合は例外を投げる（dry-runでも検出する）', () async {
+    // pubspec.yaml の内容を期待パターンと一致しない内容へ書き換え、
+    // 置換対象が見つからない状態を再現する。
+    await _write(
+      root,
+      'apps/app/pubspec.yaml',
+      'package_name: com.other.unrelated\n'
+          'bundle_id: com.other.unrelated\n',
+    );
+
+    expect(
+      () => AppIdReplacer(
+        rootDirectory: root,
+      ).replace(appId: 'io.example.product', dryRun: true),
+      throwsA(isA<FormatException>()),
+    );
+  });
+
+  test('GoogleService-Info.plistでパターンがヒットしない場合は例外を投げる', () async {
+    await _write(
+      root,
+      'apps/app/ios/dev/GoogleService-Info.plist',
+      '<string>com.other.unrelated</string>\n',
+    );
+
+    expect(
+      () => AppIdReplacer(
+        rootDirectory: root,
+      ).replace(appId: 'io.example.product', dryRun: true),
+      throwsA(isA<FormatException>()),
+    );
+  });
+
+  test('google-services.jsonでpackage_name/bundle_idがヒットしない場合は例外を投げる', () async {
+    final unrelated = <String, Object?>{
+      'client': <Object?>[
+        <String, Object?>{
+          'client_info': <String, Object?>{
+            'android_client_info': <String, Object?>{
+              'package_name': 'com.other.unrelated',
+            },
+          },
+          'oauth_client': <Object?>[
+            <String, Object?>{
+              'ios_info': <String, Object?>{'bundle_id': 'com.other.unrelated'},
+            },
+          ],
+        },
+      ],
+    };
+    await _writeJson(
+      root,
+      'apps/app/android/app/src/dev/google-services.json',
+      unrelated,
+    );
+
+    expect(
+      () => AppIdReplacer(
+        rootDirectory: root,
+      ).replace(appId: 'io.example.product', dryRun: true),
+      throwsA(isA<FormatException>()),
+    );
+  });
 }
 
 Future<void> _createFixture(Directory root) async {
