@@ -4,9 +4,9 @@ description: "Setup application runtime for Flutter"
 runs:
   using: "composite"
   steps:
-  
+
     - name: ⚙️Setup mise
-      uses: jdx/mise-action@v3
+      uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3.6.3
       with:
         cache: true
 
@@ -17,6 +17,16 @@ runs:
         echo "PUB_CACHE=$HOME/.pub-cache" >> "$GITHUB_ENV"
         echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
       shell: bash
+
+    # NOTE: jdx/mise-action の cache は mise がインストールするツール本体(Flutter SDK等)のみが対象で
+    # pub パッケージキャッシュ($PUB_CACHE)は対象外のため、pubspec.lock をキーに別途キャッシュする。
+    - name: 📦Cache pub packages
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+      with:
+        path: ~/.pub-cache
+        key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pub-
 
     - name: 🏃‍➡️Setup melos
       run: |

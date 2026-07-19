@@ -16,6 +16,9 @@ on:
         type: choice
         options: [all, android, ios]
 
+permissions:
+  contents: read
+
 concurrency:
   group: build-and-publish-${{ github.ref }}
   cancel-in-progress: false
@@ -30,11 +33,11 @@ jobs:
     outputs:
       version: ${{ steps.bump.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
-      - uses: jdx/mise-action@v3
+      - uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3.6.3
         with:
           cache: true
       - name: Install cider
@@ -67,6 +70,8 @@ jobs:
     if: inputs.platform == 'all' || inputs.platform == 'android'
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    permissions:
+      contents: read
     env:
       ANDROID_KEYSTORE_FILENAME: ${{ vars.ANDROID_KEYSTORE_FILENAME }}
       ANDROID_KEY_ALIAS: ${{ vars.ANDROID_KEY_ALIAS }}
@@ -75,15 +80,15 @@ jobs:
       ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
       GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
     steps:
-      - uses: actions/checkout@v4
+      # NOTE: version ジョブが作成したタグをチェックアウトし、バージョンとビルド実体のズレを防ぐ
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          ref: ${{ github.ref_name }}
+          ref: v${{ needs.version.outputs.version }}
       - uses: ./.github/actions/setup-config-files
         env:
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
           FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
@@ -103,7 +108,7 @@ jobs:
       - name: Build Android App Bundle
         working-directory: apps/app
         run: flutter build appbundle --release --dart-define-from-file=flavor/prd.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: app-${{ needs.version.outputs.version }}.aab
           path: apps/app/build/app/outputs/bundle/release/app-release.aab
@@ -117,6 +122,8 @@ jobs:
     if: inputs.platform == 'all' || inputs.platform == 'ios'
     runs-on: macos-latest
     timeout-minutes: 60
+    permissions:
+      contents: read
     env:
       APP_STORE_CONNECT_ISSUER_ID: ${{ vars.APP_STORE_CONNECT_ISSUER_ID }}
       APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ vars.APP_STORE_CONNECT_KEY_IDENTIFIER }}
@@ -124,15 +131,15 @@ jobs:
       CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
       EXPORT_OPTIONS: ${{ secrets.EXPORT_OPTIONS }}
     steps:
-      - uses: actions/checkout@v4
+      # NOTE: version ジョブが作成したタグをチェックアウトし、バージョンとビルド実体のズレを防ぐ
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          ref: ${{ github.ref_name }}
+          ref: v${{ needs.version.outputs.version }}
       - uses: ./.github/actions/setup-config-files
         env:
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
           FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
@@ -150,7 +157,7 @@ jobs:
       - name: Build IPA
         working-directory: apps/app
         run: flutter build ipa --release --export-options-plist=ExportOptions.plist --dart-define-from-file=flavor/prd.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: app-${{ needs.version.outputs.version }}.ipa
           path: apps/app/build/ios/ipa/*.ipa

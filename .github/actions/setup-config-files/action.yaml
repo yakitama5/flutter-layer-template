@@ -18,7 +18,6 @@ runs:
         echo -n "$GOOGLE_SERVICES_JSON" | base64 -d > apps/app/android/app/src/prd/google-services.json
         mkdir -p apps/app/ios/prd
         echo -n "$GOOGLE_INFO_PLIST" | base64 -d > apps/app/ios/prd/GoogleService-Info.plist
-        echo -n "$FIREBASE_JSON" | base64 -d > apps/app/ios/prd/firebase.json
       shell: bash
       env: 
         CONF_PATH: packages/infrastructure/firebase/lib/src/common/config
