@@ -43,13 +43,13 @@ flutter_native_splash:
 設定を追加したら、ターミナルで以下のコマンドを実行します。
 
 ```sh
-flutter pub run flutter_native_splash:create
+dart run flutter_native_splash:create
 ```
 
 設定が `pubspec.yaml` 以外（`flutter_native_splash.yaml`等）にある場合は、 `--path` オプションを使用してください。
 
 ```sh
-flutter pub run flutter_native_splash:create --path=flutter_native_splash.yaml
+dart run flutter_native_splash:create --path=flutter_native_splash.yaml
 ```
 
 ### 4. アプリ初期化のセットアップ（オプション）
@@ -78,7 +78,7 @@ Future<void> initializeApp() async {
 }
 ```
 
-> [!FYI]
+> [!NOTE]
 > preserve()メソッドとremove()メソッドを使う必要がない場合は、pubspec.yamlのdev_dependenciesセクションにflutter_native_splash依存関係を置くことができます。
 
 ---
