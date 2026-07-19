@@ -27,3 +27,9 @@ migrate_working_dir/
 .flutter-plugins
 .flutter-plugins-dependencies
 build/
+
+# alchemistのプラットフォームgoldenは環境依存のため管理対象外とする。
+# CI golden(goldens/ci/)のみgit管理する。
+test/**/goldens/**/*.*
+test/**/failures/**/*.*
+!test/**/goldens/ci/*.*
