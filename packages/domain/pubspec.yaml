@@ -20,6 +20,7 @@ dev_dependencies:
 
   freezed: any
   json_serializable: ^6.13.0
+  test: any
 
 
 resolution: workspace

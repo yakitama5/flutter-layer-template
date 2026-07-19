@@ -14,4 +14,7 @@ dependencies:
   riverpod: ^3.2.1
   version: null
 
+dev_dependencies:
+  test: any
+
 resolution: workspace
