@@ -38,7 +38,7 @@ jobs:
     steps:
       # チェックアウト
       - name: 💾Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       # セットアップ
       - name: ⚙️Setup Application Runtime
@@ -48,6 +48,10 @@ jobs:
       - name: 🔬Analyze
         run: dart analyze
 
+      # フォーマットチェック(build/ 等の生成物・依存物は対象外)
+      - name: 🎨Format check
+        run: dart format --output=none --set-exit-if-changed apps packages test tool
+
   flutter_test:
     name: 🧪Test
     runs-on: ubuntu-latest
@@ -55,7 +59,7 @@ jobs:
     steps:
       # チェックアウト
       - name: 💾Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       # セットアップ
       - name: ⚙️Setup Application Runtime
@@ -69,11 +73,25 @@ jobs:
       - name: 🧪Test Tool
         run: melos run test:tool
 
+  markdown_lint:
+    name: 📝Markdown Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # チェックアウト
+      - name: 💾Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      # Markdownの静的解析を実行(設定は .markdownlint-cli2.jsonc を参照)
+      # NOTE: firebase/node_modules 等の依存物は npm install していないためチェックアウト直後は存在せず対象外
+      - name: 📝Lint Markdown
+        run: npx --yes markdownlint-cli2@0.14.0
+
   # 他のチェックジョブの結果を集約するジョブ
   # ブランチ保護ルールのステータスチェックはこのジョブのみを対象に設定する
   status-check:
     name: ✅Status Check
-    needs: [flutter_analyze, flutter_test]
+    needs: [flutter_analyze, flutter_test, markdown_lint]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
