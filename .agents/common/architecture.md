@@ -10,6 +10,17 @@
 
 内側のレイヤーから外側のレイヤーをimportしてはならない。
 
+## 命名規則
+
+- Notifierのクラス名は`<対象>Notifier`サフィックスを付ける。状態の値型(例: `UIStyle`)と
+  混同しないためで、`UiStyleNotifier`のように命名する。
+- Providerは原則`autoDispose`を既定とする。アプリ全域で生存させたいものだけ非`autoDispose`にする。
+  familyは`autoDispose` + 必要に応じて`cacheFor`(`packages/application/lib/src/core/extension/ref_extension.dart`)
+  を併用し、参照が途切れてから一定時間キャッシュを保持する。
+- パッケージ名は歴史的経緯で`packages_`接頭辞の有無が混在している(`domain`/`designsystem`と
+  `packages_application`/`packages_foundation`等)。これはimportの別名衝突を避けるための対応であり、
+  新規パッケージは接頭辞なしの名前を優先し、既存パッケージ名は互換のため維持する。
+
 ## 例外ハンドリング
 
 - infrastructure層で外部SDK(Firebase, google_sign_in等)の例外を捕捉し、
