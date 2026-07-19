@@ -65,6 +65,10 @@ jobs:
       - name: 🧪Test
         run: melos run test:ci
 
+      # ルートのツールテストを実行
+      - name: 🧪Test Tool
+        run: melos run test:tool
+
   # 他のチェックジョブの結果を集約するジョブ
   # ブランチ保護ルールのステータスチェックはこのジョブのみを対象に設定する
   status-check:

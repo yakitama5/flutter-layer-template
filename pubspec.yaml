@@ -165,12 +165,31 @@ melos:
         dirExists:
           - test
     test:ci:
+      description: CI向けに全パッケージのテストを実行する
+      steps:
+        - test:ci:flutter
+        - test:ci:dart
+    test:ci:flutter:
+      description: Flutterパッケージのテストを実行する
       exec:
         command: flutter test --dart-define=CI=true
         failFast: true
       packageFilters:
+        flutter: true
         dirExists:
           - test
+    test:ci:dart:
+      description: pure Dartパッケージのテストを実行する
+      exec:
+        command: dart test
+        failFast: true
+      packageFilters:
+        flutter: false
+        dirExists:
+          - test
+    test:tool:
+      description: ルートのツールテストを実行する
+      run: dart test test/tool
 
     test:e2e:
       description: AndroidエミュレータでPatrol E2Eテストを実行する
