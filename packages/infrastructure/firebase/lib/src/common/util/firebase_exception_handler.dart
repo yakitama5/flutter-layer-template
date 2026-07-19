@@ -39,7 +39,11 @@ Future<T> guardFirebaseException<T>(Future<T> Function() action) async {
       case _ when _cancelledAuthErrorCodes.contains(e.code):
         throw const CancelledByUserException();
       default:
-        logger.w('FirebaseAuthException: ${e.code}', error: e, stackTrace: stackTrace);
+        logger.w(
+          'FirebaseAuthException: ${e.code}',
+          error: e,
+          stackTrace: stackTrace,
+        );
         throw const UnknownException();
     }
   } on auth.FirebaseException catch (e, stackTrace) {
@@ -49,7 +53,11 @@ Future<T> guardFirebaseException<T>(Future<T> Function() action) async {
     if (_cancelledGoogleSignInCodes.contains(e.code)) {
       throw const CancelledByUserException();
     }
-    logger.w('GoogleSignInException: ${e.code}', error: e, stackTrace: stackTrace);
+    logger.w(
+      'GoogleSignInException: ${e.code}',
+      error: e,
+      stackTrace: stackTrace,
+    );
     throw const SignInFailedException();
   } on PlatformException catch (e, stackTrace) {
     logger.w('PlatformException: ${e.code}', error: e, stackTrace: stackTrace);

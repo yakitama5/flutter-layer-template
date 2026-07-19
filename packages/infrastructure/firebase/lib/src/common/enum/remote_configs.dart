@@ -11,9 +11,11 @@ enum RemoteConfigs<T> {
   final T defaultValue;
 
   /// Remote Configから現在の値を取得する
-  T getValue(FirebaseRemoteConfig remoteConfig) => switch (this) {
-    RemoteConfigs.maintenance => remoteConfig.getBool(key),
-    RemoteConfigs.latestAppVersion ||
-    RemoteConfigs.forceUpdateAppVersion => remoteConfig.getString(key),
-  } as T;
+  T getValue(FirebaseRemoteConfig remoteConfig) =>
+      switch (this) {
+            RemoteConfigs.maintenance => remoteConfig.getBool(key),
+            RemoteConfigs.latestAppVersion ||
+            RemoteConfigs.forceUpdateAppVersion => remoteConfig.getString(key),
+          }
+          as T;
 }

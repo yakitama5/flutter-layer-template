@@ -139,9 +139,8 @@ void main() {
       ],
     );
 
-    final forceUpdateMessage = designsystemI18n.designsystem.appUpdate
-        .forceUpdate
-        .message;
+    final forceUpdateMessage =
+        designsystemI18n.designsystem.appUpdate.forceUpdate.message;
     final navigateStoreLabel =
         designsystemI18n.designsystem.appUpdate.navigateStore;
 

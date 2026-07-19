@@ -94,7 +94,9 @@ class FirebaseUserRepository implements UserRepository {
   Future<AuthStatus> signInAnonymously() {
     return guardFirebaseException(() async {
       // 匿名ログイン
-      final credential = await ref.read(firebaseAuthProvider).signInAnonymously();
+      final credential = await ref
+          .read(firebaseAuthProvider)
+          .signInAnonymously();
 
       // 結果を変換
       final user = credential.user;

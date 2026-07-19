@@ -8,9 +8,7 @@ import '../interface/user_repository.dart';
 import '../state/auth_status_provider.dart';
 import '../state/auth_user_provider.dart';
 
-final userUsecaseProvider = Provider.autoDispose<UserUsecase>(
-  UserUsecase.new,
-);
+final userUsecaseProvider = Provider.autoDispose<UserUsecase>(UserUsecase.new);
 
 class UserUsecase with RunUsecaseMixin {
   const UserUsecase(this.ref);

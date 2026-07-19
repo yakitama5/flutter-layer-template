@@ -19,10 +19,7 @@ void main() {
             width: 400,
             height: 300,
             child: MaterialApp(
-              home: ErrorView(
-                const UnknownException(),
-                StackTrace.current,
-              ),
+              home: ErrorView(const UnknownException(), StackTrace.current),
             ),
           ),
         ),
