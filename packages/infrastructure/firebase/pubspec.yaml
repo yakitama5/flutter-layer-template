@@ -14,7 +14,6 @@ dependencies:
   domain:
     path: ../../domain
   firebase_analytics: null
-  firebase_app_check: null
   firebase_auth: null
   firebase_core: null
   firebase_crashlytics: null

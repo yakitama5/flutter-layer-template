@@ -140,12 +140,6 @@ melos:
       description: Check dart fix.
       packageFilters:
         dirExists: lib
-    fix:custom:
-      description: すべてのパッケージに custom_lint の fix を実行します。
-      exec: dart run custom_lint --fix
-      packageFilters:
-        dirExists: lib
-        dependsOn: custom_lint
 
     # テスト関連
     test:golden:

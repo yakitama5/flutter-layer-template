@@ -41,14 +41,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.0.0"
-  animated_to:
-    dependency: transitive
-    description:
-      name: animated_to
-      sha256: "5d273119e4b4a90205dad2dad60feaa936f6d1b64bb150495f0808957685ef8a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.8.1"
   animations:
     dependency: transitive
     description:
@@ -137,14 +129,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.15.1"
-  build_verify:
-    dependency: transitive
-    description:
-      name: build_verify
-      sha256: "3b17b59b6d66f9d3e6014996f089902d56cec5760e051c353cc387b9da577652"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.1"
   built_collection:
     dependency: transitive
     description:
@@ -433,30 +417,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1+11"
-  firebase_app_check:
-    dependency: transitive
-    description:
-      name: firebase_app_check
-      sha256: "28c1cc87389132c710236a008ee6688df510d3ce8b542ec377274ed8777006d6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.5+2"
-  firebase_app_check_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_app_check_platform_interface
-      sha256: "1cccf087884425f595f6ae7159c568bb0bcb8aaff3acb6dd150bde9b421b06d2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.1+2"
-  firebase_app_check_web:
-    dependency: transitive
-    description:
-      name: firebase_app_check_web
-      sha256: "1049ce1073c43f8e3efc97190206132182ed2f71f4686efe9ada54a2bba27442"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.5+2"
   firebase_auth:
     dependency: transitive
     description:
@@ -1020,14 +980,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  motor:
-    dependency: transitive
-    description:
-      name: motor
-      sha256: cbd49f21b00e568c2b1a55f134ed803614a107782f4fea7769693bca32940c58
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   mustache_template:
     dependency: transitive
     description:
@@ -1252,14 +1204,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.2"
-  settings_ui:
-    dependency: transitive
-    description:
-      name: settings_ui
-      sha256: "7437c9c867f331ff6c90e951f2333441eab5cf5e654c3a7f3e4aad0c01db51ef"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   shared_preferences:
     dependency: transitive
     description:
