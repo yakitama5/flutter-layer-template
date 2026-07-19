@@ -39,9 +39,19 @@ const _descriptions = [
 ];
 
 class MockGoodsRepository extends GoodsRepository {
-  MockGoodsRepository(this.ref);
+  MockGoodsRepository(
+    this.ref, {
+    this.delay = const Duration(milliseconds: 1000),
+  });
 
   final Ref ref;
+
+  /// 一覧取得時に模擬する通信遅延。テストでは `Duration.zero` を指定して
+  /// 実時間の待機を避けられるようにする。
+  final Duration delay;
+
+  // 決定的な結果を返すため、固定シードの乱数を使用する
+  final Random _random = Random(42);
 
   static final List<Goods> items = List.generate(_totalLength, (i) {
     return Goods(
@@ -69,13 +79,13 @@ class MockGoodsRepository extends GoodsRepository {
     int pageSize = goodsPageSize,
     required GoodsFetchQuery query,
   }) async* {
-    await Future<void>.delayed(const Duration(milliseconds: 1000));
+    await Future<void>.delayed(delay);
 
-    final hoge = items
-        .map((e) => e.copyWith(price: Random().nextInt(max(1, 100))))
+    final shuffledPriceItems = items
+        .map((e) => e.copyWith(price: _random.nextInt(max(1, 100))))
         .toList();
 
-    final sortItems = hoge.sorted(
+    final sortItems = shuffledPriceItems.sorted(
       (a, b) => switch (query.sortKey) {
         GoodsSortKey.createdAt => a.createdAt.compareTo(b.createdAt),
         GoodsSortKey.name => a.name.compareTo(b.name),
