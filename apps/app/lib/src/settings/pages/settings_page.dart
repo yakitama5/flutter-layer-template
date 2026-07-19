@@ -52,6 +52,8 @@ class SettingsPage extends HookConsumerWidget {
                 onPressed: const SettingsUiStylePageRouteData().go,
               ),
               SettingsTile.navigation(
+                // E2Eからタップ対象を一意に特定するためのKey
+                key: const Key('settings_theme_mode_tile'),
                 leading: Icon(switch (themeMode) {
                   ThemeMode.system => Icons.settings,
                   ThemeMode.light => Icons.light_mode,

@@ -20,6 +20,8 @@ class SettingsThemeModePage extends HookConsumerWidget {
       title: i18n.settings.settingsPage.layout.themeMode,
       tiles: ThemeMode.values.map((themeMode) {
         return SettingsRadioListTile<ThemeMode>(
+          // E2Eから選択状態を検証するためのKey
+          key: Key('settings_theme_mode_option_${themeMode.name}'),
           title: Text(
             designsystemI18n.designsystem.themeMode(context: themeMode),
           ),

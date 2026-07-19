@@ -48,6 +48,8 @@ dev_dependencies:
   flutter_gen_runner: any
   flutter_test:
     sdk: flutter
+  infrastructure_mock:
+    path: ../../packages/infrastructure/mock
   integration_test:
     sdk: flutter
   freezed: any
