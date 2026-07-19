@@ -17,7 +17,7 @@ Windowsでcloneする場合、事前に次の対応が必要です。
 ## 💻ローカルセットアップ
 
 以降の作業はOSに依存しない作業内容になります。
-`make`コマンドを有効化している場合は、`make setup`コマンドを実行してください。
+`mise`コマンドを有効化している場合は、`mise run setup`コマンドを実行してください。
 
 ### ツールのインストール
 
@@ -28,7 +28,7 @@ Windowsでcloneする場合、事前に次の対応が必要です。
 - [mise] コマンドを有効にしてください。
   - Android SDK（Android Studio）はmiseの管理対象外です。Androidビルド・実行を行う場合は
     別途[Android Studio]をインストールし、SDKとエミュレータをセットアップしてください。
-- `make setup`でMelosと依存関係をセットアップできます。
+- `mise run setup`でMelosと依存関係、生成コードをセットアップできます。
 
 ### Flutter SDKのセットアップ
 
@@ -43,7 +43,7 @@ mise install
 ### 依存関係のインストール
 
 ```shell
-make setup
+mise run setup
 ```
 
 ## 🔥Firebase

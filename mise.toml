@@ -4,3 +4,12 @@ java = "temurin-21"
 
 [settings]
 experimental = true
+
+[tasks.setup]
+description = "開発に必要なツールと依存関係、生成コードをセットアップする"
+run = [
+  "mise install",
+  "mise exec -- dart pub global activate melos",
+  "mise exec -- dart run melos bootstrap",
+  "mise exec -- dart run melos run gen",
+]
