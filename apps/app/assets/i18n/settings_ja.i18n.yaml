@@ -4,7 +4,7 @@ settingsPage:
     head: アカウント
     account: アカウント
   layout:
-    haed: レイアウト
+    head: レイアウト
     uiStyle: UIスタイル
     themeMode: テーマモード
     colorTheme: カラー
@@ -12,9 +12,9 @@ settingsPage:
     head: ヘルプ
     howToUse: つかい方
     contactUs: お問い合わせ
-    developperTwitter: 開発者情報
-    privacyPollicy: プライバシーポリシー
-    licencse: ライセンス
+    developerTwitter: 開発者情報
+    privacyPolicy: プライバシーポリシー
+    license: ライセンス
 accountPage:
   title: アカウント
   link:

@@ -1,4 +1,4 @@
-# packages_core
+# packages_foundation
 
 ## 責務 (Responsibilities)
 

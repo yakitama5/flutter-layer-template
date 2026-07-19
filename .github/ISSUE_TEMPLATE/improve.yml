@@ -36,7 +36,7 @@ body:
       label: 環境
       description: 改善対象のアプリやプラットフォームのバージョンなどを記載してください。
       value: |
-        - Commit Hash: 0153501e8487f388e99243d36f56509ea98f9def
+        - Commit Hash:
         - App Version: 1.0.0
         - Platform: iOS 17.2.1, Android 14 API level 34
       render: Markdown

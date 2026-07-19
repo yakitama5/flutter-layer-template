@@ -137,7 +137,7 @@ class _Links extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Flexible(child: ContactUsLink()),
-              Flexible(child: PrivacyPollicyLink()),
+              Flexible(child: PrivacyPolicyLink()),
             ],
           ),
         ),

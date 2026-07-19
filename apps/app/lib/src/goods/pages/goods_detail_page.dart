@@ -28,7 +28,7 @@ class GoodsDetailPage extends StatelessWidget {
                 SliverAppBar(
                   pinned: true,
                   expandedHeight: imageHeight,
-                  title: const Text('Linked Scroll Controller Group'),
+                  title: Text(goods.name),
                   flexibleSpace: FlexibleSpaceBar(
                     background: OverflowBox(
                       child: goods.imageUrl != null

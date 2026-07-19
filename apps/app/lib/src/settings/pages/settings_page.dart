@@ -41,7 +41,7 @@ class SettingsPage extends HookConsumerWidget {
             ],
           ),
           SettingsSection(
-            title: Text(i18n.settings.settingsPage.layout.haed),
+            title: Text(i18n.settings.settingsPage.layout.head),
             tiles: [
               SettingsTile.navigation(
                 leading: const Icon(Icons.style),
@@ -90,16 +90,16 @@ class SettingsPage extends HookConsumerWidget {
               ),
               SettingsTile.navigation(
                 leading: const Icon(Icons.alternate_email),
-                title: Text(i18n.settings.settingsPage.help.developperTwitter),
-                onPressed: _onDevelopperTwitter,
+                title: Text(i18n.settings.settingsPage.help.developerTwitter),
+                onPressed: _onDeveloperTwitter,
               ),
               SettingsTile.navigation(
                 leading: const Icon(Icons.lock),
-                title: Text(i18n.settings.settingsPage.help.privacyPollicy),
+                title: Text(i18n.settings.settingsPage.help.privacyPolicy),
                 onPressed: _onPrivacyPolicy,
               ),
               SettingsTile.navigation(
-                title: Text(i18n.settings.settingsPage.help.licencse),
+                title: Text(i18n.settings.settingsPage.help.license),
                 onPressed: const LicensePageRouteData().go,
               ),
             ],
@@ -117,7 +117,7 @@ class SettingsPage extends HookConsumerWidget {
     // TODO(yakitama5): Webページに遷移
   }
 
-  Future<void> _onDevelopperTwitter(BuildContext context) async {
+  Future<void> _onDeveloperTwitter(BuildContext context) async {
     // TODO(yakitama5): Webページに遷移
   }
 
