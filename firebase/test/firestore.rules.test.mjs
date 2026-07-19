@@ -6,13 +6,16 @@ import {
   initializeTestEnvironment,
 } from '@firebase/rules-unit-testing';
 import {
+  collection,
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
   runTransaction,
   serverTimestamp,
   setDoc,
   Timestamp,
+  updateDoc,
 } from 'firebase/firestore';
 
 const projectId = 'demo-flutter-layer-template';
@@ -99,6 +102,190 @@ describe('Cloud Firestore Security Rules', () => {
     const firestore = testEnv.authenticatedContext('bob').firestore();
 
     await assertFails(deleteDoc(doc(firestore, 'users/alice')));
+  });
+
+  it('他ユーザーのドキュメント取得を拒否する', async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(
+        doc(context.firestore(), 'users/alice'),
+        validUser('alice'),
+      );
+    });
+    const firestore = testEnv.authenticatedContext('bob').firestore();
+
+    await assertFails(getDoc(doc(firestore, 'users/alice')));
+  });
+
+  it('usersコレクションのlistを所有者でも拒否する', async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(
+        doc(context.firestore(), 'users/alice'),
+        validUser('alice'),
+      );
+    });
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertFails(getDocs(collection(firestore, 'users')));
+  });
+
+  it('所有者はschemaに準拠したユーザードキュメントをupdateできる', async () => {
+    const createdAt = Timestamp.now();
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), 'users/alice'), {
+        id: 'alice',
+        created_at: createdAt,
+        updated_at: createdAt,
+      });
+    });
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertSucceeds(
+      updateDoc(doc(firestore, 'users/alice'), {
+        id: 'alice',
+        created_at: createdAt,
+        updated_at: serverTimestamp(),
+      }),
+    );
+  });
+
+  it('created_atを改ざんするupdateを拒否する', async () => {
+    const createdAt = Timestamp.now();
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), 'users/alice'), {
+        id: 'alice',
+        created_at: createdAt,
+        updated_at: createdAt,
+      });
+    });
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertFails(
+      updateDoc(doc(firestore, 'users/alice'), {
+        id: 'alice',
+        created_at: Timestamp.fromMillis(createdAt.toMillis() + 1000),
+        updated_at: serverTimestamp(),
+      }),
+    );
+  });
+
+  it('updated_atがrequest.timeでないupdateを拒否する', async () => {
+    const createdAt = Timestamp.now();
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), 'users/alice'), {
+        id: 'alice',
+        created_at: createdAt,
+        updated_at: createdAt,
+      });
+    });
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertFails(
+      updateDoc(doc(firestore, 'users/alice'), {
+        id: 'alice',
+        created_at: createdAt,
+        updated_at: Timestamp.now(),
+      }),
+    );
+  });
+
+  it('スキーマ外フィールドを追加するupdateを拒否する', async () => {
+    const createdAt = Timestamp.now();
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), 'users/alice'), {
+        id: 'alice',
+        created_at: createdAt,
+        updated_at: createdAt,
+      });
+    });
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertFails(
+      updateDoc(doc(firestore, 'users/alice'), {
+        id: 'alice',
+        created_at: createdAt,
+        updated_at: serverTimestamp(),
+        role: 'admin',
+      }),
+    );
+  });
+
+  it('他ユーザーのドキュメントのupdateを拒否する', async () => {
+    const createdAt = Timestamp.now();
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), 'users/alice'), {
+        id: 'alice',
+        created_at: createdAt,
+        updated_at: createdAt,
+      });
+    });
+    const firestore = testEnv.authenticatedContext('bob').firestore();
+
+    await assertFails(
+      updateDoc(doc(firestore, 'users/alice'), {
+        id: 'alice',
+        created_at: createdAt,
+        updated_at: serverTimestamp(),
+      }),
+    );
+  });
+
+  it('所有者であっても_dusersのupdateを拒否する', async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(
+        doc(context.firestore(), '_dusers/alice'),
+        validUser('alice'),
+      );
+    });
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertFails(
+      updateDoc(doc(firestore, '_dusers/alice'), {
+        id: 'alice',
+        created_at: Timestamp.now(),
+        updated_at: serverTimestamp(),
+      }),
+    );
+  });
+
+  it('所有者であっても_dusersのdeleteを拒否する', async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(
+        doc(context.firestore(), '_dusers/alice'),
+        validUser('alice'),
+      );
+    });
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertFails(deleteDoc(doc(firestore, '_dusers/alice')));
+  });
+
+  it('所有者であっても_dusersのgetを拒否する', async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(
+        doc(context.firestore(), '_dusers/alice'),
+        validUser('alice'),
+      );
+    });
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertFails(getDoc(doc(firestore, '_dusers/alice')));
+  });
+
+  it('users/_dusers以外の任意パスへの書き込みを拒否する', async () => {
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertFails(
+      setDoc(doc(firestore, 'other/doc'), { foo: 'bar' }),
+    );
+  });
+
+  it('users/_dusers以外の任意パスへの読み取りを拒否する', async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await setDoc(doc(context.firestore(), 'other/doc'), { foo: 'bar' });
+    });
+    const firestore = testEnv.authenticatedContext('alice').firestore();
+
+    await assertFails(getDoc(doc(firestore, 'other/doc')));
   });
 });
 
