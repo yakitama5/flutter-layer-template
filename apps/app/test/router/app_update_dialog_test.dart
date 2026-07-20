@@ -86,7 +86,9 @@ void main() {
   testWidgets('メンテナンスモード時にメンテナンス画面が表示される', (tester) async {
     await _pumpMainApp(
       tester,
-      overrides: _overrides(maintenanceStatus: AppMaintenanceStatus.maintenance),
+      overrides: _overrides(
+        maintenanceStatus: AppMaintenanceStatus.maintenance,
+      ),
     );
 
     expect(find.text('Maintenance mode'), findsOneWidget);

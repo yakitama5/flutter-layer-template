@@ -30,16 +30,15 @@ class AppUpdateListener extends SingleChildStatelessWidget {
         // listenManual + fireImmediately で購読開始時の値も確実に処理する。
         // これにより、初回起動時に既に updateRequired が解決している場合や、
         // 同期的にoverrideするテストでも強制アップデート判定が発火する。
-        final subscription = ref.listenManual(
-          appUpdateStatusProvider,
-          (_, snapshot) {
-            if (!snapshot.hasValue) {
-              return;
-            }
-            _showDialogWhenReady(ref, snapshot.value);
-          },
-          fireImmediately: true,
-        );
+        final subscription = ref.listenManual(appUpdateStatusProvider, (
+          _,
+          snapshot,
+        ) {
+          if (!snapshot.hasValue) {
+            return;
+          }
+          _showDialogWhenReady(ref, snapshot.value);
+        }, fireImmediately: true);
 
         return subscription.close;
       }, const []);
@@ -52,7 +51,9 @@ class AppUpdateListener extends SingleChildStatelessWidget {
   ///
   /// fireImmediately の初回発火時は rootNavigator がまだ mount されていない
   /// 場合があるため、mount されるまで次フレームでリトライする。
-  void _showDialogWhenReady(WidgetRef ref, AppUpdateStatus? status, [
+  void _showDialogWhenReady(
+    WidgetRef ref,
+    AppUpdateStatus? status, [
     int attempt = 0,
   ]) {
     // ダイアログ不要なステータスでは rootNavigator の mount を待たない
