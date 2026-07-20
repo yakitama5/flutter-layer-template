@@ -42,7 +42,17 @@ class MockGoodsRepository extends GoodsRepository {
   MockGoodsRepository(
     this.ref, {
     this.delay = const Duration(milliseconds: 1000),
-  });
+  }) : items = List.generate(_totalLength, (i) {
+         return Goods(
+           id: 'Id $i',
+           name: 'Name $i',
+           price: i * 100,
+           imageUrl: _images[i % _images.length],
+           description: _descriptions[i % _descriptions.length],
+           createdAt: clock.fromNow(days: -i),
+           updatedAt: clock.fromNow(days: -i),
+         );
+       });
 
   final Ref ref;
 
@@ -50,20 +60,10 @@ class MockGoodsRepository extends GoodsRepository {
   /// 実時間の待機を避けられるようにする。
   final Duration delay;
 
-  // 決定的な結果を返すため、固定シードの乱数を使用する
-  final Random _random = Random(42);
-
-  static final List<Goods> items = List.generate(_totalLength, (i) {
-    return Goods(
-      id: 'Id $i',
-      name: 'Name $i',
-      price: i * 100,
-      imageUrl: _images[i % _images.length],
-      description: _descriptions[i % _descriptions.length],
-      createdAt: clock.fromNow(days: -i),
-      updatedAt: clock.fromNow(days: -i),
-    );
-  });
+  // インスタンス生成時に確定させることで、`withClock` によるテストからの
+  // 時刻固定を可能にする（`static` にすると初回アクセス時の実時刻で固定され、
+  // プロセスごとに絶対時刻が変動してしまうため）。
+  final List<Goods> items;
 
   @override
   Stream<Goods?> listenGoods({required String id}) {
@@ -81,8 +81,10 @@ class MockGoodsRepository extends GoodsRepository {
   }) async* {
     await Future<void>.delayed(delay);
 
+    // インデックスごとに独立した乱数器を使うことで、呼び出し回数に関わらず
+    // 同じ結果を返す（共有の乱数器だと呼び出すたびに状態が進み結果が変わる）。
     final shuffledPriceItems = items
-        .map((e) => e.copyWith(price: _random.nextInt(max(1, 100))))
+        .mapIndexed((i, e) => e.copyWith(price: Random(i).nextInt(max(1, 100))))
         .toList();
 
     final sortItems = shuffledPriceItems.sorted(
