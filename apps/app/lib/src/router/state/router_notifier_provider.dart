@@ -49,6 +49,15 @@ class RouterNotifier extends AsyncNotifier<RouterRedirectState>
       const OnboardRouteData().location,
     );
 
+    // メンテナンスモードは認証状態に依らず全ユーザーをブロックするため、
+    // 認証判定よりも先に評価する。
+    final appMaintenanceStatus = state.value?.maintenanceStatus;
+    if (appMaintenanceStatus == AppMaintenanceStatus.maintenance) {
+      return location == MaintenancePageRouteData.path
+          ? null
+          : MaintenancePageRouteData.path;
+    }
+
     // 認証判定
     final authUser = state.value?.authStatus;
     if (authUser == null && (isSplash || !isNotAuthLocations)) {
@@ -57,17 +66,9 @@ class RouterNotifier extends AsyncNotifier<RouterRedirectState>
       return const HomePageRouteData().location;
     }
 
-    // メンテナンスモード
-    final appMaintenanceStatus = state.value?.maintenanceStatus;
-    switch (appMaintenanceStatus) {
-      case AppMaintenanceStatus.maintenance:
-        return MaintenancePageRouteData.path;
-      case AppMaintenanceStatus.none:
-      case null:
-        // メンテナンスページにいる場合は元に戻してやる
-        if (location == MaintenancePageRouteData.path) {
-          return HomePageRouteData.path;
-        }
+    // メンテナンス解除後、メンテナンスページに留まっている場合は元に戻してやる
+    if (location == MaintenancePageRouteData.path) {
+      return HomePageRouteData.path;
     }
 
     return null;

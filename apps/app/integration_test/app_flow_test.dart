@@ -60,16 +60,21 @@ Future<void> pumpMainApp(
 
 /// 標準シナリオ用のoverrides
 ///
-/// 未認証から開始し、メンテナンス・強制アップデートいずれも発生しない
-/// 状態にする。
-List<Override> _defaultOverrides({UserRepository? userRepository}) => [
+/// 既定では未認証から開始し、メンテナンス・強制アップデートいずれも発生しない
+/// 状態にする。メンテナンス・強制アップデートのシナリオでは、同一providerを
+/// 二重にoverrideしないよう、引数で状態を差し替える。
+List<Override> _defaultOverrides({
+  UserRepository? userRepository,
+  AppMaintenanceStatus maintenanceStatus = AppMaintenanceStatus.none,
+  AppUpdateStatus updateStatus = AppUpdateStatus.usingLatest,
+}) => [
   userRepositoryProvider.overrideWithValue(
     userRepository ?? FakeUserRepository(),
   ),
   appMaintenanceStatusProvider.overrideWith(
-    (ref) => Stream.value(AppMaintenanceStatus.none),
+    (ref) => Stream.value(maintenanceStatus),
   ),
-  appUpdateStatusProvider.overrideWith((ref) => AppUpdateStatus.usingLatest),
+  appUpdateStatusProvider.overrideWith((ref) => updateStatus),
   themeRepositoryProvider.overrideWithValue(FakeThemeRepository()),
   goodsConfigRepositoryProvider.overrideWithValue(FakeGoodsConfigRepository()),
   goodsRepositoryProvider.overrideWithValue(FakeGoodsRepository()),
@@ -114,12 +119,9 @@ void main() {
   patrolTest('メンテナンスモード時にメンテナンス画面が表示される', ($) async {
     await pumpMainApp(
       $,
-      overrides: [
-        ..._defaultOverrides(),
-        appMaintenanceStatusProvider.overrideWith(
-          (ref) => Stream.value(AppMaintenanceStatus.maintenance),
-        ),
-      ],
+      overrides: _defaultOverrides(
+        maintenanceStatus: AppMaintenanceStatus.maintenance,
+      ),
     );
 
     expect($('Maintenance mode'), findsOneWidget);
@@ -131,12 +133,9 @@ void main() {
   patrolTest('強制アップデート時にダイアログが表示されOKを押しても閉じない', ($) async {
     await pumpMainApp(
       $,
-      overrides: [
-        ..._defaultOverrides(),
-        appUpdateStatusProvider.overrideWith(
-          (ref) => AppUpdateStatus.updateRequired,
-        ),
-      ],
+      overrides: _defaultOverrides(
+        updateStatus: AppUpdateStatus.updateRequired,
+      ),
     );
 
     final forceUpdateMessage =
