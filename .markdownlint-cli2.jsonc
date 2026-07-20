@@ -16,6 +16,8 @@
     ".fvm/**/*.md",
     ".idea/**/*.md",
     "**/.dart_tool/**/*.md",
+    "**/build/**/*.md",
+    "**/node_modules/**/*.md",
     "**/ios/.symlinks/**/*.md",
     "**/ios/Pods/**/*.md",
     "**/ios/Runner/**/*.md"
