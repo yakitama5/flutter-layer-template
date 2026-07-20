@@ -38,7 +38,7 @@ jobs:
     steps:
       # チェックアウト
       - name: 💾Checkout
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # セットアップ
       - name: ⚙️Setup Application Runtime
@@ -59,7 +59,7 @@ jobs:
     steps:
       # チェックアウト
       - name: 💾Checkout
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # セットアップ
       - name: ⚙️Setup Application Runtime
@@ -80,7 +80,7 @@ jobs:
     steps:
       # チェックアウト
       - name: 💾Checkout
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # Markdownの静的解析を実行(設定は .markdownlint-cli2.jsonc を参照)
       # NOTE: firebase/node_modules 等の依存物は npm install していないためチェックアウト直後は存在せず対象外
