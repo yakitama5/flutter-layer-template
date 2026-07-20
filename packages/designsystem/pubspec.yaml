@@ -23,7 +23,7 @@ dependencies:
   freezed_annotation: null
   gap: null
   gauge_indicator: 0.4.3
-  hooks_riverpod: ^3.3.1
+  hooks_riverpod: ^3.3.2
   linked_scroll_controller: null
   material_color_utilities: null
   nested: null
