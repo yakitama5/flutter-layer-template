@@ -28,7 +28,7 @@ dependencies:
   material_color_utilities: null
   nested: null
   responsive_framework: ^1.5.1
-  riverpod: ^3.2.1
+  riverpod: ^3.3.2
   shimmer: null
   slang: ^4.18.0
   slang_flutter: ^4.18.0
