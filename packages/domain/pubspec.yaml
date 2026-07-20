@@ -9,7 +9,7 @@ environment:
 dependencies:
   freezed_annotation: null
   intl: null
-  json_annotation: ^4.11.0
+  json_annotation: ^4.12.0
   packages_foundation:
     path: ../foundation
   version: null
