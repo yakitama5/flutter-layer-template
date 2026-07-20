@@ -2,6 +2,9 @@ name: TMP Update Goldens
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - review/main-comprehensive-fixes
 
 permissions:
   contents: read
