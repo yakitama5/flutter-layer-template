@@ -11,7 +11,7 @@ dependencies:
     path: ../domain
   packages_foundation:
     path: ../foundation
-  riverpod: ^3.2.1
+  riverpod: ^3.3.2
   version: null
 
 dev_dependencies:

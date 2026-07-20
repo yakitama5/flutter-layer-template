@@ -11,7 +11,7 @@ dependencies:
   collection: any
   domain:
     path: ../../domain
-  riverpod: ^3.2.1
+  riverpod: ^3.3.2
 
 dev_dependencies:
 

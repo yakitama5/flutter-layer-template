@@ -17,6 +17,6 @@ dependencies:
     path: ../infrastructure/mock
   infrastructure_shared_preferences:
     path: ../infrastructure/shared_preferences
-  riverpod: ^3.2.1
+  riverpod: ^3.3.2
 
 resolution: workspace
