@@ -32,6 +32,10 @@ runs:
       run: |
         MELOS_VERSION=$(cat pubspec.lock | yq ".packages.melos.version" -r)
         dart pub global activate melos $MELOS_VERSION
+        # NOTE: ルートはFlutter SDKを要求するpub workspaceのため、`.dart_tool`が
+        # 未生成の状態で`dart run`を呼ぶと`dart pub`による暗黙のpub getが走り
+        # 解決に失敗する。先に`flutter pub get`でworkspace解決を済ませておく。
+        flutter pub get
         dart run melos bootstrap
       shell: bash
 
