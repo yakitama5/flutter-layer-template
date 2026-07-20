@@ -14,7 +14,11 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppBuildConfig {
 
- Flavor get flavor; String get appName; String get packageName; Version get version; String get buildNumber; String get buildSignature; String? get installerStore;
+ Flavor get flavor; String get appName; String get packageName; Version get version; String get buildNumber; String get buildSignature; String? get installerStore;/// App Store Connectで発行される数値のApp Store ID
+///
+/// ストア遷移(store_redirectのiOSAppId)で使用する。bundle IDではない点に注意。
+/// テンプレートの利用者は各flavorの設定ファイルに実際の値を設定すること。
+ String? get appStoreId;
 /// Create a copy of AppBuildConfig
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +29,16 @@ $AppBuildConfigCopyWith<AppBuildConfig> get copyWith => _$AppBuildConfigCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppBuildConfig&&(identical(other.flavor, flavor) || other.flavor == flavor)&&(identical(other.appName, appName) || other.appName == appName)&&(identical(other.packageName, packageName) || other.packageName == packageName)&&(identical(other.version, version) || other.version == version)&&(identical(other.buildNumber, buildNumber) || other.buildNumber == buildNumber)&&(identical(other.buildSignature, buildSignature) || other.buildSignature == buildSignature)&&(identical(other.installerStore, installerStore) || other.installerStore == installerStore));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppBuildConfig&&(identical(other.flavor, flavor) || other.flavor == flavor)&&(identical(other.appName, appName) || other.appName == appName)&&(identical(other.packageName, packageName) || other.packageName == packageName)&&(identical(other.version, version) || other.version == version)&&(identical(other.buildNumber, buildNumber) || other.buildNumber == buildNumber)&&(identical(other.buildSignature, buildSignature) || other.buildSignature == buildSignature)&&(identical(other.installerStore, installerStore) || other.installerStore == installerStore)&&(identical(other.appStoreId, appStoreId) || other.appStoreId == appStoreId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,flavor,appName,packageName,version,buildNumber,buildSignature,installerStore);
+int get hashCode => Object.hash(runtimeType,flavor,appName,packageName,version,buildNumber,buildSignature,installerStore,appStoreId);
 
 @override
 String toString() {
-  return 'AppBuildConfig(flavor: $flavor, appName: $appName, packageName: $packageName, version: $version, buildNumber: $buildNumber, buildSignature: $buildSignature, installerStore: $installerStore)';
+  return 'AppBuildConfig(flavor: $flavor, appName: $appName, packageName: $packageName, version: $version, buildNumber: $buildNumber, buildSignature: $buildSignature, installerStore: $installerStore, appStoreId: $appStoreId)';
 }
 
 
@@ -45,7 +49,7 @@ abstract mixin class $AppBuildConfigCopyWith<$Res>  {
   factory $AppBuildConfigCopyWith(AppBuildConfig value, $Res Function(AppBuildConfig) _then) = _$AppBuildConfigCopyWithImpl;
 @useResult
 $Res call({
- Flavor flavor, String appName, String packageName, Version version, String buildNumber, String buildSignature, String? installerStore
+ Flavor flavor, String appName, String packageName, Version version, String buildNumber, String buildSignature, String? installerStore, String? appStoreId
 });
 
 
@@ -62,7 +66,7 @@ class _$AppBuildConfigCopyWithImpl<$Res>
 
 /// Create a copy of AppBuildConfig
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? flavor = null,Object? appName = null,Object? packageName = null,Object? version = null,Object? buildNumber = null,Object? buildSignature = null,Object? installerStore = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? flavor = null,Object? appName = null,Object? packageName = null,Object? version = null,Object? buildNumber = null,Object? buildSignature = null,Object? installerStore = freezed,Object? appStoreId = freezed,}) {
   return _then(_self.copyWith(
 flavor: null == flavor ? _self.flavor : flavor // ignore: cast_nullable_to_non_nullable
 as Flavor,appName: null == appName ? _self.appName : appName // ignore: cast_nullable_to_non_nullable
@@ -71,6 +75,7 @@ as String,version: null == version ? _self.version : version // ignore: cast_nul
 as Version,buildNumber: null == buildNumber ? _self.buildNumber : buildNumber // ignore: cast_nullable_to_non_nullable
 as String,buildSignature: null == buildSignature ? _self.buildSignature : buildSignature // ignore: cast_nullable_to_non_nullable
 as String,installerStore: freezed == installerStore ? _self.installerStore : installerStore // ignore: cast_nullable_to_non_nullable
+as String?,appStoreId: freezed == appStoreId ? _self.appStoreId : appStoreId // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -156,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Flavor flavor,  String appName,  String packageName,  Version version,  String buildNumber,  String buildSignature,  String? installerStore)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Flavor flavor,  String appName,  String packageName,  Version version,  String buildNumber,  String buildSignature,  String? installerStore,  String? appStoreId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppBuildConfig() when $default != null:
-return $default(_that.flavor,_that.appName,_that.packageName,_that.version,_that.buildNumber,_that.buildSignature,_that.installerStore);case _:
+return $default(_that.flavor,_that.appName,_that.packageName,_that.version,_that.buildNumber,_that.buildSignature,_that.installerStore,_that.appStoreId);case _:
   return orElse();
 
 }
@@ -177,10 +182,10 @@ return $default(_that.flavor,_that.appName,_that.packageName,_that.version,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Flavor flavor,  String appName,  String packageName,  Version version,  String buildNumber,  String buildSignature,  String? installerStore)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Flavor flavor,  String appName,  String packageName,  Version version,  String buildNumber,  String buildSignature,  String? installerStore,  String? appStoreId)  $default,) {final _that = this;
 switch (_that) {
 case _AppBuildConfig():
-return $default(_that.flavor,_that.appName,_that.packageName,_that.version,_that.buildNumber,_that.buildSignature,_that.installerStore);case _:
+return $default(_that.flavor,_that.appName,_that.packageName,_that.version,_that.buildNumber,_that.buildSignature,_that.installerStore,_that.appStoreId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +202,10 @@ return $default(_that.flavor,_that.appName,_that.packageName,_that.version,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Flavor flavor,  String appName,  String packageName,  Version version,  String buildNumber,  String buildSignature,  String? installerStore)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Flavor flavor,  String appName,  String packageName,  Version version,  String buildNumber,  String buildSignature,  String? installerStore,  String? appStoreId)?  $default,) {final _that = this;
 switch (_that) {
 case _AppBuildConfig() when $default != null:
-return $default(_that.flavor,_that.appName,_that.packageName,_that.version,_that.buildNumber,_that.buildSignature,_that.installerStore);case _:
+return $default(_that.flavor,_that.appName,_that.packageName,_that.version,_that.buildNumber,_that.buildSignature,_that.installerStore,_that.appStoreId);case _:
   return null;
 
 }
@@ -212,7 +217,7 @@ return $default(_that.flavor,_that.appName,_that.packageName,_that.version,_that
 
 
 class _AppBuildConfig implements AppBuildConfig {
-  const _AppBuildConfig({required this.flavor, required this.appName, required this.packageName, required this.version, required this.buildNumber, required this.buildSignature, this.installerStore});
+  const _AppBuildConfig({required this.flavor, required this.appName, required this.packageName, required this.version, required this.buildNumber, required this.buildSignature, this.installerStore, this.appStoreId});
   
 
 @override final  Flavor flavor;
@@ -222,6 +227,11 @@ class _AppBuildConfig implements AppBuildConfig {
 @override final  String buildNumber;
 @override final  String buildSignature;
 @override final  String? installerStore;
+/// App Store Connectで発行される数値のApp Store ID
+///
+/// ストア遷移(store_redirectのiOSAppId)で使用する。bundle IDではない点に注意。
+/// テンプレートの利用者は各flavorの設定ファイルに実際の値を設定すること。
+@override final  String? appStoreId;
 
 /// Create a copy of AppBuildConfig
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +243,16 @@ _$AppBuildConfigCopyWith<_AppBuildConfig> get copyWith => __$AppBuildConfigCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppBuildConfig&&(identical(other.flavor, flavor) || other.flavor == flavor)&&(identical(other.appName, appName) || other.appName == appName)&&(identical(other.packageName, packageName) || other.packageName == packageName)&&(identical(other.version, version) || other.version == version)&&(identical(other.buildNumber, buildNumber) || other.buildNumber == buildNumber)&&(identical(other.buildSignature, buildSignature) || other.buildSignature == buildSignature)&&(identical(other.installerStore, installerStore) || other.installerStore == installerStore));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppBuildConfig&&(identical(other.flavor, flavor) || other.flavor == flavor)&&(identical(other.appName, appName) || other.appName == appName)&&(identical(other.packageName, packageName) || other.packageName == packageName)&&(identical(other.version, version) || other.version == version)&&(identical(other.buildNumber, buildNumber) || other.buildNumber == buildNumber)&&(identical(other.buildSignature, buildSignature) || other.buildSignature == buildSignature)&&(identical(other.installerStore, installerStore) || other.installerStore == installerStore)&&(identical(other.appStoreId, appStoreId) || other.appStoreId == appStoreId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,flavor,appName,packageName,version,buildNumber,buildSignature,installerStore);
+int get hashCode => Object.hash(runtimeType,flavor,appName,packageName,version,buildNumber,buildSignature,installerStore,appStoreId);
 
 @override
 String toString() {
-  return 'AppBuildConfig(flavor: $flavor, appName: $appName, packageName: $packageName, version: $version, buildNumber: $buildNumber, buildSignature: $buildSignature, installerStore: $installerStore)';
+  return 'AppBuildConfig(flavor: $flavor, appName: $appName, packageName: $packageName, version: $version, buildNumber: $buildNumber, buildSignature: $buildSignature, installerStore: $installerStore, appStoreId: $appStoreId)';
 }
 
 
@@ -253,7 +263,7 @@ abstract mixin class _$AppBuildConfigCopyWith<$Res> implements $AppBuildConfigCo
   factory _$AppBuildConfigCopyWith(_AppBuildConfig value, $Res Function(_AppBuildConfig) _then) = __$AppBuildConfigCopyWithImpl;
 @override @useResult
 $Res call({
- Flavor flavor, String appName, String packageName, Version version, String buildNumber, String buildSignature, String? installerStore
+ Flavor flavor, String appName, String packageName, Version version, String buildNumber, String buildSignature, String? installerStore, String? appStoreId
 });
 
 
@@ -270,7 +280,7 @@ class __$AppBuildConfigCopyWithImpl<$Res>
 
 /// Create a copy of AppBuildConfig
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? flavor = null,Object? appName = null,Object? packageName = null,Object? version = null,Object? buildNumber = null,Object? buildSignature = null,Object? installerStore = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? flavor = null,Object? appName = null,Object? packageName = null,Object? version = null,Object? buildNumber = null,Object? buildSignature = null,Object? installerStore = freezed,Object? appStoreId = freezed,}) {
   return _then(_AppBuildConfig(
 flavor: null == flavor ? _self.flavor : flavor // ignore: cast_nullable_to_non_nullable
 as Flavor,appName: null == appName ? _self.appName : appName // ignore: cast_nullable_to_non_nullable
@@ -279,6 +289,7 @@ as String,version: null == version ? _self.version : version // ignore: cast_nul
 as Version,buildNumber: null == buildNumber ? _self.buildNumber : buildNumber // ignore: cast_nullable_to_non_nullable
 as String,buildSignature: null == buildSignature ? _self.buildSignature : buildSignature // ignore: cast_nullable_to_non_nullable
 as String,installerStore: freezed == installerStore ? _self.installerStore : installerStore // ignore: cast_nullable_to_non_nullable
+as String?,appStoreId: freezed == appStoreId ? _self.appStoreId : appStoreId // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

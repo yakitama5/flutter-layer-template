@@ -10,7 +10,6 @@ dependencies:
   freezed_annotation: null
   intl: null
   json_annotation: ^4.11.0
-  logger: null
   packages_foundation:
     path: ../foundation
   version: null
@@ -20,6 +19,7 @@ dev_dependencies:
 
   freezed: any
   json_serializable: ^6.13.0
+  test: any
 
 
 resolution: workspace

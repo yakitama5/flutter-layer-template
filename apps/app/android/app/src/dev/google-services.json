@@ -1,37 +1,37 @@
 {
   "project_info": {
-    "project_number": "899934807737",
-    "project_id": "yakuran-playground",
-    "storage_bucket": "yakuran-playground.appspot.com"
+    "project_number": "000000000000",
+    "project_id": "your-project-id-dev",
+    "storage_bucket": "your-project-id-dev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:899934807737:android:c6dfe05db4690e1715dd68",
+        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
         "android_client_info": {
           "package_name": "com.yakuran.template"
         }
       },
       "oauth_client": [
         {
-          "client_id": "899934807737-lpgj125ie9vvof1huovib1qb81th5kc5.apps.googleusercontent.com",
+          "client_id": "000000000000-dummy.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCdV-R5_dvDhqCHg5jluLJZ6khGHerxeo"
+          "current_key": "AIzaSyDummyDummyDummyDummyDummyDummy000"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "899934807737-lpgj125ie9vvof1huovib1qb81th5kc5.apps.googleusercontent.com",
+              "client_id": "000000000000-dummy.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "899934807737-cmq7nu25qi7k4tqe4hjji0d80quj1jb9.apps.googleusercontent.com",
+              "client_id": "000000000000-dummy.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.yakuran.template"
@@ -43,39 +43,39 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:899934807737:android:497de452d7ab83a015dd68",
+        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
         "android_client_info": {
           "package_name": "com.yakuran.template.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "899934807737-v5col7di0a4hngfeg7u8b2og1mcn9dis.apps.googleusercontent.com",
+          "client_id": "000000000000-dummy.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.yakuran.template.dev",
-            "certificate_hash": "0b1964dfe105405d9d790553458d527cd297b392"
+            "certificate_hash": "0000000000000000000000000000000000000000"
           }
         },
         {
-          "client_id": "899934807737-lpgj125ie9vvof1huovib1qb81th5kc5.apps.googleusercontent.com",
+          "client_id": "000000000000-dummy.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCdV-R5_dvDhqCHg5jluLJZ6khGHerxeo"
+          "current_key": "AIzaSyDummyDummyDummyDummyDummyDummy000"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "899934807737-lpgj125ie9vvof1huovib1qb81th5kc5.apps.googleusercontent.com",
+              "client_id": "000000000000-dummy.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "899934807737-cmq7nu25qi7k4tqe4hjji0d80quj1jb9.apps.googleusercontent.com",
+              "client_id": "000000000000-dummy.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.yakuran.template"

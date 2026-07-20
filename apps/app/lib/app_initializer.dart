@@ -19,6 +19,7 @@ final class AppInitializer {
 
   static Future<AppBuildConfig> _initializeBuildConfig() async {
     final packageInfo = await PackageInfo.fromPlatform();
+    const appStoreId = String.fromEnvironment('appStoreId');
 
     return AppBuildConfig(
       flavor: Flavor.values.byName(const String.fromEnvironment('flavor')),
@@ -28,6 +29,7 @@ final class AppInitializer {
       buildNumber: packageInfo.buildNumber,
       buildSignature: packageInfo.buildSignature,
       installerStore: packageInfo.installerStore,
+      appStoreId: appStoreId.isEmpty ? null : appStoreId,
     );
   }
 }

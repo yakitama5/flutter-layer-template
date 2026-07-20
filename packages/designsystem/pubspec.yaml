@@ -38,6 +38,7 @@ dependencies:
   url_launcher: null
 
 dev_dependencies:
+  alchemist: ^0.14.0
   build_runner: ^2.15.1
 
   flutter_gen_runner: null

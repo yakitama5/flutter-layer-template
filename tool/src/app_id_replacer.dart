@@ -205,14 +205,21 @@ final class AppIdReplacer {
   }) async {
     final file = _file(relativePath);
     final json = await _readJsonObject(file);
+    var matchCount = 0;
     final updated =
         _replaceJsonIds(
               json,
               oldAndroidAppId: oldAndroidAppId,
               oldIosBundleId: oldIosBundleId,
               newAppId: newAppId,
+              onMatch: () => matchCount++,
             )
             as Map<String, Object?>;
+    if (matchCount == 0) {
+      throw FormatException(
+        '置換対象のpackage_name/bundle_idが見つかりません: $relativePath',
+      );
+    }
     return _jsonChange(file, updated, relativePath: relativePath);
   }
 
@@ -221,6 +228,7 @@ final class AppIdReplacer {
     required String oldAndroidAppId,
     required String oldIosBundleId,
     required String newAppId,
+    required void Function() onMatch,
     String? key,
   }) {
     if (value is Map<String, Object?>) {
@@ -232,6 +240,7 @@ final class AppIdReplacer {
             oldAndroidAppId: oldAndroidAppId,
             oldIosBundleId: oldIosBundleId,
             newAppId: newAppId,
+            onMatch: onMatch,
             key: entryKey,
           ),
         ),
@@ -245,25 +254,33 @@ final class AppIdReplacer {
               oldAndroidAppId: oldAndroidAppId,
               oldIosBundleId: oldIosBundleId,
               newAppId: newAppId,
+              onMatch: onMatch,
               key: key,
             ),
           )
           .toList();
     }
     if (value is String && key == 'package_name') {
-      return _replaceIdPrefix(value, oldAndroidAppId, newAppId);
+      return _replaceIdPrefix(value, oldAndroidAppId, newAppId, onMatch);
     }
     if (value is String && key == 'bundle_id') {
-      return _replaceIdPrefix(value, oldIosBundleId, newAppId);
+      return _replaceIdPrefix(value, oldIosBundleId, newAppId, onMatch);
     }
     return value;
   }
 
-  String _replaceIdPrefix(String value, String oldId, String newId) {
+  String _replaceIdPrefix(
+    String value,
+    String oldId,
+    String newId,
+    void Function() onMatch,
+  ) {
     if (value == oldId) {
+      onMatch();
       return newId;
     }
     if (value.startsWith('$oldId.')) {
+      onMatch();
       return '$newId${value.substring(oldId.length)}';
     }
     return value;
@@ -277,6 +294,11 @@ final class AppIdReplacer {
     final original = await file.readAsString();
     var updated = original;
     for (final replacement in replacements.entries) {
+      if (!updated.contains(replacement.key)) {
+        throw FormatException(
+          '置換対象のパターンが見つかりません: $relativePath (pattern: ${replacement.key})',
+        );
+      }
       updated = updated.replaceAll(replacement.key, replacement.value);
     }
     return _FileChange(file, relativePath, original, updated);
@@ -313,11 +335,16 @@ final class AppIdReplacer {
   }
 
   void _validateAppId(String appId) {
+    // Android(package name)とiOS(bundle ID)の両方で有効な文字集合の積集合。
+    // 各セグメントは英字始まり・英数字のみとし、アンダースコアは許可しない
+    // （iOSのCFBundleIdentifierはアンダースコアを許容しないため）。
     final pattern = RegExp(
-      r'^[A-Za-z][A-Za-z0-9_]*(\.[A-Za-z][A-Za-z0-9_]*){1,}$',
+      r'^[A-Za-z][A-Za-z0-9]*(\.[A-Za-z][A-Za-z0-9]*){1,}$',
     );
     if (!pattern.hasMatch(appId)) {
-      throw FormatException('アプリIDは逆DNS形式で指定してください: $appId');
+      throw FormatException(
+        'アプリIDは逆DNS形式（英字始まり・英数字のみのセグメントを2つ以上）で指定してください: $appId',
+      );
     }
   }
 

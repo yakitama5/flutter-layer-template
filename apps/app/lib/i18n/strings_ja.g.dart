@@ -244,7 +244,7 @@ class _Translations$settings$settingsPage$layout$ja extends Translations$setting
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get haed => 'レイアウト';
+	@override String get head => 'レイアウト';
 	@override String get uiStyle => 'UIスタイル';
 	@override String get themeMode => 'テーマモード';
 	@override String get colorTheme => 'カラー';
@@ -260,9 +260,9 @@ class _Translations$settings$settingsPage$help$ja extends Translations$settings$
 	@override String get head => 'ヘルプ';
 	@override String get howToUse => 'つかい方';
 	@override String get contactUs => 'お問い合わせ';
-	@override String get developperTwitter => '開発者情報';
-	@override String get privacyPollicy => 'プライバシーポリシー';
-	@override String get licencse => 'ライセンス';
+	@override String get developerTwitter => '開発者情報';
+	@override String get privacyPolicy => 'プライバシーポリシー';
+	@override String get license => 'ライセンス';
 }
 
 // Path: settings.accountPage.link
@@ -322,16 +322,16 @@ extension on TranslationsJa {
 			'settings.settingsPage.title' => '設定',
 			'settings.settingsPage.account.head' => 'アカウント',
 			'settings.settingsPage.account.account' => 'アカウント',
-			'settings.settingsPage.layout.haed' => 'レイアウト',
+			'settings.settingsPage.layout.head' => 'レイアウト',
 			'settings.settingsPage.layout.uiStyle' => 'UIスタイル',
 			'settings.settingsPage.layout.themeMode' => 'テーマモード',
 			'settings.settingsPage.layout.colorTheme' => 'カラー',
 			'settings.settingsPage.help.head' => 'ヘルプ',
 			'settings.settingsPage.help.howToUse' => 'つかい方',
 			'settings.settingsPage.help.contactUs' => 'お問い合わせ',
-			'settings.settingsPage.help.developperTwitter' => '開発者情報',
-			'settings.settingsPage.help.privacyPollicy' => 'プライバシーポリシー',
-			'settings.settingsPage.help.licencse' => 'ライセンス',
+			'settings.settingsPage.help.developerTwitter' => '開発者情報',
+			'settings.settingsPage.help.privacyPolicy' => 'プライバシーポリシー',
+			'settings.settingsPage.help.license' => 'ライセンス',
 			'settings.accountPage.title' => 'アカウント',
 			'settings.accountPage.link.head' => 'アカウント連携',
 			'settings.accountPage.link.google' => 'Google',

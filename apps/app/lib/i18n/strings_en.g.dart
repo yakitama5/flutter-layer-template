@@ -287,7 +287,7 @@ class Translations$settings$settingsPage$layout$en {
 	// Translations
 
 	/// en: 'Layout'
-	String get haed => 'Layout';
+	String get head => 'Layout';
 
 	/// en: 'UI Style'
 	String get uiStyle => 'UI Style';
@@ -316,14 +316,14 @@ class Translations$settings$settingsPage$help$en {
 	/// en: 'Contact us'
 	String get contactUs => 'Contact us';
 
-	/// en: 'Developper'
-	String get developperTwitter => 'Developper';
+	/// en: 'Developer'
+	String get developerTwitter => 'Developer';
 
-	/// en: 'PrivacyPollicy'
-	String get privacyPollicy => 'PrivacyPollicy';
+	/// en: 'Privacy Policy'
+	String get privacyPolicy => 'Privacy Policy';
 
 	/// en: 'License'
-	String get licencse => 'License';
+	String get license => 'License';
 }
 
 // Path: settings.accountPage.link
@@ -399,16 +399,16 @@ extension on Translations {
 			'settings.settingsPage.title' => 'Settings',
 			'settings.settingsPage.account.head' => 'Account',
 			'settings.settingsPage.account.account' => 'Account',
-			'settings.settingsPage.layout.haed' => 'Layout',
+			'settings.settingsPage.layout.head' => 'Layout',
 			'settings.settingsPage.layout.uiStyle' => 'UI Style',
 			'settings.settingsPage.layout.themeMode' => 'ThemeMode',
 			'settings.settingsPage.layout.colorTheme' => 'Colors',
 			'settings.settingsPage.help.head' => 'Help',
 			'settings.settingsPage.help.howToUse' => 'HowToUse',
 			'settings.settingsPage.help.contactUs' => 'Contact us',
-			'settings.settingsPage.help.developperTwitter' => 'Developper',
-			'settings.settingsPage.help.privacyPollicy' => 'PrivacyPollicy',
-			'settings.settingsPage.help.licencse' => 'License',
+			'settings.settingsPage.help.developerTwitter' => 'Developer',
+			'settings.settingsPage.help.privacyPolicy' => 'Privacy Policy',
+			'settings.settingsPage.help.license' => 'License',
 			'settings.accountPage.title' => 'Account',
 			'settings.accountPage.link.head' => 'Account link',
 			'settings.accountPage.link.google' => 'Google',

@@ -16,5 +16,11 @@ abstract class AppBuildConfig with _$AppBuildConfig {
     required String buildNumber,
     required String buildSignature,
     String? installerStore,
+
+    /// App Store Connectで発行される数値のApp Store ID
+    ///
+    /// ストア遷移(store_redirectのiOSAppId)で使用する。bundle IDではない点に注意。
+    /// テンプレートの利用者は各flavorの設定ファイルに実際の値を設定すること。
+    String? appStoreId,
   }) = _AppBuildConfig;
 }

@@ -8,15 +8,16 @@ import '../interface/user_repository.dart';
 import '../state/auth_status_provider.dart';
 import '../state/auth_user_provider.dart';
 
-final userUsecaseProvider = Provider<UserUsecase>(UserUsecase.new);
+final userUsecaseProvider = Provider.autoDispose<UserUsecase>(UserUsecase.new);
 
 class UserUsecase with RunUsecaseMixin {
   const UserUsecase(this.ref);
 
   final Ref ref;
 
-  UserRepository get _userRepository => ref.watch(userRepositoryProvider);
-  Future<User?> get _authUser => ref.watch(authUserProvider.future);
+  // build外(usecaseのメソッド呼び出し時)での単発参照のため、ref.readを使用する
+  UserRepository get _userRepository => ref.read(userRepositoryProvider);
+  Future<User?> get _authUser => ref.read(authUserProvider.future);
   Future<String?> get _authUserId => _authUser.then((data) => data?.id);
 
   /// ユーザーの登録

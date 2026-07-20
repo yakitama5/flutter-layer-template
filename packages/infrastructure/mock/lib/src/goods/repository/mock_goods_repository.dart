@@ -39,25 +39,45 @@ const _descriptions = [
 ];
 
 class MockGoodsRepository extends GoodsRepository {
-  MockGoodsRepository(this.ref);
+  MockGoodsRepository(
+    this.ref, {
+    this.delay = const Duration(milliseconds: 1000),
+  }) : items = List.generate(_totalLength, (i) {
+         return Goods(
+           id: 'Id $i',
+           name: 'Name $i',
+           price: i * 100,
+           imageUrl: _images[i % _images.length],
+           description: _descriptions[i % _descriptions.length],
+           createdAt: clock.fromNow(days: -i),
+           updatedAt: clock.fromNow(days: -i),
+         );
+       });
 
   final Ref ref;
 
-  static final List<Goods> items = List.generate(_totalLength, (i) {
-    return Goods(
-      id: 'Id $i',
-      name: 'Name $i',
-      price: i * 100,
-      imageUrl: _images[i % _images.length],
-      description: _descriptions[i % _descriptions.length],
-      createdAt: clock.fromNow(days: -i),
-      updatedAt: clock.fromNow(days: -i),
-    );
-  });
+  /// 一覧取得時に模擬する通信遅延。テストでは `Duration.zero` を指定して
+  /// 実時間の待機を避けられるようにする。
+  final Duration delay;
+
+  // インスタンス生成時に確定させることで、`withClock` によるテストからの
+  // 時刻固定を可能にする（`static` にすると初回アクセス時の実時刻で固定され、
+  // プロセスごとに絶対時刻が変動してしまうため）。
+  final List<Goods> items;
+
+  // インデックスのみに依存する純粋な変換でpriceを算出する。呼び出し回数に
+  // 関わらず、また`listenGoods`/`listenGoodsList`のどちらから参照しても
+  // 同じ結果になる（共有の乱数器だと呼び出すたびに状態が進み結果が変わり、
+  // かつ両メソッド間でも食い違ってしまう）。
+  List<Goods> get _shuffledPriceItems => items
+      .mapIndexed((i, e) => e.copyWith(price: Random(i).nextInt(max(1, 100))))
+      .toList();
 
   @override
   Stream<Goods?> listenGoods({required String id}) {
-    final item = items.firstWhere((e) => e.id == id);
+    // 該当なしの場合は`StateError`を投げる`firstWhere`ではなく、
+    // `null`を返す`firstWhereOrNull`を使用する
+    final item = _shuffledPriceItems.firstWhereOrNull((e) => e.id == id);
     return Stream.value(item);
   }
 
@@ -67,13 +87,11 @@ class MockGoodsRepository extends GoodsRepository {
     int pageSize = goodsPageSize,
     required GoodsFetchQuery query,
   }) async* {
-    await Future<void>.delayed(const Duration(milliseconds: 1000));
+    await Future<void>.delayed(delay);
 
-    final hoge = items
-        .map((e) => e.copyWith(price: Random().nextInt(max(1, 100))))
-        .toList();
+    final shuffledPriceItems = _shuffledPriceItems;
 
-    final sortItems = hoge.sorted(
+    final sortItems = shuffledPriceItems.sorted(
       (a, b) => switch (query.sortKey) {
         GoodsSortKey.createdAt => a.createdAt.compareTo(b.createdAt),
         GoodsSortKey.name => a.name.compareTo(b.name),

@@ -1,0 +1,51 @@
+# https://docs.github.com/ja/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  # GitHub Actionsのバージョンを週次で更新
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Dart/Flutterの依存関係を週次で更新
+  # NOTE: melosによるモノレポ構成のため、pubspec.yamlが存在する各ディレクトリを個別に指定する
+  - package-ecosystem: "pub"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/apps/app"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/application"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/dependency_override"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/designsystem"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/domain"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/foundation"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/infrastructure/firebase"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/infrastructure/mock"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/infrastructure/shared_preferences"
+    schedule:
+      interval: "weekly"

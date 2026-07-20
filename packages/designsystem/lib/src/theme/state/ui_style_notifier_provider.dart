@@ -5,11 +5,11 @@ import 'package:riverpod/riverpod.dart';
 
 /// UIスタイルを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
-final uiStyleProvider = NotifierProvider.autoDispose<UiStyle, UIStyle>(
-  UiStyle.new,
+final uiStyleProvider = NotifierProvider.autoDispose<UiStyleNotifier, UIStyle>(
+  UiStyleNotifier.new,
 );
 
-class UiStyle extends Notifier<UIStyle> {
+class UiStyleNotifier extends Notifier<UIStyle> {
   ThemeRepository get _repository => ref.watch(themeRepositoryProvider);
 
   @override

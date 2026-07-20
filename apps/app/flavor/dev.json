@@ -3,5 +3,6 @@
   "appName": "dev-Template",
   "appIdAndroid": "com.yakuran.template",
   "appIdIos": "com.yakuran.template",
-  "appIdSuffix": ".dev"
+  "appIdSuffix": ".dev",
+  "appStoreId": ""
 }

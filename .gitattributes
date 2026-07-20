@@ -1,6 +1,19 @@
+# 改行コードはLFへ自動正規化する(CRLF混入防止)
+* text=auto eol=lf
+
+# バイナリファイル
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.jar binary
+*.keystore binary
+*.ttf binary
+*.otf binary
+
+# 生成コード(GitHubの言語統計・diff表示から除外)
 *.g.dart linguist-generated=true
 *.g.theme.dart linguist-generated=true
 *.freezed.dart linguist-generated=true
-l10n.dart linguist-generated=true
-l10n_en.dart linguist-generated=true
-l10n_ja.dart linguist-generated=true

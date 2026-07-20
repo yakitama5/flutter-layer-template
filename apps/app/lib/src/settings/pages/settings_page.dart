@@ -41,7 +41,7 @@ class SettingsPage extends HookConsumerWidget {
             ],
           ),
           SettingsSection(
-            title: Text(i18n.settings.settingsPage.layout.haed),
+            title: Text(i18n.settings.settingsPage.layout.head),
             tiles: [
               SettingsTile.navigation(
                 leading: const Icon(Icons.style),
@@ -52,6 +52,8 @@ class SettingsPage extends HookConsumerWidget {
                 onPressed: const SettingsUiStylePageRouteData().go,
               ),
               SettingsTile.navigation(
+                // E2Eからタップ対象を一意に特定するためのKey
+                key: const Key('settings_theme_mode_tile'),
                 leading: Icon(switch (themeMode) {
                   ThemeMode.system => Icons.settings,
                   ThemeMode.light => Icons.light_mode,
@@ -88,16 +90,16 @@ class SettingsPage extends HookConsumerWidget {
               ),
               SettingsTile.navigation(
                 leading: const Icon(Icons.alternate_email),
-                title: Text(i18n.settings.settingsPage.help.developperTwitter),
-                onPressed: _onDevelopperTwitter,
+                title: Text(i18n.settings.settingsPage.help.developerTwitter),
+                onPressed: _onDeveloperTwitter,
               ),
               SettingsTile.navigation(
                 leading: const Icon(Icons.lock),
-                title: Text(i18n.settings.settingsPage.help.privacyPollicy),
+                title: Text(i18n.settings.settingsPage.help.privacyPolicy),
                 onPressed: _onPrivacyPolicy,
               ),
               SettingsTile.navigation(
-                title: Text(i18n.settings.settingsPage.help.licencse),
+                title: Text(i18n.settings.settingsPage.help.license),
                 onPressed: const LicensePageRouteData().go,
               ),
             ],
@@ -115,7 +117,7 @@ class SettingsPage extends HookConsumerWidget {
     // TODO(yakitama5): Webページに遷移
   }
 
-  Future<void> _onDevelopperTwitter(BuildContext context) async {
+  Future<void> _onDeveloperTwitter(BuildContext context) async {
     // TODO(yakitama5): Webページに遷移
   }
 

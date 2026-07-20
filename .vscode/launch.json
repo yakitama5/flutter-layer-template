@@ -10,7 +10,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "type": "dart",
-      "args": ["--dart-define-from-file=flavor/dev.json", "--web-renderer html"]
+      "args": ["--dart-define-from-file=flavor/dev.json"]
     },
     {
       "name": "dev-profile",
@@ -18,11 +18,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "type": "dart",
-      "args": [
-        "--dart-define-from-file=flavor/dev.json",
-        "--web-renderer html",
-        "--profile"
-      ]
+      "args": ["--dart-define-from-file=flavor/dev.json", "--profile"]
     },
     {
       "name": "dev-release",
@@ -30,11 +26,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "type": "dart",
-      "args": [
-        "--dart-define-from-file=flavor/dev.json",
-        "--web-renderer html",
-        "--release"
-      ]
+      "args": ["--dart-define-from-file=flavor/dev.json", "--release"]
     },
     {
       "name": "prd-debug",
@@ -42,7 +34,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "type": "dart",
-      "args": ["--dart-define-from-file=flavor/prd.json", "--web-renderer html"]
+      "args": ["--dart-define-from-file=flavor/prd.json"]
     },
     {
       "name": "device-preview",
@@ -52,7 +44,6 @@
       "type": "dart",
       "args": [
         "--dart-define-from-file=flavor/dev.json",
-        "--web-renderer html",
         "--dart-define=devicePreview=true"
       ]
     }

@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 
 /// OKボタンを押すでしか閉じることが出来ないダイアログ
+///
+/// [popOnOk] が true (デフォルト) の場合、OKボタン押下時にダイアログを閉じた上で
+/// [onOk] を呼び出す。
+/// [popOnOk] が false の場合、ダイアログは閉じずに [onOk] のみを呼び出す。
+/// 強制アップデートのように、処理が完了するまでダイアログを閉じさせたくない場合に使う。
 Future<void> showOkBarrierDismissibleDialog(
   BuildContext context, {
   Widget? icon,
   String? title,
   String? message,
   String? okLabel,
+  bool popOnOk = true,
   required VoidCallback onOk,
 }) => showAdaptiveDialog<void>(
   context: context,
@@ -18,6 +24,7 @@ Future<void> showOkBarrierDismissibleDialog(
     title: title,
     message: message,
     okLabel: okLabel,
+    popOnOk: popOnOk,
     onOk: onOk,
   ),
 );
@@ -29,6 +36,7 @@ class _OkDialog extends StatelessWidget {
     this.message,
     this.okLabel,
     this.icon,
+    required this.popOnOk,
     required this.onOk,
   });
 
@@ -36,6 +44,7 @@ class _OkDialog extends StatelessWidget {
   final String? title;
   final String? message;
   final String? okLabel;
+  final bool popOnOk;
   final VoidCallback onOk;
 
   @override
@@ -48,7 +57,12 @@ class _OkDialog extends StatelessWidget {
         _AdaptiveAction(
           // TODO(yakitama5): 多言語化対応
           child: Text(okLabel ?? 'OK'),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            if (popOnOk) {
+              Navigator.pop(context);
+            }
+            onOk();
+          },
         ),
       ],
     );

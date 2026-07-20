@@ -16,6 +16,8 @@ final class FirebaseInitializer {
       Flavor.prd => DefaultFirebaseOptions.currentPlatform,
     };
 
+    _validateNotDummyOptions(firebaseOptions);
+
     await Firebase.initializeApp(options: firebaseOptions);
 
     // Firebase Crashlytics
@@ -24,5 +26,19 @@ final class FirebaseInitializer {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
     };
+  }
+
+  /// テンプレートのダミー値のまま起動しようとしていないかを検証する。
+  ///
+  /// `flutterfire configure` を未実施の状態で実行すると、作者の実Firebase
+  /// プロジェクトへ誤って接続してしまう事故を防ぐためのガード。
+  static void _validateNotDummyOptions(FirebaseOptions options) {
+    if (options.projectId.startsWith('your-project-id')) {
+      throw StateError(
+        'Firebase設定がテンプレートのダミー値のままです。'
+        'flutterfire configure を実行して自身のFirebaseプロジェクトの設定へ'
+        '差し替えてください (docs/GET_STARTED.md 参照)',
+      );
+    }
   }
 }

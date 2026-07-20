@@ -97,25 +97,33 @@ class _SliverBody extends HookConsumerWidget {
         );
 
         return response.when(
-          data: (data) => OpenContainerCardWrapper(
-            openBuilder: (context, action) =>
-                GoodsDetailPage(goods: data.items[indexInPage]),
-            closedBuilder: (context, action) {
-              final item = data.items[indexInPage];
-              return switch (viewLayout) {
-                ViewLayout.grid => GoodsCard(
-                  key: ValueKey(item),
-                  item: item,
-                  onTap: action,
-                ),
-                ViewLayout.list => GoodsListTile(
-                  key: ValueKey(item),
-                  item: item,
-                  onTap: action,
-                ),
-              };
-            },
-          ),
+          data: (data) {
+            // 最終ページの件数が`goodsPageSize`未満の場合、
+            // `indexInPage`が範囲外になり得るためガードする
+            if (indexInPage >= data.items.length) {
+              return const SizedBox.shrink();
+            }
+
+            return OpenContainerCardWrapper(
+              openBuilder: (context, action) =>
+                  GoodsDetailPage(goods: data.items[indexInPage]),
+              closedBuilder: (context, action) {
+                final item = data.items[indexInPage];
+                return switch (viewLayout) {
+                  ViewLayout.grid => GoodsCard(
+                    key: ValueKey(item),
+                    item: item,
+                    onTap: action,
+                  ),
+                  ViewLayout.list => GoodsListTile(
+                    key: ValueKey(item),
+                    item: item,
+                    onTap: action,
+                  ),
+                };
+              },
+            );
+          },
           loading: () => _ShimmerTile(viewLayout: viewLayout),
           // TODO(yakitama5): エラー表示を分けて記載
           error: (error, _) => ErrorListTile(
