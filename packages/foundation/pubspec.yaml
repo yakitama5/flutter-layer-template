@@ -8,6 +8,6 @@ environment:
 
 dependencies:
   logger: any
-  uuid: ^4.5.2
+  uuid: ^4.6.0
 
 resolution: workspace
