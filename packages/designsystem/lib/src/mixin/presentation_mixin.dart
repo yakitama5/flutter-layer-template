@@ -18,7 +18,10 @@ mixin PresentationMixin {
       // ユーザー操作によるキャンセルは通知不要
     } on AppException catch (e) {
       // TODO(yakitama5): 例外種別に応じたi18nメッセージへの変換
-      SnackBarManager.showErrorSnackBar(e.message ?? '');
+      // message が null な例外(RequiresRecentLoginException 等)でも
+      // 空のスナックバーにならないよう toString() にフォールバックする
+      // (error_view.dart の _ExceptionX.errorMessage と同じ方針)
+      SnackBarManager.showErrorSnackBar(e.message ?? e.toString());
     } on Exception catch (e) {
       SnackBarManager.showErrorSnackBar(e.toString());
     }
