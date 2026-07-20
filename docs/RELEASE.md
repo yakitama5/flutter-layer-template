@@ -25,7 +25,6 @@ GitHub Actionsの`Build and Publish`を手動実行します。
 | `DART_DEFINE_JSON` | Secret | 本番用`--dart-define-from-file`設定（base64） | Build and Publish |
 | `FIREBASE_OPTIONS` | Secret | 本番用`firebase_options.dart`（base64） | Build and Publish |
 | `FIREBASE_OPTIONS_DEV` | Secret | 開発用`firebase_options_dev.dart`（base64） | Build and Publish |
-| `FIREBASE_JSON` | Secret | iOS用`firebase.json`（base64） | Build and Publish |
 | `GOOGLE_SERVICES_JSON` | Secret | Android本番用`google-services.json`（base64） | Build and Publish |
 | `GOOGLE_INFO_PLIST` | Secret | iOS本番用`GoogleService-Info.plist`（base64） | Build and Publish |
 | `ENV_FILE` | Secret | Firebase Functions等の本番用`.env`（base64） | Build and Publish |

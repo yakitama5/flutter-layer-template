@@ -5,9 +5,9 @@ import 'package:test/test.dart';
 
 /// テスト用の最小fakeリポジトリ
 ///
-/// `packages/infrastructure/mock` はapplicationに依存しており、
-/// applicationのテストから参照すると循環依存になるため、
-/// テストファイル内に最小限のfakeを定義する。
+/// applicationは中間層であり、依存方向を保つため
+/// `packages/infrastructure/mock`（infrastructure層）へは依存させない。
+/// そのためテストファイル内に最小限のfakeを定義する。
 class _FakeGoodsRepository implements GoodsRepository {
   _FakeGoodsRepository(this.pageInfo);
 

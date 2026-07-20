@@ -17,8 +17,8 @@
 - app: ルーティング・画面のWidgetテスト。
 - fake/mock: 再利用可能な決定的fakeは `packages/infrastructure/mock` に集約し、
   E2Eとproviderテスト双方から参照する。テストファイル内への自前fake定義は避ける。
-  ただしapplicationのproviderテストは、`packages/infrastructure/mock` がapplicationに
-  依存しており参照すると循環依存になるため、テストに必要な最小限のfakeをテストファイル内に
+  ただしapplicationのproviderテストは、依存方向を保つため `packages/infrastructure/mock`
+  （infrastructure層）へは依存させず、テストに必要な最小限のfakeをテストファイル内に
   定義してよい。集約対象の決定的fakeはE2Eなどinfrastructureに依存できる層で使うものに限る。
 - Firestore/Storageルール: `firebase/test/*.rules.test.mjs` で検証する。
   ルール変更時はupdate系を含むテスト追加を必須とする。
