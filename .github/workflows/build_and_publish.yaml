@@ -33,7 +33,7 @@ jobs:
     outputs:
       version: ${{ steps.bump.outputs.version }}
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
@@ -81,7 +81,7 @@ jobs:
       GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
     steps:
       # NOTE: version ジョブが作成したタグをチェックアウトし、バージョンとビルド実体のズレを防ぐ
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: v${{ needs.version.outputs.version }}
       - uses: ./.github/actions/setup-config-files
@@ -132,7 +132,7 @@ jobs:
       EXPORT_OPTIONS: ${{ secrets.EXPORT_OPTIONS }}
     steps:
       # NOTE: version ジョブが作成したタグをチェックアウトし、バージョンとビルド実体のズレを防ぐ
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: v${{ needs.version.outputs.version }}
       - uses: ./.github/actions/setup-config-files
