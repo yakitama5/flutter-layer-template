@@ -25,15 +25,17 @@ class FirebaseUserRepository implements UserRepository {
 
   @override
   Stream<User?> listen({required String userId}) {
-    return ref
-        .read(userDocumentRefProvider(userId))
-        .snapshots()
-        .where((s) {
-          // 読み込み中のドキュメントが存在する場合はスキップ
-          final doc = s.data();
-          return doc == null || !doc.fieldValuePending;
-        })
-        .map((snap) => snap.data()?.toDomainModel());
+    return guardFirebaseExceptionStream(
+      ref
+          .read(userDocumentRefProvider(userId))
+          .snapshots()
+          .where((s) {
+            // 読み込み中のドキュメントが存在する場合はスキップ
+            final doc = s.data();
+            return doc == null || !doc.fieldValuePending;
+          })
+          .map((snap) => snap.data()?.toDomainModel()),
+    );
   }
 
   @override
@@ -82,12 +84,14 @@ class FirebaseUserRepository implements UserRepository {
 
   @override
   Stream<AuthStatus?> listenAuthStatus() {
-    return ref.read(firebaseAuthProvider).userChanges().map((authUser) {
-      if (authUser == null) {
-        return null;
-      }
-      return authUser.authStatus;
-    });
+    return guardFirebaseExceptionStream(
+      ref.read(firebaseAuthProvider).userChanges().map((authUser) {
+        if (authUser == null) {
+          return null;
+        }
+        return authUser.authStatus;
+      }),
+    );
   }
 
   @override

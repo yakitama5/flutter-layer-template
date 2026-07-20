@@ -20,6 +20,60 @@ const _cancelledGoogleSignInCodes = {
   GoogleSignInExceptionCode.interrupted,
 };
 
+/// Firebase系の例外を[AppException]へ変換して再throwする
+///
+/// [guardFirebaseException]（Future用）と[guardFirebaseExceptionStream]
+/// （Stream用）で共有する変換ロジック。変換対象外の例外は元の例外・スタック
+/// トレースのまま再throwする。
+Never _throwAsAppException(Object error, StackTrace stackTrace) {
+  if (error is AppException) {
+    // 変換済みの例外はそのまま再throw
+    Error.throwWithStackTrace(error, stackTrace);
+  } else if (error is auth.FirebaseAuthException) {
+    switch (error.code) {
+      case 'requires-recent-login':
+        throw const RequiresRecentLoginException();
+      case 'network-request-failed':
+        throw const UnknownNetworkException();
+      case _ when _cancelledAuthErrorCodes.contains(error.code):
+        throw const CancelledByUserException();
+      default:
+        logger.w(
+          'FirebaseAuthException: ${error.code}',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        throw const UnknownException();
+    }
+  } else if (error is auth.FirebaseException) {
+    logger.w(
+      'FirebaseException: ${error.code}',
+      error: error,
+      stackTrace: stackTrace,
+    );
+    throw const UnknownException();
+  } else if (error is GoogleSignInException) {
+    if (_cancelledGoogleSignInCodes.contains(error.code)) {
+      throw const CancelledByUserException();
+    }
+    logger.w(
+      'GoogleSignInException: ${error.code}',
+      error: error,
+      stackTrace: stackTrace,
+    );
+    throw const SignInFailedException();
+  } else if (error is PlatformException) {
+    logger.w(
+      'PlatformException: ${error.code}',
+      error: error,
+      stackTrace: stackTrace,
+    );
+    throw const UnknownException();
+  } else {
+    Error.throwWithStackTrace(error, stackTrace);
+  }
+}
+
 /// Firebase系の例外を[AppException]へ変換して再throwする共通ハンドラ
 ///
 /// infrastructure層で外部SDKの例外を[AppException]へ変換するための
@@ -27,40 +81,15 @@ const _cancelledGoogleSignInCodes = {
 Future<T> guardFirebaseException<T>(Future<T> Function() action) async {
   try {
     return await action();
-  } on AppException {
-    // 変換済みの例外はそのまま再throw
-    rethrow;
-  } on auth.FirebaseAuthException catch (e, stackTrace) {
-    switch (e.code) {
-      case 'requires-recent-login':
-        throw const RequiresRecentLoginException();
-      case 'network-request-failed':
-        throw const UnknownNetworkException();
-      case _ when _cancelledAuthErrorCodes.contains(e.code):
-        throw const CancelledByUserException();
-      default:
-        logger.w(
-          'FirebaseAuthException: ${e.code}',
-          error: e,
-          stackTrace: stackTrace,
-        );
-        throw const UnknownException();
-    }
-  } on auth.FirebaseException catch (e, stackTrace) {
-    logger.w('FirebaseException: ${e.code}', error: e, stackTrace: stackTrace);
-    throw const UnknownException();
-  } on GoogleSignInException catch (e, stackTrace) {
-    if (_cancelledGoogleSignInCodes.contains(e.code)) {
-      throw const CancelledByUserException();
-    }
-    logger.w(
-      'GoogleSignInException: ${e.code}',
-      error: e,
-      stackTrace: stackTrace,
-    );
-    throw const SignInFailedException();
-  } on PlatformException catch (e, stackTrace) {
-    logger.w('PlatformException: ${e.code}', error: e, stackTrace: stackTrace);
-    throw const UnknownException();
+  } catch (e, stackTrace) {
+    _throwAsAppException(e, stackTrace);
   }
+}
+
+/// [guardFirebaseException]のStream版
+///
+/// 購読中に発生したFirebase系例外(ネットワーク断等)も[AppException]へ
+/// 変換してからStreamのエラーイベントとして流す。
+Stream<T> guardFirebaseExceptionStream<T>(Stream<T> stream) {
+  return stream.handleError(_throwAsAppException);
 }
