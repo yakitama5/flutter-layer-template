@@ -65,11 +65,19 @@ class MockGoodsRepository extends GoodsRepository {
   // プロセスごとに絶対時刻が変動してしまうため）。
   final List<Goods> items;
 
+  // インデックスのみに依存する純粋な変換でpriceを算出する。呼び出し回数に
+  // 関わらず、また`listenGoods`/`listenGoodsList`のどちらから参照しても
+  // 同じ結果になる（共有の乱数器だと呼び出すたびに状態が進み結果が変わり、
+  // かつ両メソッド間でも食い違ってしまう）。
+  List<Goods> get _shuffledPriceItems => items
+      .mapIndexed((i, e) => e.copyWith(price: Random(i).nextInt(max(1, 100))))
+      .toList();
+
   @override
   Stream<Goods?> listenGoods({required String id}) {
     // 該当なしの場合は`StateError`を投げる`firstWhere`ではなく、
     // `null`を返す`firstWhereOrNull`を使用する
-    final item = items.firstWhereOrNull((e) => e.id == id);
+    final item = _shuffledPriceItems.firstWhereOrNull((e) => e.id == id);
     return Stream.value(item);
   }
 
@@ -81,11 +89,7 @@ class MockGoodsRepository extends GoodsRepository {
   }) async* {
     await Future<void>.delayed(delay);
 
-    // インデックスごとに独立した乱数器を使うことで、呼び出し回数に関わらず
-    // 同じ結果を返す（共有の乱数器だと呼び出すたびに状態が進み結果が変わる）。
-    final shuffledPriceItems = items
-        .mapIndexed((i, e) => e.copyWith(price: Random(i).nextInt(max(1, 100))))
-        .toList();
+    final shuffledPriceItems = _shuffledPriceItems;
 
     final sortItems = shuffledPriceItems.sorted(
       (a, b) => switch (query.sortKey) {
